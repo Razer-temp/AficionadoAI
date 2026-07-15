@@ -1,0 +1,411 @@
+{
+  "venue": {
+    "name": "New York New Jersey Stadium",
+    "officialName": "MetLife Stadium",
+    "location": "East Rutherford, New Jersey, USA",
+    "capacity": 82500,
+    "hostCity": "New York / New Jersey",
+    "tournament": "FIFA World Cup 2026",
+    "timezone": "America/New_York",
+    "coordinates": {
+      "lat": 40.8128,
+      "lng": -74.0742
+    }
+  },
+
+  "gates": [
+    {
+      "id": "gate-a",
+      "name": "MetLife Gate",
+      "direction": "East",
+      "sections": ["101-112"],
+      "accessible": true,
+      "accessibleFeatures": ["wheelchair ramp", "accessible turnstiles", "mobility assistance tent"],
+      "nearbyAmenities": ["West Hall food court", "Guest Services"],
+      "elevatorAccess": true,
+      "notes": "Main entrance. West Hall food court immediately inside. Halal food (Shah's) available in West Hall."
+    },
+    {
+      "id": "gate-b",
+      "name": "Verizon Gate",
+      "direction": "Southwest",
+      "sections": ["124-137"],
+      "accessible": true,
+      "accessibleFeatures": ["wheelchair ramp", "accessible turnstiles", "elevator to all levels", "disability drop-off zone in Lot C"],
+      "nearbyAmenities": ["Guest Services at Section 124", "elevator lobby"],
+      "elevatorAccess": true,
+      "notes": "Adjacent to accessible parking Lot C drop-off zone. Elevator access to all levels. Recommended for wheelchair users arriving by vehicle."
+    },
+    {
+      "id": "gate-c",
+      "name": "HCLTech Gate",
+      "direction": "Southeast",
+      "sections": ["138-149"],
+      "accessible": true,
+      "accessibleFeatures": ["wheelchair ramp", "accessible turnstiles", "elevator to all levels"],
+      "nearbyAmenities": ["Guest Services at Section 149"],
+      "elevatorAccess": true,
+      "notes": "Southeast entrance. Elevator access to all levels."
+    },
+    {
+      "id": "gate-d",
+      "name": "Moody's Gate",
+      "direction": "Northwest",
+      "sections": ["113-124"],
+      "accessible": true,
+      "accessibleFeatures": ["wheelchair ramp", "accessible turnstiles", "elevator to all levels"],
+      "nearbyAmenities": ["Guest Services"],
+      "elevatorAccess": true,
+      "notes": "Northwest entrance. Elevator access available."
+    }
+  ],
+
+  "levels": [
+    {
+      "id": "lower",
+      "name": "Lower Bowl (100 Level)",
+      "sections": "101-149",
+      "description": "Closest to the pitch. Sections 101-149 wrap around the field. Accessible seating available in all sections.",
+      "concessions": true,
+      "restrooms": true,
+      "accessibleSeating": true
+    },
+    {
+      "id": "mezzanine",
+      "name": "Mezzanine Club (200 Level)",
+      "sections": "201-249",
+      "description": "Mid-level premium seating. Club lounges and premium concessions. Elevator access from east and west premium entrances.",
+      "concessions": true,
+      "restrooms": true,
+      "accessibleSeating": true
+    },
+    {
+      "id": "upper",
+      "name": "Upper Deck (300 Level)",
+      "sections": "301-349",
+      "description": "Highest level. Budget-friendly seating with full pitch views. Elevator access available.",
+      "concessions": true,
+      "restrooms": true,
+      "accessibleSeating": true
+    }
+  ],
+
+  "accessibleRoutes": [
+    {
+      "id": "route-verizon-elevator",
+      "from": "Verizon Gate (Gate B)",
+      "to": "All levels (200, 300)",
+      "type": "elevator",
+      "wheelchairAccessible": true,
+      "description": "Take elevator at Verizon Gate lobby to reach Mezzanine (200) or Upper Deck (300) levels. Staff available to assist."
+    },
+    {
+      "id": "route-hcltech-elevator",
+      "from": "HCLTech Gate (Gate C)",
+      "to": "All levels (200, 300)",
+      "type": "elevator",
+      "wheelchairAccessible": true,
+      "description": "Elevator located at HCLTech Gate southeast lobby. Access to all upper levels."
+    },
+    {
+      "id": "route-moodys-elevator",
+      "from": "Moody's Gate (Gate D)",
+      "to": "All levels (200, 300)",
+      "type": "elevator",
+      "wheelchairAccessible": true,
+      "description": "Elevator at Moody's Gate northwest entrance. Access to all upper levels."
+    },
+    {
+      "id": "route-east-premium",
+      "from": "East Premium Entrance",
+      "to": "200 Level",
+      "type": "elevator",
+      "wheelchairAccessible": true,
+      "description": "Dedicated elevator for premium seating access on the east side."
+    },
+    {
+      "id": "route-west-premium",
+      "from": "West Premium Entrance",
+      "to": "200 Level",
+      "type": "elevator",
+      "wheelchairAccessible": true,
+      "description": "Dedicated elevator for premium seating access on the west side."
+    },
+    {
+      "id": "route-wheelchair-escort",
+      "from": "Any Gate",
+      "to": "Your assigned seat",
+      "type": "wheelchair escort",
+      "wheelchairAccessible": true,
+      "description": "Request gate-to-seat wheelchair transportation from any Accessibility Assistant at the stadium gates. Available at no charge."
+    }
+  ],
+
+  "transit": [
+    {
+      "id": "nj-transit-rail",
+      "mode": "train",
+      "name": "NJ TRANSIT Rail",
+      "description": "Primary transit option. Trains from New York Penn Station connect through Secaucus Junction to the stadium. Match ticket holders only.",
+      "route": "New York Penn Station → Secaucus Junction → Stadium",
+      "ticketing": "Must purchase in advance via NJ TRANSIT Mobile App. Tickets NOT sold at stations or on board.",
+      "frequency": "Matchday service starts 4 hours before kickoff, continues 2 hours after final whistle.",
+      "accessibleVehicles": true,
+      "sustainabilityNote": "Lowest carbon footprint option. Carries up to 1,000 passengers per train.",
+      "tips": [
+        "Download NJ TRANSIT app before match day",
+        "Your match ticket includes a Boarding Zone — follow it",
+        "Allow 60-90 minutes from NYC Penn Station",
+        "Service is exclusive to match ticket holders"
+      ]
+    },
+    {
+      "id": "path-train",
+      "mode": "train",
+      "name": "PATH Train (connecting)",
+      "description": "Connects Hoboken, Jersey City, and Newark to Manhattan. Transfer to NJ TRANSIT at Newark Penn Station or NYC Penn Station to reach stadium.",
+      "route": "Hoboken/Jersey City/Newark → NYC Penn Station or Newark Penn → NJ TRANSIT → Stadium",
+      "accessibleVehicles": true,
+      "sustainabilityNote": "Electric rail — low carbon option.",
+      "tips": [
+        "Not a direct route to stadium — requires NJ TRANSIT transfer",
+        "Useful if staying in Hoboken or Jersey City",
+        "Transfer at NYC Penn Station is most straightforward"
+      ]
+    },
+    {
+      "id": "official-shuttles",
+      "mode": "bus",
+      "name": "Official FIFA Stadium Shuttles",
+      "description": "Shuttle buses from designated hubs in New York City and New Jersey park-and-ride locations.",
+      "ticketing": "Must be booked in advance through official channels.",
+      "accessibleVehicles": true,
+      "sustainabilityNote": "Shared transport — reduces individual car emissions.",
+      "tips": [
+        "Book shuttle tickets early — capacity is limited",
+        "Follow official FIFA or host city website for pickup locations",
+        "Allow extra time for security screening at shuttle hubs"
+      ]
+    },
+    {
+      "id": "rideshare",
+      "mode": "rideshare",
+      "name": "Rideshare / Taxi",
+      "description": "Rideshare drop-off and pick-up zones are designated around the stadium complex.",
+      "tips": [
+        "Expect significant surge pricing before and after matches",
+        "Drop-off zones may be 10-15 minute walk from gates",
+        "Consider taking rideshare to Secaucus Junction and transferring to NJ TRANSIT"
+      ]
+    }
+  ],
+
+  "food": [
+    {
+      "id": "halal-shahs",
+      "name": "Shah's Halal Food",
+      "type": "halal",
+      "cuisine": "Middle Eastern / South Asian",
+      "items": ["Chicken Over Rice", "Lamb Over Rice", "Falafel Over Rice", "Chicken Gyro", "Lamb Gyro", "Falafel Gyro", "Pakora Chips"],
+      "locations": ["West Hall (inside MetLife Gate)", "Section 126", "Section 314", "MetLife Central"],
+      "dietaryTags": ["halal", "contains-gluten"]
+    },
+    {
+      "id": "kosher",
+      "name": "Kosher Concessions",
+      "type": "kosher",
+      "cuisine": "Kosher certified",
+      "items": ["Kosher hot dogs", "Kosher snacks", "Kosher beverages"],
+      "locations": ["West Hall", "Near Section 121", "Near Section 309", "Near Section 335"],
+      "certification": "VHQ (Vaad HaRabonim of Queens)",
+      "dietaryTags": ["kosher"]
+    },
+    {
+      "id": "vegetarian",
+      "name": "Vegetarian Options",
+      "type": "vegetarian",
+      "cuisine": "Various",
+      "items": ["Veggie Burritos", "Veggie Tacos", "Rice & Bean Bowls", "Fresh Fruit Cups", "Mr. Tot", "Dippin' Dots"],
+      "locations": ["Portable stands and main concessions across 100, 200, and 300 concourses", "Sections 116-117", "Sections 201, 211, 216, 226, 237", "Sections 306, 315, 330"],
+      "dietaryTags": ["vegetarian"]
+    },
+    {
+      "id": "general-concessions",
+      "name": "General Concessions",
+      "type": "general",
+      "cuisine": "American stadium classics",
+      "items": ["Hot Dogs", "Burgers", "Pizza", "Chicken Tenders", "Nachos", "Pretzels", "Popcorn", "Soft Drinks", "Beer", "Water"],
+      "locations": ["All concourse levels — concession stands located near every 4-5 sections"],
+      "dietaryTags": ["general"],
+      "notes": "Mobile ordering available at 30+ locations for express pickup."
+    }
+  ],
+
+  "restrooms": {
+    "general": {
+      "description": "Public restrooms located throughout all concourses on every level.",
+      "accessible": true,
+      "note": "All restrooms are ADA accessible."
+    },
+    "family": {
+      "description": "Single-user / family / gender-neutral restrooms available on every level.",
+      "accessible": true,
+      "note": "Ask Guest Services representative for nearest location."
+    },
+    "nursing": [
+      {
+        "name": "Nursing Suite",
+        "location": "Plaza Level near Section 143",
+        "type": "dedicated suite"
+      },
+      {
+        "name": "Mamava Pod - 200 Level Gate H",
+        "location": "200 Level, Gate H elevator lobby",
+        "type": "nursing pod"
+      },
+      {
+        "name": "Mamava Pod - 200 Level Sections 249a/250a",
+        "location": "200 Level near Section 249a/250a",
+        "type": "nursing pod"
+      },
+      {
+        "name": "Mamava Pod - 100 Level Sections 117/118",
+        "location": "100 Level near Section 117/118",
+        "type": "nursing pod"
+      }
+    ]
+  },
+
+  "medical": [
+    {
+      "id": "first-aid-103",
+      "name": "First Aid Station - Section 103",
+      "location": "100 Level, near Section 103",
+      "services": ["basic first aid", "over-the-counter medication", "EMT response"],
+      "staffing": "Doctors, nurses, and EMTs"
+    },
+    {
+      "id": "first-aid-128",
+      "name": "First Aid Station - Section 128",
+      "location": "100 Level, near Section 128",
+      "services": ["basic first aid", "over-the-counter medication", "EMT response", "adult changing table"],
+      "staffing": "Doctors, nurses, and EMTs"
+    },
+    {
+      "id": "first-aid-301",
+      "name": "First Aid Station - Section 301",
+      "location": "300 Level, near Section 301",
+      "services": ["basic first aid", "over-the-counter medication", "EMT response"],
+      "staffing": "Doctors, nurses, and EMTs"
+    },
+    {
+      "id": "first-aid-326",
+      "name": "First Aid Station - Section 326",
+      "location": "300 Level, near Section 326",
+      "services": ["basic first aid", "over-the-counter medication", "EMT response", "adult changing table"],
+      "staffing": "Doctors, nurses, and EMTs"
+    }
+  ],
+
+  "guestServices": [
+    { "level": "100 Level", "location": "Near Section 124" },
+    { "level": "100 Level", "location": "Near Section 149" },
+    { "level": "200 Level", "location": "Near Section 227" },
+    { "level": "200 Level", "location": "Near Section 249" },
+    { "level": "300 Level", "location": "Near Section 303" },
+    { "level": "300 Level", "location": "Near Section 324" },
+    { "level": "300 Level", "location": "Near Section 328" },
+    { "level": "300 Level", "location": "Near Section 349" }
+  ],
+
+  "policies": {
+    "bagPolicy": {
+      "summary": "FIFA World Cup universal clear bag policy. One bag per person.",
+      "permitted": [
+        "Clear plastic/vinyl/PVC bag, max 12in x 6in x 12in (30cm x 15cm x 30cm), fully transparent, no tinting",
+        "Small clutch/wallet/pouch (does NOT need to be clear), max 4.5in x 6.5in",
+        "One-gallon clear resealable plastic freezer bag (e.g., Ziploc)"
+      ],
+      "prohibited": [
+        "Backpacks of any size (even clear ones exceeding dimensions)",
+        "Fanny packs, camera cases, binocular cases",
+        "Mesh, woven, or fabric bags",
+        "Any opaque bag larger than clutch limit"
+      ],
+      "important": "No bag storage available at the stadium. Non-compliant bags will be turned away."
+    },
+    "waterPolicy": {
+      "permitted": "One soft, plastic, factory-sealed disposable water bottle, max 20 oz (590 ml)",
+      "prohibited": ["Hard-sided / reusable water bottles", "Glass bottles", "Thermoses", "Coolers"]
+    },
+    "prohibitedItems": [
+      "Umbrellas",
+      "Strollers and car seats",
+      "Professional cameras (lenses longer than 6 inches)",
+      "Flags/banners exceeding 78in x 60in",
+      "Non-fire-resistant flags or banners",
+      "Weapons of any kind",
+      "Laser pointers",
+      "Drones",
+      "Noisemakers (air horns, vuvuzelas)",
+      "Outside food and beverages (except permitted water)"
+    ],
+    "gateOpenTime": "Gates open approximately 3 hours before kickoff for FIFA World Cup matches.",
+    "reEntryPolicy": "No re-entry. Once you exit the stadium, you cannot re-enter."
+  },
+
+  "accessibility": {
+    "parking": {
+      "lots": ["Lot E", "Lot F", "Lot G"],
+      "requirements": "Valid state-issued accessible parking plate or hang tag must be visible. Valid pre-paid parking permit required.",
+      "dropOff": "Lot C, adjacent to Verizon Gate (Gate B)"
+    },
+    "seating": "Wheelchair, low-mobility, and companion seating available on ALL levels and across all price ranges.",
+    "services": [
+      "Gate-to-seat wheelchair transportation (request at any gate)",
+      "Assistive Listening System via ListenWIFI app",
+      "Closed captioning on ribbon boards and concourse TVs",
+      "Accessibility Assistants stationed at all gates"
+    ],
+    "contact": {
+      "phone": "201-559-1515",
+      "email": "adainfo@metlifestadium.com",
+      "tdd": "866-410-5787 (relay)"
+    }
+  },
+
+  "weather": {
+    "note": "MetLife Stadium is an OPEN-AIR venue with no retractable roof.",
+    "summerGuidance": {
+      "typicalTemperature": "75-95F (24-35C) during June-July matches",
+      "heatSafety": [
+        "Arrive hydrated — bring your permitted 20oz water bottle",
+        "Free water refill stations located on all concourse levels",
+        "Seek shade in concourse areas during halftime",
+        "Wear sunscreen, hat, and light clothing",
+        "First Aid stations can assist with heat-related symptoms"
+      ],
+      "rainGuidance": [
+        "Umbrellas are PROHIBITED — bring a rain poncho instead",
+        "Concourse areas provide covered shelter",
+        "Matches typically continue during rain"
+      ]
+    }
+  },
+
+  "sustainability": {
+    "tips": [
+      "Use NJ TRANSIT rail — lowest carbon footprint transit option",
+      "This digital assistant replaces paper maps, guides, and signage queries",
+      "Use mobile ordering to reduce concession queue waste and energy",
+      "Recycling bins are located next to all trash receptacles throughout the stadium",
+      "Bring a reusable clear bag — reduce single-use plastic"
+    ],
+    "venueFeatures": [
+      "LED lighting throughout stadium (90% energy reduction vs. traditional)",
+      "Solar panel installations on surrounding infrastructure",
+      "Comprehensive recycling and composting program",
+      "Water-efficient fixtures in all restrooms"
+    ]
+  }
+}

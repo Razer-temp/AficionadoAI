@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <!-- Ultra-premium Aficionado AI signature cyan-to-emerald gradient -->
+    <linearGradient id="aficionadoGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F2FE" />
+      <stop offset="45%" stop-color="#06B6D4" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+
+    <!-- Deep obsidian squircle surface with subtle glow border -->
+    <linearGradient id="surfaceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#070A12" />
+    </linearGradient>
+
+    <!-- Subtle exterior aura for dark mode pop -->
+    <filter id="subtleGlow" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Outer Minimalist Squircle Container (Inspired by Image 0) -->
+  <rect x="24" y="24" width="464" height="464" rx="140" fill="url(#surfaceGrad)" stroke="url(#aficionadoGrad)" stroke-width="4" stroke-opacity="0.35" />
+
+  <!-- The Aerodynamic Stylized 'A' & Dynamic Stadium Sphere Nexus (Inspired by Images 1, 2 & 3) -->
+  <g filter="url(#subtleGlow)">
+    <!-- Upper aerodynamic sweeping wing blade (The top & right curve of 'A') -->
+    <path d="M136 160 H356 C384 160 398 178 376 206 L288 318 C266 346 242 346 220 318 L192 282 C210 282 246 248 266 222 L312 164 Z" fill="url(#aficionadoGrad)" />
+
+    <!-- Lower forward-sloping angular slice (The lower leg & negative space notch of 'A') -->
+    <path d="M136 360 L236 230 C248 214 266 214 278 230 L376 360 H304 L257 298 C252 291 242 291 237 298 L190 360 H136 Z" fill="url(#aficionadoGrad)" />
+
+    <!-- Center Precision Sphere / Stadium Core (Intersecting negative space curves) -->
+    <circle cx="257" cy="254" r="32" fill="#070A12" />
+    <circle cx="257" cy="254" r="18" fill="url(#aficionadoGrad)" />
+  </g>
+
+  <!-- Tiny minimal registered/stadium AI mark in the upper-right corner -->
+  <circle cx="396" cy="116" r="12" stroke="url(#aficionadoGrad)" stroke-width="2.5" fill="none" opacity="0.8" />
+  <circle cx="396" cy="116" r="4.5" fill="url(#aficionadoGrad)" opacity="0.8" />
+</svg>
