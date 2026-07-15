@@ -29,10 +29,10 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'text-summary', 'lcov'],
       thresholds: {
-        lines: 85,
-        functions: 85,
-        branches: 85,
-        statements: 85,
+        lines: 95,
+        functions: 95,
+        branches: 90,
+        statements: 95,
       },
       include: ['src/utils/**', 'src/services/**'],
       exclude: [
@@ -41,8 +41,6 @@ export default defineConfig({
         'tests',
         'src/services/supabase.js',
         'src/services/eventService.js',
-        'src/services/geminiChat.js',
-        'src/services/geminiBriefing.js',
       ],
     },
   },

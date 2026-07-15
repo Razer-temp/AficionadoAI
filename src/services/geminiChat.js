@@ -136,9 +136,7 @@ export function detectLanguage(text) {
 
   if (scores.es === maxScore) return 'es';
   if (scores.fr === maxScore) return 'fr';
-  if (scores.pt === maxScore) return 'pt';
-
-  return 'en';
+  return 'pt';
 }
 
 /**
@@ -160,26 +158,29 @@ export async function sendChatMessage(userMessage, history = [], crowdData = nul
   // Step 3: Detect language
   const language = detectLanguage(sanitized);
 
-  // Step 4: Check cache
-  const cacheKey = normalizeForCache(sanitized, language);
-  const cached = queryCache.get(cacheKey);
-  if (cached) {
-    return {
-      success: true,
-      data: { ...cached, cached: true },
-      meta: { cached: true, language, groundedSources: cached.sources?.length || 0 },
-    };
-  }
-
-  // Step 5: Classify intent
+  // Step 4: Classify intent
   const intents = classifyIntent(sanitized);
+  const isCrowdQuery = intents.includes('crowd');
+
+  // Step 5: Check cache (bypass if crowd intent is present)
+  const cacheKey = normalizeForCache(sanitized, language);
+  if (!isCrowdQuery) {
+    const cached = queryCache.get(cacheKey);
+    if (cached) {
+      return {
+        success: true,
+        data: { ...cached, cached: true },
+        meta: { cached: true, language, groundedSources: cached.sources?.length || 0 },
+      };
+    }
+  }
 
   // Step 6: Retrieve grounding context
   const { context, sources } = retrieveContext(intents, sanitized);
 
   // Add crowd data if available and relevant
   let fullContext = context;
-  if (crowdData && intents.includes('crowd')) {
+  if (crowdData && isCrowdQuery) {
     const crowdLines = crowdData.zones
       .map((z) => `${z.name}: ${z.density}% (${z.level.label})`)
       .join('\n');
@@ -205,7 +206,9 @@ export async function sendChatMessage(userMessage, history = [], crowdData = nul
 
     // Step 9: Cache the response
     const responseData = { response, language, intents, sources };
-    queryCache.set(cacheKey, responseData);
+    if (!isCrowdQuery) {
+      queryCache.set(cacheKey, responseData);
+    }
 
     return {
       success: true,

@@ -24,9 +24,46 @@ import { CACHE_CONFIG } from './constants.js';
 export function createLRUCache(options = {}) {
   const maxSize = options.maxSize || CACHE_CONFIG.maxSize;
   const ttlMs = options.ttlMs || CACHE_CONFIG.ttlMs;
+  const storageKey = 'aficionado_cache_store';
 
   /** @type {Map<string, CacheEntry>} */
   const cache = new Map();
+
+  // Load from localStorage if present
+  if (typeof window !== 'undefined' && window.localStorage) {
+    try {
+      const stored = window.localStorage.getItem(storageKey);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        for (const [k, entry] of Object.entries(parsed)) {
+          if (Date.now() - entry.timestamp <= ttlMs) {
+            cache.set(k, entry);
+          }
+        }
+      }
+    } catch (e) {
+      // Ignore storage errors in restricted/private environments
+    }
+  }
+
+  /**
+   * Persists non-expired cache entries to localStorage.
+   */
+  function persistToStorage() {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      try {
+        const entriesObj = {};
+        for (const [k, entry] of cache) {
+          if (Date.now() - entry.timestamp <= ttlMs) {
+            entriesObj[k] = entry;
+          }
+        }
+        window.localStorage.setItem(storageKey, JSON.stringify(entriesObj));
+      } catch (e) {
+        // Ignore quota/write errors
+      }
+    }
+  }
 
   /**
    * Checks if an entry has expired based on TTL.
@@ -49,12 +86,14 @@ export function createLRUCache(options = {}) {
 
     if (isExpired(entry)) {
       cache.delete(key);
+      persistToStorage();
       return undefined;
     }
 
     // Move to most-recent position (delete + re-insert)
     cache.delete(key);
     cache.set(key, entry);
+    persistToStorage();
     return entry.value;
   }
 
@@ -76,6 +115,7 @@ export function createLRUCache(options = {}) {
     }
 
     cache.set(key, { key, value, timestamp: Date.now() });
+    persistToStorage();
   }
 
   /**
@@ -88,6 +128,7 @@ export function createLRUCache(options = {}) {
     if (!entry) return false;
     if (isExpired(entry)) {
       cache.delete(key);
+      persistToStorage();
       return false;
     }
     return true;
@@ -96,6 +137,13 @@ export function createLRUCache(options = {}) {
   /** Clears all cached entries. */
   function clear() {
     cache.clear();
+    if (typeof window !== 'undefined' && window.localStorage) {
+      try {
+        window.localStorage.removeItem(storageKey);
+      } catch (e) {
+        // Ignore errors
+      }
+    }
   }
 
   /**

@@ -42,7 +42,7 @@ describe('SUPPORTED_LANGUAGES', () => {
   });
 
   it('each language has name, flag, and nativeName', () => {
-    for (const [_code, lang] of Object.entries(SUPPORTED_LANGUAGES)) {
+    for (const [, lang] of Object.entries(SUPPORTED_LANGUAGES)) {
       expect(lang).toHaveProperty('name');
       expect(lang).toHaveProperty('flag');
       expect(lang).toHaveProperty('nativeName');
@@ -92,7 +92,7 @@ describe('CROWD_THRESHOLDS', () => {
   });
 
   it('each level has max, label, and color', () => {
-    for (const [_level, config] of Object.entries(CROWD_THRESHOLDS)) {
+    for (const [, config] of Object.entries(CROWD_THRESHOLDS)) {
       expect(config).toHaveProperty('max');
       expect(config).toHaveProperty('label');
       expect(config).toHaveProperty('color');
@@ -166,7 +166,7 @@ describe('ERROR_CODES', () => {
   });
 
   it('all error codes are non-empty strings', () => {
-    for (const [_key, value] of Object.entries(ERROR_CODES)) {
+    for (const [, value] of Object.entries(ERROR_CODES)) {
       expect(typeof value).toBe('string');
       expect(value.length).toBeGreaterThan(0);
     }

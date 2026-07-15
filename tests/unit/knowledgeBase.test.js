@@ -8,6 +8,8 @@ import {
   classifyIntent,
   retrieveContext,
   INTENT_CATEGORIES,
+  getVenueName,
+  getAllGates,
 } from '../../src/services/knowledgeBase.js';
 
 describe('classifyIntent', () => {
@@ -59,7 +61,6 @@ describe('classifyIntent', () => {
   it('returns multiple intents sorted by relevance', () => {
     const intents = classifyIntent('Where is the nearest accessible gate entrance?');
     expect(intents.length).toBeGreaterThanOrEqual(2);
-    // Should match both navigation and accessibility
     expect(intents).toContain(INTENT_CATEGORIES.NAVIGATION);
     expect(intents).toContain(INTENT_CATEGORIES.ACCESSIBILITY);
   });
@@ -98,6 +99,24 @@ describe('retrieveContext', () => {
     expect(result.sources).toContain('venue-food');
   });
 
+  it('returns medical data for medical intent', () => {
+    const result = retrieveContext([INTENT_CATEGORIES.MEDICAL], 'first aid');
+    expect(result.context).toContain('MEDICAL');
+    expect(result.sources).toContain('venue-medical');
+  });
+
+  it('returns weather data for weather intent', () => {
+    const result = retrieveContext([INTENT_CATEGORIES.WEATHER], 'forecast');
+    expect(result.context).toContain('WEATHER');
+    expect(result.sources).toContain('venue-weather');
+  });
+
+  it('returns sustainability data for sustainability intent', () => {
+    const result = retrieveContext([INTENT_CATEGORIES.SUSTAINABILITY], 'recycle');
+    expect(result.context).toContain('SUSTAINABILITY');
+    expect(result.sources).toContain('venue-sustainability');
+  });
+
   it('returns venue overview for general intent', () => {
     const result = retrieveContext([INTENT_CATEGORIES.GENERAL], 'hello');
     expect(result.context).toContain('VENUE OVERVIEW');
@@ -113,7 +132,19 @@ describe('retrieveContext', () => {
       INTENT_CATEGORIES.MEDICAL,
     ];
     const result = retrieveContext(manyIntents, 'test');
-    // Should not process more than 3 intents
     expect(result.sources.length).toBeLessThanOrEqual(10);
+  });
+});
+
+describe('Helper functions', () => {
+  it('returns the correct venue name', () => {
+    const name = getVenueName();
+    expect(name).toContain('MetLife Stadium');
+  });
+
+  it('returns all gate definitions', () => {
+    const gates = getAllGates();
+    expect(Array.isArray(gates)).toBe(true);
+    expect(gates.length).toBeGreaterThan(0);
   });
 });
