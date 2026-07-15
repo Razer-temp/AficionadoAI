@@ -1,5 +1,5 @@
 {
-  "ignorePatterns": ["dist", "node_modules", ".eslintrc.json", "coverage"],
+  "ignorePatterns": ["dist", "node_modules", ".eslintrc.json", "coverage", "supabase"],
   "env": {
     "browser": true,
     "es2020": true,

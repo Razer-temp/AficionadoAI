@@ -72,10 +72,12 @@ export function normalizeForCache(input, language) {
 export function sanitizeModelText(text, maxLength = 5000) {
   if (typeof text !== 'string') return '';
 
-  return text
-    .replace(/<[^>]*>/g, '') // Strip HTML tags
-    // eslint-disable-next-line no-control-regex
-    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '') // Remove control chars (keep \n, \r, \t)
-    .slice(0, maxLength)
-    .trim();
+  return (
+    text
+      .replace(/<[^>]*>/g, '') // Strip HTML tags
+      // eslint-disable-next-line no-control-regex
+      .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '') // Remove control chars (keep \n, \r, \t)
+      .slice(0, maxLength)
+      .trim()
+  );
 }

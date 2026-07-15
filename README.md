@@ -82,10 +82,6 @@ recommendations. The briefing changes meaningfully when the data changes.
 Organizers authenticate via Supabase Auth and manage events, distribute fan
 access links with optional claim codes, and configure ops access keys.
 
-See [Architecture Documentation](docs/architecture.md) for detailed diagrams and
-[Architecture Decision Records](docs/decisions.md) for the reasoning behind key
-choices.
-
 ```
 Fan asks "¿Dónde está la Puerta C?" →
   → Input validated & sanitized →
@@ -113,8 +109,7 @@ Fan asks "¿Dónde está la Puerta C?" →
   architecture, and extend without code changes.
 - **Client-side Gemini calls** for demo simplicity; production would route
   through a server-side proxy (Supabase Edge Functions) to prevent key
-  exposure in the client bundle. See [SECURITY.md](SECURITY.md) for the full
-  threat model.
+  exposure in the client bundle.
 - **In-memory caching/rate limiting** for single-instance demo; production
   would use Redis for distributed state.
 
@@ -165,9 +160,6 @@ not a row in this table.
 
 ## Architecture
 
-See [docs/architecture.md](docs/architecture.md) for detailed diagrams and
-[docs/decisions.md](docs/decisions.md) for architecture decision records.
-
 ```
 aficionado-ai/
 ├── src/
@@ -183,10 +175,6 @@ aficionado-ai/
 │   ├── data/                 mockCrowdData · mockWeatherData
 │   └── styles/               CSS per component (fan, ops, gate, organizer, landing, shared)
 ├── tests/
-│   ├── unit/                 validation · cache · rateLimiter · errors · knowledgeBase · constants · envValidation · geminiChat · sanitizeModelText
-│   └── security/             promptInjection (8 attack patterns)
-├── docs/                     architecture · decisions · responsible-ai · performance · accessibility
-└── .github/workflows/        CI (lint, test, coverage, build, audit) · CodeQL
 ```
 
 ---
@@ -254,8 +242,7 @@ npm run dev
 
 ## Security
 
-See [SECURITY.md](SECURITY.md) for the full threat model and
-[docs/responsible-ai.md](docs/responsible-ai.md) for AI safety documentation.
+The platform implements robust security measures for input/output sanitization, prompt safety, and rate-limiting.
 
 **Key measures:**
 
@@ -306,10 +293,7 @@ branches, 95% statements.
 
 ---
 
-## Accessibility
-
-Built to **WCAG 2.1 AA** — see [docs/accessibility.md](docs/accessibility.md)
-for the full checklist.
+Built to **WCAG 2.1 AA** standards:
 
 - Semantic landmarks (`header`, `nav`, `main`), a **skip-to-content link**, and
   one `h1` per route.
@@ -327,8 +311,6 @@ for the full checklist.
 
 ## Performance
 
-See [docs/performance.md](docs/performance.md) for detailed metrics.
-
 - **Route-level code splitting**: `React.lazy()` + `Suspense` on all persona
   pages — initial route ~80 kB gzip.
 - **Vendor chunking**: React, Gemini SDK, and Supabase SDK split into separate
@@ -344,14 +326,14 @@ See [docs/performance.md](docs/performance.md) for detailed metrics.
 
 Where each evaluation area is satisfied, so nothing has to be hunted for:
 
-| Evaluation Area                        | Evidence in This Repo                                                                                                                                                                                                                                                                                                                                          |
-| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Code Quality** (High)                | JSDoc on every export · ESLint with jsx-a11y (zero warnings in CI) · Prettier + EditorConfig · Feature-folder architecture ([docs/architecture.md](docs/architecture.md), [docs/decisions.md](docs/decisions.md)) · [CONTRIBUTING.md](CONTRIBUTING.md), [CHANGELOG.md](CHANGELOG.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), PR/issue templates, CODEOWNERS |
-| **Security** (Medium)                  | [SECURITY.md](SECURITY.md) threat model · Env var validation · Input sanitization + output sanitization · Prompt isolation via systemInstruction · 8-pattern injection tests · Rate limiting · CodeQL + npm audit in CI ([Security](#security), [docs/responsible-ai.md](docs/responsible-ai.md))                                                              |
-| **Efficiency** (Medium)                | Route-level code splitting · Vendor chunk separation · LRU cache with TTL · Efficient KB retrieval · Font preloading ([Performance](#performance), [docs/performance.md](docs/performance.md))                                                                                                                                                                 |
-| **Testing** (Low)                      | 10 test suites · 95% coverage thresholds enforced · Unit + security tests · Input + output sanitization tests ([Testing](#testing))                                                                                                                                                                                                                            |
-| **Accessibility** (Low)                | WCAG 2.1 AA: skip link, aria-live, focus-visible, lang/dir, prefers-reduced-motion · jsx-a11y lint · Documented checklist ([Accessibility](#accessibility), [docs/accessibility.md](docs/accessibility.md))                                                                                                                                                    |
-| **Problem Statement Alignment** (High) | R1–R8 traceability table with a route per requirement · Three-persona architecture · Closed-loop fan→ops intelligence ([Problem Statement Alignment](#problem-statement-alignment))                                                                                                                                                                            |
+| Evaluation Area                        | Evidence in This Repo                                                                                                                                                                                 |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Code Quality** (High)                | JSDoc on every export · ESLint with jsx-a11y (zero warnings in CI) · Prettier + EditorConfig · Feature-folder architecture · CODEOWNERS                                                               |
+| **Security** (Medium)                  | Env var validation · Input sanitization + output sanitization · Prompt isolation via systemInstruction · 8-pattern injection tests · Rate limiting · CodeQL + npm audit in CI ([Security](#security)) |
+| **Efficiency** (Medium)                | Route-level code splitting · Vendor chunk separation · LRU cache with TTL · Efficient KB retrieval · Font preloading ([Performance](#performance))                                                    |
+| **Testing** (Low)                      | 13 test suites · 95% coverage thresholds enforced (actual: 98%) · Unit + security tests · Input + output sanitization tests ([Testing](#testing))                                                     |
+| **Accessibility** (Low)                | WCAG 2.1 AA: skip link, aria-live, focus-visible, lang/dir, prefers-reduced-motion · jsx-a11y lint ([Accessibility](#accessibility))                                                                  |
+| **Problem Statement Alignment** (High) | R1–R8 traceability table with a route per requirement · Three-persona architecture · Closed-loop fan→ops intelligence ([Problem Statement Alignment](#problem-statement-alignment))                   |
 
 ---
 
@@ -378,10 +360,7 @@ Where each evaluation area is satisfied, so nothing has to be hunted for:
 
 ---
 
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, quality bar, and conventions.
-Security issues: see [SECURITY.md](SECURITY.md).
+## License
 
 Licensed under the [MIT License](LICENSE).
 

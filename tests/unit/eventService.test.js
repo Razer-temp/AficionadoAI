@@ -10,45 +10,38 @@ vi.stubEnv('VITE_SUPABASE_URL', 'https://test.supabase.co');
 vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'test-anon-key');
 
 // Use vi.hoisted to declare mock functions before they are used in the hoisted vi.mock
-const {
-  mockSignIn,
-  mockSignUp,
-  mockSignOut,
-  mockGetSession,
-  mockInsert,
-  mockSelect,
-  mockSingle
-} = vi.hoisted(() => {
-  const mockUser = { id: 'org-user-456', email: 'org@example.com' };
-  const mockSession = { user: mockUser };
-  
-  const mockSignInFn = vi.fn().mockResolvedValue({ data: { user: mockUser }, error: null });
-  const mockSignUpFn = vi.fn().mockResolvedValue({ data: { user: mockUser }, error: null });
-  const mockSignOutFn = vi.fn().mockResolvedValue({ error: null });
-  const mockGetSessionFn = vi.fn().mockResolvedValue({ data: { session: mockSession } });
+const { mockSignIn, mockSignUp, mockSignOut, mockGetSession, mockInsert, mockSelect, mockSingle } =
+  vi.hoisted(() => {
+    const mockUser = { id: 'org-user-456', email: 'org@example.com' };
+    const mockSession = { user: mockUser };
 
-  const mockSingleFn = vi.fn().mockResolvedValue({ data: null, error: null });
-  const mockEqSingleFn = vi.fn().mockReturnValue({ single: mockSingleFn });
-  const mockEqFn = vi.fn().mockReturnValue({ eq: mockEqSingleFn });
-  const mockOrderFn = vi.fn().mockResolvedValue({ data: [], error: null });
-  
-  const mockSelectFn = vi.fn().mockReturnValue({
-    eq: mockEqFn,
-    single: mockSingleFn,
-    order: mockOrderFn,
+    const mockSignInFn = vi.fn().mockResolvedValue({ data: { user: mockUser }, error: null });
+    const mockSignUpFn = vi.fn().mockResolvedValue({ data: { user: mockUser }, error: null });
+    const mockSignOutFn = vi.fn().mockResolvedValue({ error: null });
+    const mockGetSessionFn = vi.fn().mockResolvedValue({ data: { session: mockSession } });
+
+    const mockSingleFn = vi.fn().mockResolvedValue({ data: null, error: null });
+    const mockEqSingleFn = vi.fn().mockReturnValue({ single: mockSingleFn });
+    const mockEqFn = vi.fn().mockReturnValue({ eq: mockEqSingleFn });
+    const mockOrderFn = vi.fn().mockResolvedValue({ data: [], error: null });
+
+    const mockSelectFn = vi.fn().mockReturnValue({
+      eq: mockEqFn,
+      single: mockSingleFn,
+      order: mockOrderFn,
+    });
+    const mockInsertFn = vi.fn().mockReturnValue({ select: mockSelectFn });
+
+    return {
+      mockSignIn: mockSignInFn,
+      mockSignUp: mockSignUpFn,
+      mockSignOut: mockSignOutFn,
+      mockGetSession: mockGetSessionFn,
+      mockInsert: mockInsertFn,
+      mockSelect: mockSelectFn,
+      mockSingle: mockSingleFn,
+    };
   });
-  const mockInsertFn = vi.fn().mockReturnValue({ select: mockSelectFn });
-
-  return {
-    mockSignIn: mockSignInFn,
-    mockSignUp: mockSignUpFn,
-    mockSignOut: mockSignOutFn,
-    mockGetSession: mockGetSessionFn,
-    mockInsert: mockInsertFn,
-    mockSelect: mockSelectFn,
-    mockSingle: mockSingleFn,
-  };
-});
 
 vi.mock('@supabase/supabase-js', () => {
   return {

@@ -8,7 +8,9 @@ import { generateBriefing } from '../../src/services/geminiBriefing.js';
 import { LLMError } from '../../src/utils/errors.js';
 
 // Mock Google Generative AI
-const mockResponseText = vi.fn().mockReturnValue('[STATUS: NORMAL OPERATIONS]\nSituation is calm.\nActions: None.');
+const mockResponseText = vi
+  .fn()
+  .mockReturnValue('[STATUS: NORMAL OPERATIONS]\nSituation is calm.\nActions: None.');
 const mockGenerateContent = vi.fn().mockResolvedValue({
   response: {
     text: mockResponseText,
@@ -42,13 +44,17 @@ describe('generateBriefing', () => {
 
   beforeEach(() => {
     vi.stubEnv('VITE_GEMINI_API_KEY', 'test-api-key-for-briefing');
-    mockResponseText.mockReturnValue('[STATUS: NORMAL OPERATIONS]\nSituation is calm.\nActions: None.');
+    mockResponseText.mockReturnValue(
+      '[STATUS: NORMAL OPERATIONS]\nSituation is calm.\nActions: None.',
+    );
     mockGenerateContent.mockClear();
   });
 
   it('throws error if API key is missing on first call', async () => {
     vi.stubEnv('VITE_GEMINI_API_KEY', '');
-    await expect(generateBriefing(mockCrowdSnapshot, mockQueries)).rejects.toThrow('Gemini API key not configured for briefings.');
+    await expect(generateBriefing(mockCrowdSnapshot, mockQueries)).rejects.toThrow(
+      'Gemini API key not configured for briefings.',
+    );
   });
 
   it('successfully generates an operational briefing with correct inputs', async () => {

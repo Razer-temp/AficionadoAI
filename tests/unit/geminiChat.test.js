@@ -6,7 +6,12 @@
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { detectLanguage, sendChatMessage, getCacheStats, resetRateLimiter } from '../../src/services/geminiChat.js';
+import {
+  detectLanguage,
+  sendChatMessage,
+  getCacheStats,
+  resetRateLimiter,
+} from '../../src/services/geminiChat.js';
 import { LLMError } from '../../src/utils/errors.js';
 
 // Stub environment

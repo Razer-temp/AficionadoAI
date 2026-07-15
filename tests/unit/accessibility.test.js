@@ -10,7 +10,7 @@ import { CROWD_THRESHOLDS, SUPPORTED_LANGUAGES } from '../../src/utils/constants
 describe('Accessibility Standards Verification', () => {
   it('verifies status indicators are not color-only (combines text + color)', () => {
     // WCAG 1.4.1 requirement
-    for (const [level, config] of Object.entries(CROWD_THRESHOLDS)) {
+    for (const config of Object.values(CROWD_THRESHOLDS)) {
       expect(config).toHaveProperty('label');
       expect(config).toHaveProperty('color');
       expect(typeof config.label).toBe('string');
@@ -35,19 +35,19 @@ describe('Accessibility Standards Verification', () => {
     // Verify CSS files contain accessibility rules (prefers-reduced-motion, skip-link, focus-visible)
     const fs = await import('fs');
     const path = await import('path');
-    
+
     // Path to global styles index
     const cssPath = path.resolve(__dirname, '../../src/styles/index.css');
-    
+
     if (fs.existsSync(cssPath)) {
       const cssContent = fs.readFileSync(cssPath, 'utf8');
-      
+
       // Ensure Skip Link classes are defined in the CSS
       expect(cssContent).toContain('.skip-link');
-      
+
       // Ensure prefers-reduced-motion media query is implemented
       expect(cssContent).toContain('prefers-reduced-motion');
-      
+
       // Ensure focus-visible rings are configured
       expect(cssContent).toContain(':focus-visible');
     }

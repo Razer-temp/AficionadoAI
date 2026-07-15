@@ -24,13 +24,13 @@ describe('validateEnvironment', () => {
     vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'your-anon-key'); // starts with 'your-'
 
     const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    
+
     const result = validateEnvironment();
     expect(result.valid).toBe(false);
     expect(result.missing).toContain('VITE_GEMINI_API_KEY (Google Gemini API key)');
     expect(result.missing).toContain('VITE_SUPABASE_ANON_KEY (Supabase anonymous/public key)');
     expect(spy).toHaveBeenCalled();
-    
+
     spy.mockRestore();
   });
 });

@@ -39,9 +39,12 @@ describe('LRU Cache', () => {
   });
 
   it('restores cached values from localStorage on creation', () => {
-    localStorageMock.setItem('aficionado_cache_store', JSON.stringify({
-      'en:hello': { key: 'en:hello', value: 'Hi there', timestamp: Date.now() }
-    }));
+    localStorageMock.setItem(
+      'aficionado_cache_store',
+      JSON.stringify({
+        'en:hello': { key: 'en:hello', value: 'Hi there', timestamp: Date.now() },
+      }),
+    );
     const cache = createLRUCache();
     expect(cache.get('en:hello')).toBe('Hi there');
   });
