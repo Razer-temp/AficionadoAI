@@ -91,13 +91,14 @@ function OrganizerDashboard() {
     const result = await toggleEventActive(eventId, !currentState);
     if (result.success) {
       setEvents((prev) =>
-        prev.map((e) => (e.id === eventId ? { ...e, is_active: !currentState } : e))
+        prev.map((e) => (e.id === eventId ? { ...e, is_active: !currentState } : e)),
       );
     }
   }
 
   async function handleDelete(eventId) {
-    if (!confirm('Are you sure you want to delete this event? This action cannot be undone.')) return;
+    if (!confirm('Are you sure you want to delete this event? This action cannot be undone.'))
+      return;
     const result = await deleteEvent(eventId);
     if (result.success) {
       setEvents((prev) => prev.filter((e) => e.id !== eventId));
@@ -169,10 +170,7 @@ function OrganizerDashboard() {
               Create, configure, and manage access credentials for live stadium sessions
             </p>
           </div>
-          <button
-            className="org-create-btn"
-            onClick={() => setShowCreateModal(true)}
-          >
+          <button className="org-create-btn" onClick={() => setShowCreateModal(true)}>
             <Plus size={18} />
             <span>Create Event</span>
           </button>
@@ -217,7 +215,11 @@ function OrganizerDashboard() {
             </div>
             <div className="org-stat-data">
               <span className="org-stat-value">
-                {Object.values(eventCodes).flat().filter((c) => c?.is_claimed).length}
+                {
+                  Object.values(eventCodes)
+                    .flat()
+                    .filter((c) => c?.is_claimed).length
+                }
               </span>
               <span className="org-stat-label">Codes Claimed</span>
             </div>
@@ -228,7 +230,9 @@ function OrganizerDashboard() {
         <div className="org-events-section">
           <h2 className="org-section-title">
             <CalendarDays size={20} className="text-cyan" />
-            <span>Stadium Protocol <span className="gradient-text">Events Catalog</span></span>
+            <span>
+              Stadium Protocol <span className="gradient-text">Events Catalog</span>
+            </span>
           </h2>
 
           {loading ? (
@@ -241,10 +245,7 @@ function OrganizerDashboard() {
               <CalendarDays size={48} className="org-empty-icon" />
               <h3>No Events Yet</h3>
               <p>Create your first event to generate access links for fans and ops staff.</p>
-              <button
-                className="org-create-btn"
-                onClick={() => setShowCreateModal(true)}
-              >
+              <button className="org-create-btn" onClick={() => setShowCreateModal(true)}>
                 <Plus size={18} />
                 <span>Create Event</span>
               </button>
@@ -258,7 +259,10 @@ function OrganizerDashboard() {
                 const sessions = sessionCounts[event.id] || 0;
 
                 return (
-                  <div key={event.id} className={`org-event-card glass-card ${isExpanded ? 'org-event-card--expanded' : ''}`}>
+                  <div
+                    key={event.id}
+                    className={`org-event-card glass-card ${isExpanded ? 'org-event-card--expanded' : ''}`}
+                  >
                     {/* Event Card Header */}
                     <div
                       className="org-event-header"
@@ -339,7 +343,9 @@ function OrganizerDashboard() {
                                 />
                                 <button
                                   className={`org-copy-btn ${copiedField === `fan-${event.id}` ? 'org-copy-btn--copied' : ''}`}
-                                  onClick={() => copyToClipboard(getFanLink(event), `fan-${event.id}`)}
+                                  onClick={() =>
+                                    copyToClipboard(getFanLink(event), `fan-${event.id}`)
+                                  }
                                   title="Copy fan link"
                                 >
                                   {copiedField === `fan-${event.id}` ? (
@@ -374,7 +380,9 @@ function OrganizerDashboard() {
                                   <Shield size={14} className="text-cyan" />
                                   Ops Staff Portal
                                 </span>
-                                <span className="org-link-tag org-link-tag--secure">Encrypted Key Access</span>
+                                <span className="org-link-tag org-link-tag--secure">
+                                  Encrypted Key Access
+                                </span>
                               </div>
                               <div className="org-link-row">
                                 <input
@@ -386,7 +394,9 @@ function OrganizerDashboard() {
                                 />
                                 <button
                                   className={`org-copy-btn ${copiedField === `ops-${event.id}` ? 'org-copy-btn--copied' : ''}`}
-                                  onClick={() => copyToClipboard(getOpsLink(event), `ops-${event.id}`)}
+                                  onClick={() =>
+                                    copyToClipboard(getOpsLink(event), `ops-${event.id}`)
+                                  }
                                   title="Copy ops link"
                                 >
                                   {copiedField === `ops-${event.id}` ? (
@@ -427,7 +437,8 @@ function OrganizerDashboard() {
                                 </h4>
                                 {codes.length > 0 && (
                                   <span className="org-codes-pill">
-                                    <strong>{codes.filter((c) => c.is_claimed).length}</strong> / {codes.length} claimed
+                                    <strong>{codes.filter((c) => c.is_claimed).length}</strong> /{' '}
+                                    {codes.length} claimed
                                   </span>
                                 )}
                               </div>
@@ -452,7 +463,10 @@ function OrganizerDashboard() {
                             {codes.length === 0 ? (
                               <div className="org-codes-empty">
                                 <Ticket size={28} className="text-muted" />
-                                <p>No access codes generated yet. Generate credentials to distribute to verified stadium attendees.</p>
+                                <p>
+                                  No access codes generated yet. Generate credentials to distribute
+                                  to verified stadium attendees.
+                                </p>
                               </div>
                             ) : (
                               <div className="org-codes-grid">
@@ -473,7 +487,9 @@ function OrganizerDashboard() {
                                     ) : (
                                       <button
                                         className={`org-code-copy ${copiedField === `code-${code.id}` ? 'org-code-copy--copied' : ''}`}
-                                        onClick={() => copyToClipboard(code.code, `code-${code.id}`)}
+                                        onClick={() =>
+                                          copyToClipboard(code.code, `code-${code.id}`)
+                                        }
                                         title="Copy code"
                                       >
                                         {copiedField === `code-${code.id}` ? (
@@ -623,7 +639,16 @@ function CreateEventModal({ onClose, onCreated }) {
   }
 
   return (
-    <div className="org-modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }} role="presentation" onKeyDown={(e) => { if (e.key === 'Escape') onClose(); }}>
+    <div
+      className="org-modal-overlay"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+      role="presentation"
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') onClose();
+      }}
+    >
       <div className="org-modal glass-card" role="dialog" aria-modal="true">
         <div className="org-modal-header">
           <h2 className="org-modal-title">
@@ -751,8 +776,8 @@ function CreateEventModal({ onClose, onCreated }) {
               <div>
                 <span className="org-toggle-label">Require Claim Codes</span>
                 <span className="org-toggle-desc">
-                  Fans must enter a unique code to access the AI concierge.
-                  If disabled, anyone with the link can access the event.
+                  Fans must enter a unique code to access the AI concierge. If disabled, anyone with
+                  the link can access the event.
                 </span>
               </div>
             </div>

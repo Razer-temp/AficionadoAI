@@ -1,8 +1,8 @@
 /**
  * Gemini-powered fan chat service.
- * Handles the full pipeline: input validation → rate limiting → 
+ * Handles the full pipeline: input validation → rate limiting →
  * knowledge retrieval → Gemini call with grounding → streaming response.
- * 
+ *
  * System prompt is isolated from user input (never concatenated into system role).
  * Includes prompt-injection guardrails.
  * @module geminiChat
@@ -107,18 +107,21 @@ export function detectLanguage(text) {
   const lower = text.toLowerCase();
 
   // Spanish indicators
-  const esPatterns = /\b(hola|dónde|cómo|qué|cuándo|puedo|necesito|ayuda|quiero|tengo|está|favor|gracias|buenas|entrada|puerta|comida|sección)\b/;
+  const esPatterns =
+    /\b(hola|dónde|cómo|qué|cuándo|puedo|necesito|ayuda|quiero|tengo|está|favor|gracias|buenas|entrada|puerta|comida|sección)\b/;
   // French indicators
-  const frPatterns = /\b(bonjour|où|comment|quoi|quand|puis-je|besoin|aide|voudrais|merci|s'il vous|entrée|porte|nourriture|billet)\b/;
+  const frPatterns =
+    /\b(bonjour|où|comment|quoi|quand|puis-je|besoin|aide|voudrais|merci|s'il vous|entrée|porte|nourriture|billet)\b/;
   // Portuguese indicators
-  const ptPatterns = /\b(olá|onde|como|quando|posso|preciso|ajuda|quero|tenho|obrigado|entrada|portão|comida|seção|bilhete)\b/;
+  const ptPatterns =
+    /\b(olá|onde|como|quando|posso|preciso|ajuda|quero|tenho|obrigado|entrada|portão|comida|seção|bilhete)\b/;
 
   const esScore = (lower.match(esPatterns) || []).length;
   const frScore = (lower.match(frPatterns) || []).length;
   const ptScore = (lower.match(ptPatterns) || []).length;
 
   // Check for accented characters common in specific languages
-  const esAccents = (lower.match(/[ñ¿¡á é í ó ú]/g) || []).length;
+  const esAccents = (lower.match(/[ñ¿¡áéíóú]/g) || []).length;
   const frAccents = (lower.match(/[çèêëîïôùûüÿœæ]/g) || []).length;
   const ptAccents = (lower.match(/[ãõçâêô]/g) || []).length;
 
@@ -141,7 +144,7 @@ export function detectLanguage(text) {
 /**
  * Sends a fan chat message through the full pipeline.
  * Pipeline: validate → rate limit → cache check → classify → retrieve KB → Gemini → cache store → return
- * 
+ *
  * @param {string} userMessage - Raw fan message
  * @param {Array<{role: string, parts: Array<{text: string}>}>} [history=[]] - Chat history for context
  * @param {object} [crowdData=null] - Current crowd density snapshot (for crowd queries)

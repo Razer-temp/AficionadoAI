@@ -1,5 +1,12 @@
 import { memo } from 'react';
-import { CheckCircle2, MinusCircle, AlertTriangle, ShieldAlert, Radio, Activity } from 'lucide-react';
+import {
+  CheckCircle2,
+  MinusCircle,
+  AlertTriangle,
+  ShieldAlert,
+  Radio,
+  Activity,
+} from 'lucide-react';
 
 const ICON_MAP = {
   CheckCircle2: CheckCircle2,
@@ -56,7 +63,11 @@ const CrowdDensityMap = memo(function CrowdDensityMap({ zones }) {
               }}
             >
               <div className="zone-header">
-                <IconComponent className="zone-icon" size={18} style={{ color: zone.level.color }} />
+                <IconComponent
+                  className="zone-icon"
+                  size={18}
+                  style={{ color: zone.level.color }}
+                />
                 <span className="zone-name">{zone.name}</span>
               </div>
               <div className="zone-density">

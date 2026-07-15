@@ -8,9 +8,9 @@ import FanChat from './FanChat';
  */
 function FanLayout({ onQueryLog }) {
   return (
-    <main className="fan-layout" role="main" aria-label="Fan Chat Interface">
+    <div className="fan-layout" aria-label="Fan Chat Interface">
       <FanChat onQueryLog={onQueryLog} />
-    </main>
+    </div>
   );
 }
 

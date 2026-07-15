@@ -83,10 +83,18 @@ function BriefingPanel({ crowdSnapshot, fanQueries, weatherSnapshot = null }) {
 
         {!briefing && !isLoading && !error && (
           <div className="briefing-empty">
-            <ClipboardList size={40} className="text-cyan opacity-50" style={{ margin: '0 auto 1rem' }} />
-            <p>Click <strong>Generate Dispatch Orders</strong> to synthesize 3D Digital Twin & fan query patterns into AI recommendations.</p>
+            <ClipboardList
+              size={40}
+              className="text-cyan opacity-50"
+              style={{ margin: '0 auto 1rem' }}
+            />
+            <p>
+              Click <strong>Generate Dispatch Orders</strong> to synthesize 3D Digital Twin & fan
+              query patterns into AI recommendations.
+            </p>
             <p className="briefing-empty-hint">
-              Powered by Gemini 2.5 Flash reasoning over MetLife transit corridors, crowd Lidar spikes, and multi-lingual concierge trends.
+              Powered by Gemini 2.5 Flash reasoning over MetLife transit corridors, crowd Lidar
+              spikes, and multi-lingual concierge trends.
             </p>
           </div>
         )}
@@ -109,7 +117,8 @@ function BriefingPanel({ crowdSnapshot, fanQueries, weatherSnapshot = null }) {
 
       <div className="briefing-footer">
         <span className="briefing-disclaimer flex-align" style={{ gap: '0.4rem' }}>
-          <ShieldCheck size={14} className="text-emerald" /> Powered by Google Gemini 2.5 Flash • MetLife NYNJ 2026 Telemetry
+          <ShieldCheck size={14} className="text-emerald" /> Powered by Google Gemini 2.5 Flash •
+          MetLife NYNJ 2026 Telemetry
         </span>
       </div>
     </section>

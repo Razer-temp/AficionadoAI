@@ -44,6 +44,7 @@ graph TD
 ## Data Flow
 
 ### Fan Chat Pipeline
+
 1. **Input** → User types in any supported language
 2. **Validation** → Length check, sanitization (HTML entities, null bytes)
 3. **Rate Limiting** → Token bucket (10 requests burst, 2/10s refill)
@@ -54,6 +55,7 @@ graph TD
 8. **Response** → Formatted, cached, and displayed with source citations
 
 ### Ops Briefing Pipeline
+
 1. **Data Collection** → Fan queries (anonymized) + crowd density snapshot
 2. **Pattern Analysis** → Language/intent/zone aggregation
 3. **Gemini Synthesis** → Combined data → natural language briefing + actions
@@ -98,11 +100,11 @@ graph LR
 
 ## Key Design Decisions
 
-| Decision | Rationale |
-|----------|-----------|
-| Client-side Gemini calls | Hackathon demo simplicity; avoids deploying Edge Functions |
-| Local state for query feed | Self-contained demo; no Supabase table setup required |
+| Decision                            | Rationale                                                       |
+| ----------------------------------- | --------------------------------------------------------------- |
+| Client-side Gemini calls            | Hackathon demo simplicity; avoids deploying Edge Functions      |
+| Local state for query feed          | Self-contained demo; no Supabase table setup required           |
 | JSON knowledge base (not vector DB) | Structured venue data fits keyword matching; no vector overhead |
-| Snapshot-based mock data | Predictable for demos; avoids random generator complexity |
-| System prompt isolation | Security — user input never in system role |
-| LRU cache (not Redis) | Single-instance demo; production would use distributed cache |
+| Snapshot-based mock data            | Predictable for demos; avoids random generator complexity       |
+| System prompt isolation             | Security — user input never in system role                      |
+| LRU cache (not Redis)               | Single-instance demo; production would use distributed cache    |

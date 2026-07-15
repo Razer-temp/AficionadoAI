@@ -57,8 +57,10 @@ const SIMULATOR_PROMPTS = [
     category: 'Navigation & Topology',
     icon: Navigation,
     query: 'How do I get from Gate C to Section 112?',
-    groundingStep: '🔍 Retrieving MetLife Stadium 3D Topology Maps (Section 112) & Gate C sensors...',
-    fullAiResponse: 'Take the Express Concourse Escalator B up one level. Section 112 is directly on your left past the Coca-Cola Refresh station. Live walking time: ~3 mins.',
+    groundingStep:
+      '🔍 Retrieving MetLife Stadium 3D Topology Maps (Section 112) & Gate C sensors...',
+    fullAiResponse:
+      'Take the Express Concourse Escalator B up one level. Section 112 is directly on your left past the Coca-Cola Refresh station. Live walking time: ~3 mins.',
     badge: '🚶 3 mins walk',
     badgeColor: 'emerald',
     crowdStatus: 'Low Crowd (Current wait: 1 min)',
@@ -72,8 +74,10 @@ const SIMULATOR_PROMPTS = [
     category: 'Halal & Vegan Food',
     icon: Globe,
     query: '¿Dónde venden comida vegetariana o halal cerca de mí?',
-    groundingStep: '🌱 Verifying real-time inventory & Halal certification at Vendor Level 2 (Section 204)...',
-    fullAiResponse: 'El puesto "Green Stadium Bowl" está en el Nivel 2, Sección 204 (a 2 min a pie). Cuentan con certification Halal y menú 100% vegetariano verificado hoy.',
+    groundingStep:
+      '🌱 Verifying real-time inventory & Halal certification at Vendor Level 2 (Section 204)...',
+    fullAiResponse:
+      'El puesto "Green Stadium Bowl" está en el Nivel 2, Sección 204 (a 2 min a pie). Cuentan con certification Halal y menú 100% vegetariano verificado hoy.',
     badge: '🌱 Halal & Vegano',
     badgeColor: 'cyan',
     crowdStatus: 'Fila corta (Aprox. 3 mins)',
@@ -87,8 +91,10 @@ const SIMULATOR_PROMPTS = [
     category: 'WCAG AA Accessibility',
     icon: Accessibility,
     query: 'Où se trouve l’ascenseur accessible aux fauteuils roulants ?',
-    groundingStep: '♿ Checking WCAG AA step-free elevator priority status & dispatching concierge alert...',
-    fullAiResponse: 'L’ascenseur Priorité Accessibilité E-2 est situé directement en face de la Porte A. Le personnel de conciergerie a été notifié pour vous assurer un accès immédiat.',
+    groundingStep:
+      '♿ Checking WCAG AA step-free elevator priority status & dispatching concierge alert...',
+    fullAiResponse:
+      'L’ascenseur Priorité Accessibilité E-2 est situé directement en face de la Porte A. Le personnel de conciergerie a été notifié pour vous assurer un accès immédiat.',
     badge: '♿ Accès Prioritaire',
     badgeColor: 'amber',
     crowdStatus: 'Réservé PMR (0 min d’attente)',
@@ -102,8 +108,10 @@ const SIMULATOR_PROMPTS = [
     category: 'Multi-Modal Transit',
     icon: Train,
     query: 'Qual é a melhor saída para pegar o trem NJ Transit após o jogo?',
-    groundingStep: '🚆 Analyzing multi-modal transit departures & pedestrian corridor flow rates...',
-    fullAiResponse: 'Use o Portão Sul (Gate S). Os trens expressos com destino a Penn Station estão partindo a cada 10 minutos. O fluxo de multidão está otimizado nesta rota.',
+    groundingStep:
+      '🚆 Analyzing multi-modal transit departures & pedestrian corridor flow rates...',
+    fullAiResponse:
+      'Use o Portão Sul (Gate S). Os trens expressos com destino a Penn Station estão partindo a cada 10 minutos. O fluxo de multidão está otimizado nesta rota.',
     badge: '🚆 NJ Transit Express',
     badgeColor: 'purple',
     crowdStatus: 'Fluxo Moderado (5 mins até a plataforma)',
@@ -113,9 +121,27 @@ const SIMULATOR_PROMPTS = [
 
 /** Live Ops Telemetry simulation initial events */
 const INITIAL_OPS_FEED = [
-  { id: 1, time: 'Just now', query: 'Gate C to Section 112', lang: 'EN', impact: 'Normal flow · Route optimized via Concourse B' },
-  { id: 2, time: '12s ago', query: 'Comida Halal / Vegana', lang: 'ES', impact: 'Vendor 204 demand +8% · Stock verified' },
-  { id: 3, time: '34s ago', query: 'Wheelchair elevator assist', lang: 'FR', impact: 'Steward alert sent to Gate A elevator' },
+  {
+    id: 1,
+    time: 'Just now',
+    query: 'Gate C to Section 112',
+    lang: 'EN',
+    impact: 'Normal flow · Route optimized via Concourse B',
+  },
+  {
+    id: 2,
+    time: '12s ago',
+    query: 'Comida Halal / Vegana',
+    lang: 'ES',
+    impact: 'Vendor 204 demand +8% · Stock verified',
+  },
+  {
+    id: 3,
+    time: '34s ago',
+    query: 'Wheelchair elevator assist',
+    lang: 'FR',
+    impact: 'Steward alert sent to Gate A elevator',
+  },
 ];
 
 /** Interactive Bento grid feature cards */
@@ -181,7 +207,8 @@ const STEPS = [
     icon: Settings,
     previewTitle: 'Organizer Management Console',
     previewBadge: 'Step 1 of 3 · Event Setup',
-    previewContent: 'Configure "FIFA World Cup Final 2026 — MetLife Stadium". Set gate access times, activate 4-language AI Concierge, and generate secure invite links in seconds.',
+    previewContent:
+      'Configure "FIFA World Cup Final 2026 — MetLife Stadium". Set gate access times, activate 4-language AI Concierge, and generate secure invite links in seconds.',
   },
   {
     number: 2,
@@ -190,7 +217,8 @@ const STEPS = [
     icon: QrCode,
     previewTitle: 'Instant Mobile Web Access',
     previewBadge: 'Step 2 of 3 · Zero App Friction',
-    previewContent: 'Fan scans QR code or taps `/event/metlife-opener`. The system verifies their claim code and opens the AI Concierge formatted perfectly for their smartphone.',
+    previewContent:
+      'Fan scans QR code or taps `/event/metlife-opener`. The system verifies their claim code and opens the AI Concierge formatted perfectly for their smartphone.',
   },
   {
     number: 3,
@@ -199,7 +227,8 @@ const STEPS = [
     icon: Sparkles,
     previewTitle: 'Real-Time Closed Loop Intelligence',
     previewBadge: 'Step 3 of 3 · Live Synchronization',
-    previewContent: 'When 150 fans ask about Gate C restrooms, the AI Concierge guides them while instantly alerting Ops Staff to dispatch janitorial and crowd control units.',
+    previewContent:
+      'When 150 fans ask about Gate C restrooms, the AI Concierge guides them while instantly alerting Ops Staff to dispatch janitorial and crowd control units.',
   },
 ];
 
@@ -207,23 +236,28 @@ const STEPS = [
 const FAQ_ITEMS = [
   {
     question: 'Do stadium attendees need to download an app from the App Store or Google Play?',
-    answer: 'No! Aficionado AI is designed mobile-first as an instant progressive web experience. Fans simply scan a QR code on their ticket or tap an invite link, and the AI Concierge opens immediately inside any mobile browser (Safari, Chrome, etc.) with zero friction.',
+    answer:
+      'No! Aficionado AI is designed mobile-first as an instant progressive web experience. Fans simply scan a QR code on their ticket or tap an invite link, and the AI Concierge opens immediately inside any mobile browser (Safari, Chrome, etc.) with zero friction.',
   },
   {
     question: 'How does the AI Concierge know accurate details about my specific venue or gates?',
-    answer: 'Unlike generic chatbots, Aficionado AI is deeply grounded in your specific venue topology data, custom gate schedules, menu offerings, and security policies uploaded through the Organizer Dashboard. If a gate closes or a policy changes, the AI adapts instantly.',
+    answer:
+      'Unlike generic chatbots, Aficionado AI is deeply grounded in your specific venue topology data, custom gate schedules, menu offerings, and security policies uploaded through the Organizer Dashboard. If a gate closes or a policy changes, the AI adapts instantly.',
   },
   {
     question: 'How does the closed loop between Fans and Operations Staff work?',
-    answer: 'Every question asked by a fan (e.g., "Where is the shortest restroom line?" or "Is Gate B open?") is processed anonymously. The Ops Command Center aggregates these queries into real-time heatmaps, early-warning crowd surge alerts, and AI-synthesized staff action plans.',
+    answer:
+      'Every question asked by a fan (e.g., "Where is the shortest restroom line?" or "Is Gate B open?") is processed anonymously. The Ops Command Center aggregates these queries into real-time heatmaps, early-warning crowd surge alerts, and AI-synthesized staff action plans.',
   },
   {
     question: 'Is attendee privacy and personal data protected?',
-    answer: 'Yes, absolutely. Aficionado AI collects ZERO personally identifiable information (PII). All queries are anonymized upon ingestion and used strictly for venue guidance and aggregate operations safety.',
+    answer:
+      'Yes, absolutely. Aficionado AI collects ZERO personally identifiable information (PII). All queries are anonymized upon ingestion and used strictly for venue guidance and aggregate operations safety.',
   },
   {
     question: 'Which languages are currently supported by the AI Concierge?',
-    answer: 'The system currently provides native, real-time responses in English (EN), Spanish (ES), French (FR), and Portuguese (PT). It automatically detects the user’s input language and responds fluently using Google Gemini 2.5 Flash.',
+    answer:
+      'The system currently provides native, real-time responses in English (EN), Spanish (ES), French (FR), and Portuguese (PT). It automatically detects the user’s input language and responds fluently using Google Gemini 2.5 Flash.',
   },
 ];
 
@@ -238,7 +272,7 @@ function LandingPage() {
 
   // Live Device Time Synchronization State
   const [deviceTime, setDeviceTime] = useState(() =>
-    new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })
+    new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
   );
 
   // Interactive Simulator State
@@ -304,9 +338,7 @@ function LandingPage() {
   // Sync device clock precisely every second
   useEffect(() => {
     const timer = setInterval(() => {
-      setDeviceTime(
-        new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })
-      );
+      setDeviceTime(new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }));
     }, 1000);
     return () => clearInterval(timer);
   }, []);
@@ -369,7 +401,8 @@ function LandingPage() {
     // Stage 2: Grounding Step-by-Step Chain of Thought
     setAiState('grounding');
     setActiveGroundingStep(
-      promptPreset.groundingStep || '🔍 Consulting real-time stadium sensors & WCAG AA topology data...'
+      promptPreset.groundingStep ||
+        '🔍 Consulting real-time stadium sensors & WCAG AA topology data...',
     );
 
     // After 600ms, begin Stage 3: Token-by-Token Typewriter Streaming
@@ -405,9 +438,7 @@ function LandingPage() {
             const updated = prev ? `${prev} ${nextWord}` : nextWord;
             // Update the live message in chat history as well
             setChatHistory((history) =>
-              history.map((msg) =>
-                msg.id === aiMsgId ? { ...msg, text: updated } : msg
-              )
+              history.map((msg) => (msg.id === aiMsgId ? { ...msg, text: updated } : msg)),
             );
             return updated;
           });
@@ -418,8 +449,8 @@ function LandingPage() {
           setAiState('completed');
           setChatHistory((history) =>
             history.map((msg) =>
-              msg.id === aiMsgId ? { ...msg, isStreaming: false, isCompleted: true } : msg
-            )
+              msg.id === aiMsgId ? { ...msg, isStreaming: false, isCompleted: true } : msg,
+            ),
           );
 
           // Simultaneously append telemetry signal to Ops Command Center
@@ -453,19 +484,23 @@ function LandingPage() {
     const q = customInput.trim();
     setCustomInput('');
 
-    triggerLlmGeneration({
-      id: 'custom-' + Date.now(),
-      lang: 'EN',
-      langName: 'Detected (EN/Multilingual)',
-      icon: Sparkles,
-      query: q,
-      groundingStep: '🔍 Grounding with MetLife Stadium 3D architectural model & live concourse cameras...',
-      fullAiResponse: `Based on MetLife Stadium live telemetry: Your requested destination is open and accessible right now. Follow the green overhead signage to Concourse Level 2. Estimated travel time: ~4 mins with minimal foot traffic.`,
-      badge: '⚡ Live Grounded Answer',
-      badgeColor: 'emerald',
-      crowdStatus: 'Optimal Route Calculated',
-      audioSnippet: 'Responded instantly via Gemini 2.5 Flash',
-    }, null);
+    triggerLlmGeneration(
+      {
+        id: 'custom-' + Date.now(),
+        lang: 'EN',
+        langName: 'Detected (EN/Multilingual)',
+        icon: Sparkles,
+        query: q,
+        groundingStep:
+          '🔍 Grounding with MetLife Stadium 3D architectural model & live concourse cameras...',
+        fullAiResponse: `Based on MetLife Stadium live telemetry: Your requested destination is open and accessible right now. Follow the green overhead signage to Concourse Level 2. Estimated travel time: ~4 mins with minimal foot traffic.`,
+        badge: '⚡ Live Grounded Answer',
+        badgeColor: 'emerald',
+        crowdStatus: 'Optimal Route Calculated',
+        audioSnippet: 'Responded instantly via Gemini 2.5 Flash',
+      },
+      null,
+    );
   }
 
   // Handle audio readout simulation
@@ -589,7 +624,10 @@ function LandingPage() {
             <button
               type="button"
               className="landing-nav-brand"
-              onClick={() => { setMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               style={{ border: 'none', background: 'transparent', cursor: 'pointer', padding: 0 }}
             >
               <img src="/logo.svg" alt="Aficionado AI" className="landing-nav-logo" />
@@ -609,12 +647,18 @@ function LandingPage() {
           <div className="landing-mobile-drawer-content">
             <div className="landing-mobile-nav-group">
               <div className="landing-mobile-nav-label">Navigation</div>
-              <button className="landing-mobile-nav-item" onClick={() => scrollToSection(simulatorRef)}>
+              <button
+                className="landing-mobile-nav-item"
+                onClick={() => scrollToSection(simulatorRef)}
+              >
                 <Sparkles size={18} className="text-cyan" />
                 <span>Interactive Simulator</span>
                 <ChevronRight size={16} />
               </button>
-              <button className="landing-mobile-nav-item" onClick={() => scrollToSection(featuresRef)}>
+              <button
+                className="landing-mobile-nav-item"
+                onClick={() => scrollToSection(featuresRef)}
+              >
                 <Zap size={18} className="text-emerald" />
                 <span>AI Capabilities</span>
                 <ChevronRight size={16} />
@@ -633,22 +677,46 @@ function LandingPage() {
 
             <div className="landing-mobile-nav-group">
               <div className="landing-mobile-nav-label">Live Persona Demos</div>
-              <button className="landing-mobile-demo-card" onClick={() => { setMobileMenuOpen(false); navigate('/fan'); }}>
-                <div className="landing-mobile-demo-icon bg-emerald-dim"><Smartphone size={20} /></div>
+              <button
+                className="landing-mobile-demo-card"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  navigate('/fan');
+                }}
+              >
+                <div className="landing-mobile-demo-icon bg-emerald-dim">
+                  <Smartphone size={20} />
+                </div>
                 <div className="landing-mobile-demo-info">
                   <strong>Fan Concierge View</strong>
                   <span>Try the mobile stadium AI assistant</span>
                 </div>
               </button>
-              <button className="landing-mobile-demo-card" onClick={() => { setMobileMenuOpen(false); navigate('/ops'); }}>
-                <div className="landing-mobile-demo-icon bg-cyan-dim"><Monitor size={20} /></div>
+              <button
+                className="landing-mobile-demo-card"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  navigate('/ops');
+                }}
+              >
+                <div className="landing-mobile-demo-icon bg-cyan-dim">
+                  <Monitor size={20} />
+                </div>
                 <div className="landing-mobile-demo-info">
                   <strong>Ops Command Center</strong>
                   <span>Live telemetry & crowd heatmaps</span>
                 </div>
               </button>
-              <button className="landing-mobile-demo-card" onClick={() => { setMobileMenuOpen(false); navigate('/organizer'); }}>
-                <div className="landing-mobile-demo-icon bg-purple-dim"><Settings size={20} /></div>
+              <button
+                className="landing-mobile-demo-card"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  navigate('/organizer');
+                }}
+              >
+                <div className="landing-mobile-demo-icon bg-purple-dim">
+                  <Settings size={20} />
+                </div>
                 <div className="landing-mobile-demo-info">
                   <strong>Organizer Console</strong>
                   <span>Create & manage stadium events</span>
@@ -657,7 +725,10 @@ function LandingPage() {
             </div>
 
             <div className="landing-mobile-drawer-footer">
-              <button className="landing-cta-primary w-full justify-center" onClick={() => scrollToSection(joinRef)}>
+              <button
+                className="landing-cta-primary w-full justify-center"
+                onClick={() => scrollToSection(joinRef)}
+              >
                 <Ticket size={18} />
                 <span>Join Event with Link / QR</span>
               </button>
@@ -689,7 +760,9 @@ function LandingPage() {
           </h1>
 
           <p className="landing-hero-sub">
-            Multilingual, zero-app, grounded in live venue topology. Ask anything about gates, transit, food, or WCAG AA accessibility — while operations intelligence monitors crowd flow and alerts staff in real time.
+            Multilingual, zero-app, grounded in live venue topology. Ask anything about gates,
+            transit, food, or WCAG AA accessibility — while operations intelligence monitors crowd
+            flow and alerts staff in real time.
           </p>
 
           <div className="landing-hero-ctas">
@@ -715,8 +788,7 @@ function LandingPage() {
             </span>
             <span className="landing-trust-divider" />
             <span className="landing-trust-item">
-              <Globe size={14} className="text-cyan" />
-              4 Native Languages
+              <Globe size={14} className="text-cyan" />4 Native Languages
             </span>
             <span className="landing-trust-divider" />
             <span className="landing-trust-item">
@@ -735,7 +807,11 @@ function LandingPage() {
       {/* ========================================
           INTERACTIVE SIMULATOR (Test Drive)
           ======================================== */}
-      <section className="landing-section landing-simulator-section" ref={simulatorRef} id="interactive-demo">
+      <section
+        className="landing-section landing-simulator-section"
+        ref={simulatorRef}
+        id="interactive-demo"
+      >
         <div className="landing-section-header">
           <div className="landing-section-badge">
             <Sparkles size={13} />
@@ -745,7 +821,9 @@ function LandingPage() {
             Experience both sides of the stadium intelligence loop
           </h2>
           <p className="landing-section-desc">
-            Test the fan experience on our Titanium iPhone 16 Pro mockup (synchronized exactly to your device clock), or switch to the Ops Command Center to see how every inquiry converts into actionable telemetry.
+            Test the fan experience on our Titanium iPhone 16 Pro mockup (synchronized exactly to
+            your device clock), or switch to the Ops Command Center to see how every inquiry
+            converts into actionable telemetry.
           </p>
         </div>
 
@@ -827,7 +905,9 @@ function LandingPage() {
                     >
                       {msg.role === 'user' ? (
                         <>
-                          <span className="landing-sim-msg-user-icon"><MessageSquare size={14} /></span>
+                          <span className="landing-sim-msg-user-icon">
+                            <MessageSquare size={14} />
+                          </span>
                           <div>
                             <p>{msg.text}</p>
                             <span className="landing-sim-msg-time">{msg.time}</span>
@@ -867,7 +947,11 @@ function LandingPage() {
                                   onClick={() => handlePlayAudio(msg.id)}
                                 >
                                   <Volume2 size={13} />
-                                  <span>{playingAudioId === msg.id ? '🔊 Playing Audio Readout...' : `Read Aloud (${msg.audioSnippet.split(' ')[2] || 'EN'})`}</span>
+                                  <span>
+                                    {playingAudioId === msg.id
+                                      ? '🔊 Playing Audio Readout...'
+                                      : `Read Aloud (${msg.audioSnippet.split(' ')[2] || 'EN'})`}
+                                  </span>
                                 </button>
                                 <button
                                   className={`landing-sim-like-btn ${likedMessageIds[msg.id] ? 'landing-sim-like-btn--active' : ''}`}
@@ -925,7 +1009,9 @@ function LandingPage() {
                   <button
                     type="submit"
                     className="landing-sim-phone-send"
-                    disabled={!customInput.trim() || aiState === 'grounding' || aiState === 'streaming'}
+                    disabled={
+                      !customInput.trim() || aiState === 'grounding' || aiState === 'streaming'
+                    }
                   >
                     <ArrowRight size={16} />
                   </button>
@@ -944,11 +1030,14 @@ function LandingPage() {
                 <div className="landing-showcase-header">
                   <div className="flex-align gap-2">
                     <Layers size={18} className="text-cyan" />
-                    <span className="text-sm font-bold text-cyan uppercase tracking-wider">Interactive Showcase Deck</span>
+                    <span className="text-sm font-bold text-cyan uppercase tracking-wider">
+                      Interactive Showcase Deck
+                    </span>
                   </div>
                   <h3 className="landing-showcase-title">Test Drive 4 Multilingual AI Scenarios</h3>
                   <p className="landing-showcase-subtitle">
-                    Click any scenario card below to trigger real-time chain-of-thought grounding and token-by-token streaming right inside the Titanium iPhone on the left.
+                    Click any scenario card below to trigger real-time chain-of-thought grounding
+                    and token-by-token streaming right inside the Titanium iPhone on the left.
                   </p>
                 </div>
 
@@ -986,7 +1075,9 @@ function LandingPage() {
                         <div className="landing-scenario-card-bottom">
                           <span className={`landing-scenario-status text-${prompt.badgeColor}`}>
                             {isActive && (aiState === 'grounding' || aiState === 'streaming') ? (
-                              <span className="flex-align gap-1"><span className="pulse-icon">⚡</span> Streaming Live...</span>
+                              <span className="flex-align gap-1">
+                                <span className="pulse-icon">⚡</span> Streaming Live...
+                              </span>
                             ) : (
                               <span>{prompt.badge}</span>
                             )}
@@ -1006,7 +1097,10 @@ function LandingPage() {
 
                 <div className="landing-showcase-footer-note">
                   <Sparkles size={14} className="text-gold" />
-                  <span>Notice how every query automatically feeds operations telemetry to the Command Center in real time.</span>
+                  <span>
+                    Notice how every query automatically feeds operations telemetry to the Command
+                    Center in real time.
+                  </span>
                 </div>
               </div>
             </div>
@@ -1015,8 +1109,12 @@ function LandingPage() {
             <div className="landing-sim-ops-layout">
               <div className="landing-sim-ops-header">
                 <div>
-                  <h3 className="landing-sim-ops-title">MetLife Stadium · Live Operations Command Center</h3>
-                  <p className="landing-sim-ops-sub">Real-time crowd intelligence synthesized from 100% anonymized fan interactions</p>
+                  <h3 className="landing-sim-ops-title">
+                    MetLife Stadium · Live Operations Command Center
+                  </h3>
+                  <p className="landing-sim-ops-sub">
+                    Real-time crowd intelligence synthesized from 100% anonymized fan interactions
+                  </p>
                 </div>
                 <div className="landing-sim-ops-controls">
                   <button
@@ -1024,7 +1122,9 @@ function LandingPage() {
                     onClick={() => setSurgeActive(!surgeActive)}
                   >
                     <AlertCircle size={16} />
-                    <span>{surgeActive ? '🚨 Surge Simulated (Gate C)' : '⚡ Simulate Crowd Surge'}</span>
+                    <span>
+                      {surgeActive ? '🚨 Surge Simulated (Gate C)' : '⚡ Simulate Crowd Surge'}
+                    </span>
                   </button>
                   <button className="landing-sim-ops-full-btn" onClick={() => navigate('/ops')}>
                     <span>Launch Live Ops Console (/ops)</span>
@@ -1048,7 +1148,9 @@ function LandingPage() {
                       <div key={item.id} className="landing-sim-ops-feed-item">
                         <div className="landing-sim-ops-feed-top">
                           <span className="landing-sim-ops-feed-lang">{item.lang}</span>
-                          <strong className="landing-sim-ops-feed-query">&quot;{item.query}&quot;</strong>
+                          <strong className="landing-sim-ops-feed-query">
+                            &quot;{item.query}&quot;
+                          </strong>
                           <span className="landing-sim-ops-feed-time">{item.time}</span>
                         </div>
                         <div className="landing-sim-ops-feed-impact">
@@ -1067,7 +1169,9 @@ function LandingPage() {
                       <Activity size={15} className="text-emerald" />
                       <strong>Venue Gate Crowd Density</strong>
                     </span>
-                    <span className="telemetry-pill">{surgeActive ? '1 SURGE DETECTED' : 'OPTIMAL FLOW'}</span>
+                    <span className="telemetry-pill">
+                      {surgeActive ? '1 SURGE DETECTED' : 'OPTIMAL FLOW'}
+                    </span>
                   </div>
 
                   <div className="landing-sim-gates-list">
@@ -1093,7 +1197,9 @@ function LandingPage() {
                           style={{ width: surgeActive ? '92%' : '65%' }}
                         />
                       </div>
-                      <span className={`landing-sim-gate-stat ${surgeActive ? 'text-red font-bold' : 'text-gold'}`}>
+                      <span
+                        className={`landing-sim-gate-stat ${surgeActive ? 'text-red font-bold' : 'text-gold'}`}
+                      >
                         {surgeActive ? '🚨 18m wait (High)' : '7m wait'}
                       </span>
                     </div>
@@ -1115,11 +1221,17 @@ function LandingPage() {
                     <p className="landing-sim-ops-briefing-text">
                       {surgeActive ? (
                         <>
-                          <strong className="text-orange">🚨 Action Required:</strong> Gate C crowd volume reached 92% threshold due to NJ Transit arrival. <em>AI Action:</em> Automated AI Concierge has redirected 34% of incoming fan queries to Gate D. Recommend dispatching 3 crowd stewards to Concourse C corridor.
+                          <strong className="text-orange">🚨 Action Required:</strong> Gate C crowd
+                          volume reached 92% threshold due to NJ Transit arrival.{' '}
+                          <em>AI Action:</em> Automated AI Concierge has redirected 34% of incoming
+                          fan queries to Gate D. Recommend dispatching 3 crowd stewards to Concourse
+                          C corridor.
                         </>
                       ) : (
                         <>
-                          <strong className="text-emerald">🟢 All Systems Stable:</strong> Fan queries indicate steady dispersion across Gates A and D. Halal vendor demand at Section 204 is elevated (+8%) — inventory verified sufficient.
+                          <strong className="text-emerald">🟢 All Systems Stable:</strong> Fan
+                          queries indicate steady dispersion across Gates A and D. Halal vendor
+                          demand at Section 204 is elevated (+8%) — inventory verified sufficient.
                         </>
                       )}
                     </p>
@@ -1144,7 +1256,8 @@ function LandingPage() {
             Everything attendees and operations staff need, unified
           </h2>
           <p className="landing-section-desc">
-            A closed-loop system where fan assistance naturally generates anonymized operations telemetry — the connection IS the product.
+            A closed-loop system where fan assistance naturally generates anonymized operations
+            telemetry — the connection IS the product.
           </p>
         </div>
 
@@ -1163,7 +1276,9 @@ function LandingPage() {
                   {feature.tags && (
                     <div className="landing-bento-tags">
                       {feature.tags.map((tag, j) => (
-                        <span key={j} className="landing-bento-tag">{tag}</span>
+                        <span key={j} className="landing-bento-tag">
+                          {tag}
+                        </span>
                       ))}
                     </div>
                   )}
@@ -1187,10 +1302,14 @@ function LandingPage() {
                       ))}
                     </div>
                     <div className="landing-bento-lang-sample">
-                      {bentoLang === 'EN' && '"Where is Gate B elevator?" ➔ Gate B elevator is right next to VIP Section 101.'}
-                      {bentoLang === 'ES' && '"¿Dónde está el ascensor B?" ➔ El ascensor B está junto a la Sección VIP 101.'}
-                      {bentoLang === 'FR' && '"Où est l’ascenseur B ?" ➔ L’ascenseur B est à côté de la Section VIP 101.'}
-                      {bentoLang === 'PT' && '"Onde fica o elevador B?" ➔ O elevador B fica ao lado da Seção VIP 101.'}
+                      {bentoLang === 'EN' &&
+                        '"Where is Gate B elevator?" ➔ Gate B elevator is right next to VIP Section 101.'}
+                      {bentoLang === 'ES' &&
+                        '"¿Dónde está el ascensor B?" ➔ El ascensor B está junto a la Sección VIP 101.'}
+                      {bentoLang === 'FR' &&
+                        '"Où est l’ascenseur B ?" ➔ L’ascenseur B est à côté de la Section VIP 101.'}
+                      {bentoLang === 'PT' &&
+                        '"Onde fica o elevador B?" ➔ O elevador B fica ao lado da Seção VIP 101.'}
                     </div>
                   </div>
                 )}
@@ -1236,7 +1355,8 @@ function LandingPage() {
             From event creation to live fan experience in 3 steps
           </h2>
           <p className="landing-section-desc">
-            Tap any step below to see how simple and powerful Aficionado AI is for organizers and stadium guests.
+            Tap any step below to see how simple and powerful Aficionado AI is for organizers and
+            stadium guests.
           </p>
         </div>
 
@@ -1318,17 +1438,17 @@ function LandingPage() {
             <Ticket size={14} className="text-emerald" />
             <span>Instant Access Gate</span>
           </div>
-          <h2 className="landing-join-title">
-            Ready to enter the stadium?
-          </h2>
+          <h2 className="landing-join-title">Ready to enter the stadium?</h2>
           <p className="landing-join-desc">
-            Paste an event invite link, enter an event slug, or click one of our one-click live demo stadiums below to experience Aficionado AI immediately.
+            Paste an event invite link, enter an event slug, or click one of our one-click live demo
+            stadiums below to experience Aficionado AI immediately.
           </p>
 
           {/* Hackathon Evaluator Tip Banner */}
           <div
             style={{
-              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%)',
+              background:
+                'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%)',
               border: '1px solid rgba(16, 185, 129, 0.4)',
               borderRadius: '12px',
               padding: '14px 18px',
@@ -1337,22 +1457,55 @@ function LandingPage() {
               alignItems: 'center',
               gap: '14px',
               textAlign: 'left',
-              boxShadow: '0 8px 24px rgba(16, 185, 129, 0.1)'
+              boxShadow: '0 8px 24px rgba(16, 185, 129, 0.1)',
             }}
           >
             <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>💡</span>
             <div style={{ fontSize: '0.88rem', color: '#e2e8f0', lineHeight: 1.45 }}>
-              <strong style={{ color: '#6ee7b7', display: 'block', marginBottom: '3px', fontSize: '0.94rem' }}>Hackathon Evaluator & Judge Pro-Tip:</strong>
-              Click <b style={{ color: '#fff' }}>MetLife Stadium Opener</b> below to test <i>Secure Gated Access & Claim Code Verification (<code style={{ color: '#6ee7b7' }}>FAN-2026</code>)</i>, or click <b style={{ color: '#fff' }}>World Cup Final 2026</b> to test <i>Instant 0-Click VIP Entry</i> directly into the 4-Language AI Concierge!
+              <strong
+                style={{
+                  color: '#6ee7b7',
+                  display: 'block',
+                  marginBottom: '3px',
+                  fontSize: '0.94rem',
+                }}
+              >
+                Hackathon Evaluator & Judge Pro-Tip:
+              </strong>
+              Click <b style={{ color: '#fff' }}>MetLife Stadium Opener</b> below to test{' '}
+              <i>
+                Secure Gated Access & Claim Code Verification (
+                <code style={{ color: '#6ee7b7' }}>FAN-2026</code>)
+              </i>
+              , or click <b style={{ color: '#fff' }}>World Cup Final 2026</b> to test{' '}
+              <i>Instant 0-Click VIP Entry</i> directly into the 4-Language AI Concierge!
             </div>
           </div>
 
           {/* Quick Demo Buttons */}
           <div className="landing-quick-demos" style={{ marginBottom: '24px' }}>
-            <div className="landing-quick-demos-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px', fontSize: '0.94rem', color: '#94a3b8', fontWeight: '600' }}>
+            <div
+              className="landing-quick-demos-label"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                marginBottom: '14px',
+                fontSize: '0.94rem',
+                color: '#94a3b8',
+                fontWeight: '600',
+              }}
+            >
               <span style={{ color: '#38bdf8' }}>⚡</span> One-Click Instant Demo Stadiums:
             </div>
-            <div className="landing-quick-demos-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: '16px' }}>
+            <div
+              className="landing-quick-demos-grid"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
+                gap: '16px',
+              }}
+            >
               <button
                 className="landing-quick-demo-btn"
                 onClick={() => handleQuickDemoJoin('metlife-opener')}
@@ -1362,35 +1515,119 @@ function LandingPage() {
                   justifyContent: 'space-between',
                   padding: '18px',
                   borderRadius: '14px',
-                  background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%)',
+                  background:
+                    'linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%)',
                   border: '1px solid rgba(56, 189, 248, 0.38)',
                   boxShadow: '0 6px 20px rgba(0, 0, 0, 0.35)',
                   transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
                   cursor: 'pointer',
-                  textAlign: 'left'
+                  textAlign: 'left',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
-                  <div style={{ background: 'rgba(56, 189, 248, 0.16)', width: '46px', height: '46px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.45rem', border: '1px solid rgba(56, 189, 248, 0.35)', flexShrink: 0 }}>
+                  <div
+                    style={{
+                      background: 'rgba(56, 189, 248, 0.16)',
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '12px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '1.45rem',
+                      border: '1px solid rgba(56, 189, 248, 0.35)',
+                      flexShrink: 0,
+                    }}
+                  >
                     ⚽
                   </div>
                   <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '5px' }}>
-                      <strong style={{ color: '#f8fafc', fontSize: '1.03rem', fontWeight: '700' }}>MetLife Stadium Opener</strong>
-                      <span style={{ background: 'rgba(16, 185, 129, 0.22)', color: '#6ee7b7', padding: '2px 8px', borderRadius: '20px', fontSize: '0.72rem', fontWeight: '600', border: '1px solid rgba(16, 185, 129, 0.45)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10b981', display: 'inline-block' }} /> Live
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        marginBottom: '5px',
+                      }}
+                    >
+                      <strong style={{ color: '#f8fafc', fontSize: '1.03rem', fontWeight: '700' }}>
+                        MetLife Stadium Opener
+                      </strong>
+                      <span
+                        style={{
+                          background: 'rgba(16, 185, 129, 0.22)',
+                          color: '#6ee7b7',
+                          padding: '2px 8px',
+                          borderRadius: '20px',
+                          fontSize: '0.72rem',
+                          fontWeight: '600',
+                          border: '1px solid rgba(16, 185, 129, 0.45)',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '5px',
+                        }}
+                      >
+                        <span
+                          style={{
+                            width: '6px',
+                            height: '6px',
+                            borderRadius: '50%',
+                            background: '#10b981',
+                            display: 'inline-block',
+                          }}
+                        />{' '}
+                        Live
                       </span>
                     </div>
-                    <div style={{ color: '#94a3b8', fontSize: '0.83rem', marginBottom: '8px', lineHeight: 1.35 }}>
-                      Gated Access Demo · Time Window + Claim Code Verification (<code style={{ color: '#38bdf8', fontWeight: 'bold' }}>FAN-2026</code>)
+                    <div
+                      style={{
+                        color: '#94a3b8',
+                        fontSize: '0.83rem',
+                        marginBottom: '8px',
+                        lineHeight: 1.35,
+                      }}
+                    >
+                      Gated Access Demo · Time Window + Claim Code Verification (
+                      <code style={{ color: '#38bdf8', fontWeight: 'bold' }}>FAN-2026</code>)
                     </div>
                     <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                      <span style={{ background: 'rgba(255,255,255,0.07)', padding: '3px 8px', borderRadius: '5px', fontSize: '0.73rem', color: '#cbd5e1', border: '1px solid rgba(255,255,255,0.1)' }}>🛡️ Gated Flow</span>
-                      <span style={{ background: 'rgba(255,255,255,0.07)', padding: '3px 8px', borderRadius: '5px', fontSize: '0.73rem', color: '#cbd5e1', border: '1px solid rgba(255,255,255,0.1)' }}>🌐 4L AI Concierge</span>
+                      <span
+                        style={{
+                          background: 'rgba(255,255,255,0.07)',
+                          padding: '3px 8px',
+                          borderRadius: '5px',
+                          fontSize: '0.73rem',
+                          color: '#cbd5e1',
+                          border: '1px solid rgba(255,255,255,0.1)',
+                        }}
+                      >
+                        🛡️ Gated Flow
+                      </span>
+                      <span
+                        style={{
+                          background: 'rgba(255,255,255,0.07)',
+                          padding: '3px 8px',
+                          borderRadius: '5px',
+                          fontSize: '0.73rem',
+                          color: '#cbd5e1',
+                          border: '1px solid rgba(255,255,255,0.1)',
+                        }}
+                      >
+                        🌐 4L AI Concierge
+                      </span>
                     </div>
                   </div>
                 </div>
-                <ArrowRight size={20} style={{ color: '#38bdf8', flexShrink: 0, transition: 'transform 0.2s ease', marginLeft: '10px' }} className="landing-quick-demo-arrow" />
+                <ArrowRight
+                  size={20}
+                  style={{
+                    color: '#38bdf8',
+                    flexShrink: 0,
+                    transition: 'transform 0.2s ease',
+                    marginLeft: '10px',
+                  }}
+                  className="landing-quick-demo-arrow"
+                />
               </button>
 
               <button
@@ -1402,35 +1639,110 @@ function LandingPage() {
                   justifyContent: 'space-between',
                   padding: '18px',
                   borderRadius: '14px',
-                  background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%)',
+                  background:
+                    'linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%)',
                   border: '1px solid rgba(250, 204, 21, 0.38)',
                   boxShadow: '0 6px 20px rgba(0, 0, 0, 0.35)',
                   transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
                   cursor: 'pointer',
-                  textAlign: 'left'
+                  textAlign: 'left',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
-                  <div style={{ background: 'rgba(250, 204, 21, 0.16)', width: '46px', height: '46px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.45rem', border: '1px solid rgba(250, 204, 21, 0.35)', flexShrink: 0 }}>
+                  <div
+                    style={{
+                      background: 'rgba(250, 204, 21, 0.16)',
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '12px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '1.45rem',
+                      border: '1px solid rgba(250, 204, 21, 0.35)',
+                      flexShrink: 0,
+                    }}
+                  >
                     🏆
                   </div>
                   <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '5px' }}>
-                      <strong style={{ color: '#f8fafc', fontSize: '1.03rem', fontWeight: '700' }}>World Cup Final 2026</strong>
-                      <span style={{ background: 'rgba(250, 204, 21, 0.22)', color: '#fde047', padding: '2px 8px', borderRadius: '20px', fontSize: '0.72rem', fontWeight: '600', border: '1px solid rgba(250, 204, 21, 0.45)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        marginBottom: '5px',
+                      }}
+                    >
+                      <strong style={{ color: '#f8fafc', fontSize: '1.03rem', fontWeight: '700' }}>
+                        World Cup Final 2026
+                      </strong>
+                      <span
+                        style={{
+                          background: 'rgba(250, 204, 21, 0.22)',
+                          color: '#fde047',
+                          padding: '2px 8px',
+                          borderRadius: '20px',
+                          fontSize: '0.72rem',
+                          fontWeight: '600',
+                          border: '1px solid rgba(250, 204, 21, 0.45)',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '5px',
+                        }}
+                      >
                         ★ VIP Ready
                       </span>
                     </div>
-                    <div style={{ color: '#94a3b8', fontSize: '0.83rem', marginBottom: '8px', lineHeight: 1.35 }}>
-                      Instant 0-Click Pass · Drops directly into 3D Topology Navigation & Priority Lanes
+                    <div
+                      style={{
+                        color: '#94a3b8',
+                        fontSize: '0.83rem',
+                        marginBottom: '8px',
+                        lineHeight: 1.35,
+                      }}
+                    >
+                      Instant 0-Click Pass · Drops directly into 3D Topology Navigation & Priority
+                      Lanes
                     </div>
                     <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                      <span style={{ background: 'rgba(255,255,255,0.07)', padding: '3px 8px', borderRadius: '5px', fontSize: '0.73rem', color: '#cbd5e1', border: '1px solid rgba(255,255,255,0.1)' }}>⚡ 0-Click Entry</span>
-                      <span style={{ background: 'rgba(255,255,255,0.07)', padding: '3px 8px', borderRadius: '5px', fontSize: '0.73rem', color: '#cbd5e1', border: '1px solid rgba(255,255,255,0.1)' }}>♿ WCAG AA Grounded</span>
+                      <span
+                        style={{
+                          background: 'rgba(255,255,255,0.07)',
+                          padding: '3px 8px',
+                          borderRadius: '5px',
+                          fontSize: '0.73rem',
+                          color: '#cbd5e1',
+                          border: '1px solid rgba(255,255,255,0.1)',
+                        }}
+                      >
+                        ⚡ 0-Click Entry
+                      </span>
+                      <span
+                        style={{
+                          background: 'rgba(255,255,255,0.07)',
+                          padding: '3px 8px',
+                          borderRadius: '5px',
+                          fontSize: '0.73rem',
+                          color: '#cbd5e1',
+                          border: '1px solid rgba(255,255,255,0.1)',
+                        }}
+                      >
+                        ♿ WCAG AA Grounded
+                      </span>
                     </div>
                   </div>
                 </div>
-                <ArrowRight size={20} style={{ color: '#facc15', flexShrink: 0, transition: 'transform 0.2s ease', marginLeft: '10px' }} className="landing-quick-demo-arrow" />
+                <ArrowRight
+                  size={20}
+                  style={{
+                    color: '#facc15',
+                    flexShrink: 0,
+                    transition: 'transform 0.2s ease',
+                    marginLeft: '10px',
+                  }}
+                  className="landing-quick-demo-arrow"
+                />
               </button>
             </div>
           </div>
@@ -1451,11 +1763,7 @@ function LandingPage() {
                 aria-label="Event link or slug"
               />
             </div>
-            <button
-              type="submit"
-              className="landing-join-btn"
-              disabled={!eventInput.trim()}
-            >
+            <button type="submit" className="landing-join-btn" disabled={!eventInput.trim()}>
               <span>Join Match</span>
               <ArrowRight size={16} />
             </button>
@@ -1496,11 +1804,10 @@ function LandingPage() {
             <HelpCircle size={13} />
             <span>FAQ & Architecture</span>
           </div>
-          <h2 className="landing-section-title">
-            Frequently Asked Questions
-          </h2>
+          <h2 className="landing-section-title">Frequently Asked Questions</h2>
           <p className="landing-section-desc">
-            Everything you need to know about Aficionado AI’s zero-app design, venue grounding, and security compliance.
+            Everything you need to know about Aficionado AI’s zero-app design, venue grounding, and
+            security compliance.
           </p>
         </div>
 
@@ -1518,7 +1825,11 @@ function LandingPage() {
                   aria-expanded={isOpen}
                 >
                   <span>{item.question}</span>
-                  {isOpen ? <ChevronUp size={20} className="text-cyan" /> : <ChevronDown size={20} />}
+                  {isOpen ? (
+                    <ChevronUp size={20} className="text-cyan" />
+                  ) : (
+                    <ChevronDown size={20} />
+                  )}
                 </button>
                 {isOpen && (
                   <div className="landing-faq-answer">
@@ -1549,10 +1860,18 @@ function LandingPage() {
           </div>
 
           <div className="landing-footer-links">
-            <button onClick={() => scrollToSection(simulatorRef)} className="landing-footer-link">Interactive Demo</button>
-            <button onClick={() => navigate('/fan')} className="landing-footer-link">Fan Demo (/fan)</button>
-            <button onClick={() => navigate('/ops')} className="landing-footer-link">Ops Demo (/ops)</button>
-            <button onClick={() => navigate('/organizer')} className="landing-footer-link">Organizer (/organizer)</button>
+            <button onClick={() => scrollToSection(simulatorRef)} className="landing-footer-link">
+              Interactive Demo
+            </button>
+            <button onClick={() => navigate('/fan')} className="landing-footer-link">
+              Fan Demo (/fan)
+            </button>
+            <button onClick={() => navigate('/ops')} className="landing-footer-link">
+              Ops Demo (/ops)
+            </button>
+            <button onClick={() => navigate('/organizer')} className="landing-footer-link">
+              Organizer (/organizer)
+            </button>
           </div>
 
           <div className="landing-footer-powered">

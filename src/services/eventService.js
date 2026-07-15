@@ -69,7 +69,9 @@ export async function logoutOrganizer() {
 export async function getOrganizerSession() {
   if (!supabase) return { success: false, session: null, user: null };
   try {
-    const { data: { session } } = await supabase.auth.getSession();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
     return { success: true, session, user: session?.user || null };
   } catch (err) {
     return { success: false, session: null, user: null };
@@ -86,7 +88,8 @@ const DEMO_EVENTS = {
     id: 'demo-event-metlife-opener-2026',
     name: 'FIFA World Cup 2026 — MetLife Stadium Opener',
     venue: 'MetLife Stadium (East Rutherford, NJ)',
-    description: 'Opening match of the FIFA World Cup 2026 at MetLife Stadium. Features secure time windows, claim code verification (FAN-2026), 4-Language AI Concierge, and live Ops synchronization.',
+    description:
+      'Opening match of the FIFA World Cup 2026 at MetLife Stadium. Features secure time windows, claim code verification (FAN-2026), 4-Language AI Concierge, and live Ops synchronization.',
     event_date: new Date(now.getTime() - 2 * 3600 * 1000).toISOString().slice(0, 10),
     starts_at: new Date(now.getTime() - 2 * 3600 * 1000).toISOString(),
     ends_at: new Date(now.getTime() + 8 * 3600 * 1000).toISOString(),
@@ -101,7 +104,8 @@ const DEMO_EVENTS = {
     id: 'demo-event-fifa-final-2026',
     name: 'World Cup Final 2026 — VIP Championship Gate',
     venue: 'MetLife Stadium — Championship Suite & Concourse Level 1',
-    description: 'The grand finale of the 2026 FIFA World Cup. Zero-friction instant access VIP concierge with real-time topology routing, executive menu verification, and step-free WCAG AA priority lanes.',
+    description:
+      'The grand finale of the 2026 FIFA World Cup. Zero-friction instant access VIP concierge with real-time topology routing, executive menu verification, and step-free WCAG AA priority lanes.',
     event_date: new Date(now.getTime() - 1 * 3600 * 1000).toISOString().slice(0, 10),
     starts_at: new Date(now.getTime() - 1 * 3600 * 1000).toISOString(),
     ends_at: new Date(now.getTime() + 6 * 3600 * 1000).toISOString(),
@@ -189,7 +193,10 @@ export async function createEvent(data) {
       .single();
 
     if (error) {
-      console.warn('[EventService] Supabase createEvent failed, using local storage fallback:', error.message);
+      console.warn(
+        '[EventService] Supabase createEvent failed, using local storage fallback:',
+        error.message,
+      );
       return { success: true, data: newEvent };
     }
     return { success: true, data: event || newEvent };
@@ -221,7 +228,9 @@ export async function getEventBySlug(slug) {
   // 3. Try Supabase cloud lookup
   if (supabase) {
     try {
-      const { data: rpcData, error: rpcError } = await supabase.rpc('get_public_event_by_slug', { p_slug: cleanSlug });
+      const { data: rpcData, error: rpcError } = await supabase.rpc('get_public_event_by_slug', {
+        p_slug: cleanSlug,
+      });
       if (!rpcError && rpcData) {
         return { success: true, data: rpcData };
       }
@@ -300,15 +309,21 @@ export async function toggleEventActive(eventId, isActive) {
 
   // Update local storage if present
   const locals = getLocalEvents();
-  const updatedLocals = locals.map((e) => (e.id === eventId || e.slug === eventId ? { ...e, is_active: isActive } : e));
+  const updatedLocals = locals.map((e) =>
+    e.id === eventId || e.slug === eventId ? { ...e, is_active: isActive } : e,
+  );
   try {
     localStorage.setItem('afic_custom_events', JSON.stringify(updatedLocals));
-  } catch { /* ignore fallback */ }
+  } catch {
+    /* ignore fallback */
+  }
 
   if (supabase) {
     try {
       await supabase.from('events').update({ is_active: isActive }).eq('id', eventId);
-    } catch { /* ignore fallback */ }
+    } catch {
+      /* ignore fallback */
+    }
   }
 
   return { success: true };
@@ -332,12 +347,16 @@ export async function deleteEvent(eventId) {
   const filtered = locals.filter((e) => e.id !== eventId && e.slug !== eventId);
   try {
     localStorage.setItem('afic_custom_events', JSON.stringify(filtered));
-  } catch { /* ignore fallback */ }
+  } catch {
+    /* ignore fallback */
+  }
 
   if (supabase) {
     try {
       await supabase.from('events').delete().eq('id', eventId);
-    } catch { /* ignore fallback */ }
+    } catch {
+      /* ignore fallback */
+    }
   }
 
   return { success: true };
@@ -363,7 +382,7 @@ export async function generateClaimCodes(eventId, count = 10) {
       { id: 'c-1', event_id: eventId, code: 'FAN-2026', is_claimed: false },
       { id: 'c-2', event_id: eventId, code: 'VIP-OPENER', is_claimed: false },
       { id: 'c-3', event_id: eventId, code: 'WCAG-PASS', is_claimed: false },
-      { id: 'c-4', event_id: eventId, code: 'DEMO-PASS', is_claimed: false }
+      { id: 'c-4', event_id: eventId, code: 'DEMO-PASS', is_claimed: false },
     );
   }
 
@@ -383,13 +402,17 @@ export async function generateClaimCodes(eventId, count = 10) {
 
   try {
     localStorage.setItem(`afic_codes_${eventId}`, JSON.stringify(codes));
-  } catch { /* ignore fallback */ }
+  } catch {
+    /* ignore fallback */
+  }
 
   if (supabase) {
     try {
       const { data, error } = await supabase.from('claim_codes').insert(codes).select();
       if (!error && data) return { success: true, data };
-    } catch { /* ignore fallback */ }
+    } catch {
+      /* ignore fallback */
+    }
   }
 
   return { success: true, data: codes };
@@ -416,7 +439,9 @@ export async function getClaimCodes(eventId) {
   try {
     const stored = localStorage.getItem(`afic_codes_${eventId}`);
     if (stored) return { success: true, data: JSON.parse(stored) };
-  } catch { /* ignore fallback */ }
+  } catch {
+    /* ignore fallback */
+  }
 
   if (supabase) {
     try {
@@ -427,7 +452,9 @@ export async function getClaimCodes(eventId) {
         .order('created_at', { ascending: true });
 
       if (!error && data) return { success: true, data };
-    } catch { /* ignore fallback */ }
+    } catch {
+      /* ignore fallback */
+    }
   }
 
   return { success: true, data: [] };
@@ -471,11 +498,17 @@ export async function validateClaimCode(eventId, code) {
         }
         await supabase
           .from('claim_codes')
-          .update({ is_claimed: true, claimed_at: new Date().toISOString(), session_token: sessionToken })
+          .update({
+            is_claimed: true,
+            claimed_at: new Date().toISOString(),
+            session_token: sessionToken,
+          })
           .eq('id', codeRecord.id);
         return { success: true, sessionToken };
       }
-    } catch { /* ignore fallback */ }
+    } catch {
+      /* ignore fallback */
+    }
   }
 
   // Check local codes
@@ -488,7 +521,9 @@ export async function validateClaimCode(eventId, code) {
         return { success: true, sessionToken };
       }
     }
-  } catch { /* ignore fallback */ }
+  } catch {
+    /* ignore fallback */
+  }
 
   // For hackathon evaluator flexibility on local custom events, accept if formatted alphanumeric
   if (cleanCode.length >= 3) {
@@ -545,7 +580,9 @@ export async function claimEventCodeBySlug(slug, code) {
       if (!error && data?.success) {
         return { success: true, sessionToken, event: data.event || event };
       }
-    } catch { /* ignore fallback */ }
+    } catch {
+      /* ignore fallback */
+    }
   }
 
   // Check local validation
@@ -591,7 +628,9 @@ export async function verifyOpsKeyBySlug(slug, key) {
       if (!error && data?.success) {
         return { success: true, sessionToken, event: data.event || event };
       }
-    } catch { /* ignore fallback */ }
+    } catch {
+      /* ignore fallback */
+    }
   }
 
   return { success: false, error: 'Invalid ops access key. Try "FIFA2026OPS"' };
@@ -612,7 +651,9 @@ export async function createSession(eventId, role, sessionToken) {
   try {
     const current = Number(localStorage.getItem(`afic_sess_${eventId}`) || 0);
     localStorage.setItem(`afic_sess_${eventId}`, String(current + 1));
-  } catch { /* ignore fallback */ }
+  } catch {
+    /* ignore fallback */
+  }
 
   if (supabase) {
     try {
@@ -622,7 +663,9 @@ export async function createSession(eventId, role, sessionToken) {
         role,
         is_active: true,
       });
-    } catch { /* ignore fallback */ }
+    } catch {
+      /* ignore fallback */
+    }
   }
 
   return { success: true };
@@ -646,7 +689,9 @@ export async function getActiveSessionCount(eventId) {
   try {
     const stored = Number(localStorage.getItem(`afic_sess_${eventId}`) || 0);
     localCount += stored;
-  } catch { /* ignore fallback */ }
+  } catch {
+    /* ignore fallback */
+  }
 
   if (supabase) {
     try {
@@ -659,7 +704,9 @@ export async function getActiveSessionCount(eventId) {
       if (!error && typeof count === 'number') {
         return { success: true, count: count || localCount };
       }
-    } catch { /* ignore fallback */ }
+    } catch {
+      /* ignore fallback */
+    }
   }
 
   return { success: true, count: localCount };

@@ -2,7 +2,7 @@
  * Gemini-powered operational briefing generator.
  * Synthesizes fan query patterns + mock crowd sensor data + context
  * into plain-language briefings with actionable recommendations.
- * 
+ *
  * This is genuinely generative — change the input data and the
  * briefing wording changes meaningfully, not just numbers.
  * @module geminiBriefing
@@ -138,7 +138,7 @@ SECURITY:
 /**
  * Generates an operational briefing from current crowd + query + weather data.
  * This is genuinely generative — the output changes meaningfully with different inputs.
- * 
+ *
  * @param {{ zones: Array }} crowdSnapshot - Current crowd density data
  * @param {Array<object>} recentQueries - Recent anonymized fan queries
  * @param {object} [weatherSnapshot] - Current weather condition data
@@ -151,7 +151,7 @@ export async function generateBriefing(crowdSnapshot, recentQueries, weatherSnap
     // Format inputs
     const crowdContext = formatCrowdDataForBriefing(crowdSnapshot);
     const queryAnalysis = analyzeQueryPatterns(recentQueries);
-    
+
     let weatherContext = '';
     if (weatherSnapshot) {
       weatherContext = `WEATHER CONDITIONS:\n  • Condition: ${weatherSnapshot.icon} ${weatherSnapshot.condition}\n  • Temp: ${weatherSnapshot.tempC}°C / ${weatherSnapshot.tempF}°F\n  • Humidity: ${weatherSnapshot.humidity}%\n  • UV Index: ${weatherSnapshot.uvIndex}\n  • Status: ${weatherSnapshot.status}${weatherSnapshot.alert ? `\n  • Alert: ${weatherSnapshot.alert}` : ''}\n`;

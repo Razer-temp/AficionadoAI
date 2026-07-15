@@ -48,7 +48,7 @@ export const ZONES = [
   { id: 'gate-a', name: 'Gate A — MetLife Gate', direction: 'East' },
   { id: 'gate-b', name: 'Gate B — Verizon Gate', direction: 'Southwest' },
   { id: 'gate-c', name: 'Gate C — HCLTech Gate', direction: 'Southeast' },
-  { id: 'gate-d', name: 'Gate D — Moody\'s Gate', direction: 'Northwest' },
+  { id: 'gate-d', name: "Gate D — Moody's Gate", direction: 'Northwest' },
   { id: 'concourse-100', name: '100 Level Concourse', direction: 'Lower' },
   { id: 'concourse-200', name: '200 Level Concourse', direction: 'Mid' },
   { id: 'concourse-300', name: '300 Level Concourse', direction: 'Upper' },

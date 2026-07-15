@@ -42,10 +42,7 @@ export function validateChatInput(input) {
  * @returns {string} Sanitized input
  */
 export function sanitizeInput(input) {
-  return input
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/\0/g, '');
+  return input.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\0/g, '');
 }
 
 /**
@@ -62,4 +59,23 @@ export function normalizeForCache(input, language) {
     .replace(/\s+/g, ' ')
     .replace(/[?!.,;:]+$/g, '');
   return `${language}:${normalized}`;
+}
+
+/**
+ * Sanitizes model output text before rendering.
+ * Strips any residual HTML tags the model may have included,
+ * removes control characters, and caps output length.
+ * @param {string} text - Raw model response text
+ * @param {number} [maxLength=5000] - Maximum allowed output length
+ * @returns {string} Sanitized model text safe for rendering
+ */
+export function sanitizeModelText(text, maxLength = 5000) {
+  if (typeof text !== 'string') return '';
+
+  return text
+    .replace(/<[^>]*>/g, '') // Strip HTML tags
+    // eslint-disable-next-line no-control-regex
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '') // Remove control chars (keep \n, \r, \t)
+    .slice(0, maxLength)
+    .trim();
 }

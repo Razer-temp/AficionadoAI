@@ -4,17 +4,65 @@ import TypingIndicator from './TypingIndicator';
 import LanguageBadge from './LanguageBadge';
 import { sendChatMessage, detectLanguage } from '../../services/geminiChat';
 import { formatErrorResponse } from '../../utils/errors';
-import { Send, Navigation, Train, Accessibility, Briefcase, Utensils, Globe, ShieldCheck, Compass, HelpCircle, Smartphone } from 'lucide-react';
+import {
+  Send,
+  Navigation,
+  Train,
+  Accessibility,
+  Briefcase,
+  Utensils,
+  Globe,
+  ShieldCheck,
+  Compass,
+  HelpCircle,
+  Smartphone,
+} from 'lucide-react';
 import '../../styles/fan.css';
 
 /** Suggested starter questions with Lucide vector icons and category tags */
 const STARTER_QUESTIONS = [
-  { text: 'How do I get to Gate C?', category: 'Wayfinding', query: 'How do I get to Gate C?', icon: Navigation, color: '#00F2FE' },
-  { text: 'Transit from Manhattan?', category: 'Transit Corridor', query: 'How do I get to the stadium using public transit from Manhattan?', icon: Train, color: '#10B981' },
-  { text: 'Wheelchair Entrances?', category: 'ADA & Safety', query: 'Where are the wheelchair accessible entrances and drop-off zones?', icon: Accessibility, color: '#F59E0B' },
-  { text: 'Bag & Water Policy?', category: 'Stadium Policy', query: 'What is the bag policy? Can I bring a water bottle into MetLife?', icon: Briefcase, color: '#4FACFE' },
-  { text: 'Halal Food Options?', category: 'Dining & Food', query: 'Where can I find halal food options in the stadium concourses?', icon: Utensils, color: '#A855F7' },
-  { text: '¿Dónde está la puerta A?', category: 'Multilingual', query: '¿Dónde está la puerta A?', icon: Globe, color: '#EC4899' },
+  {
+    text: 'How do I get to Gate C?',
+    category: 'Wayfinding',
+    query: 'How do I get to Gate C?',
+    icon: Navigation,
+    color: '#00F2FE',
+  },
+  {
+    text: 'Transit from Manhattan?',
+    category: 'Transit Corridor',
+    query: 'How do I get to the stadium using public transit from Manhattan?',
+    icon: Train,
+    color: '#10B981',
+  },
+  {
+    text: 'Wheelchair Entrances?',
+    category: 'ADA & Safety',
+    query: 'Where are the wheelchair accessible entrances and drop-off zones?',
+    icon: Accessibility,
+    color: '#F59E0B',
+  },
+  {
+    text: 'Bag & Water Policy?',
+    category: 'Stadium Policy',
+    query: 'What is the bag policy? Can I bring a water bottle into MetLife?',
+    icon: Briefcase,
+    color: '#4FACFE',
+  },
+  {
+    text: 'Halal Food Options?',
+    category: 'Dining & Food',
+    query: 'Where can I find halal food options in the stadium concourses?',
+    icon: Utensils,
+    color: '#A855F7',
+  },
+  {
+    text: '¿Dónde está la puerta A?',
+    category: 'Multilingual',
+    query: '¿Dónde está la puerta A?',
+    icon: Globe,
+    color: '#EC4899',
+  },
 ];
 
 /** Quick 5G AR Wayfinding passes for VIP concourse navigation */
@@ -23,19 +71,21 @@ const AR_WAYFINDING_CARDS = [
     title: 'Manhattan 5G Express Pass',
     badge: '5G CORRIDOR',
     desc: 'Direct NJ Transit & LIRR express corridor schedule, arriving platforms, and live VIP transfer routing.',
-    query: 'What is the fastest transit route from Manhattan right now and where do express trains arrive at MetLife?'
+    query:
+      'What is the fastest transit route from Manhattan right now and where do express trains arrive at MetLife?',
   },
   {
     title: 'ADA & Sensory Routing',
     badge: 'PRIORITY ROUTE',
     desc: 'Low-sensory rooms, priority wheelchair elevators, and designated accessible gate telemetry.',
-    query: 'Where are the sensory rooms and priority accessible elevator gates located at MetLife Stadium?'
+    query:
+      'Where are the sensory rooms and priority accessible elevator gates located at MetLife Stadium?',
   },
   {
     title: 'Gate Wait-Time Telemetry',
     badge: 'LIVE FLOW',
     desc: 'Real-time entry flow predictions, security line speeds, and VIP express lane status across all gates.',
-    query: 'Which gates currently have the lowest wait times and fastest security check right now?'
+    query: 'Which gates currently have the lowest wait times and fastest security check right now?',
   },
 ];
 
@@ -69,73 +119,79 @@ function FanChat({ onQueryLog }) {
    * Sends a message through the chat pipeline.
    * @param {string} messageText - The message to send
    */
-  const handleSend = useCallback(async (messageText) => {
-    const text = messageText || input.trim();
-    if (!text || isLoading) return;
+  const handleSend = useCallback(
+    async (messageText) => {
+      const text = messageText || input.trim();
+      if (!text || isLoading) return;
 
-    setInput('');
-    setError(null);
+      setInput('');
+      setError(null);
 
-    // Detect language for badge
-    const detectedLang = detectLanguage(text);
-    setLanguage(detectedLang);
+      // Detect language for badge
+      const detectedLang = detectLanguage(text);
+      setLanguage(detectedLang);
 
-    // Add user message
-    const userMessage = { role: 'user', text, timestamp: Date.now() };
-    setMessages((prev) => [...prev, userMessage]);
-    setIsLoading(true);
+      // Add user message
+      const userMessage = { role: 'user', text, timestamp: Date.now() };
+      setMessages((prev) => [...prev, userMessage]);
+      setIsLoading(true);
 
-    try {
-      // Build history for context (last 10 messages)
-      const history = messages.slice(-10).map((m) => ({
-        role: m.role === 'user' ? 'user' : 'model',
-        text: m.text,
-      }));
+      try {
+        // Build history for context (last 10 messages)
+        const history = messages.slice(-10).map((m) => ({
+          role: m.role === 'user' ? 'user' : 'model',
+          text: m.text,
+        }));
 
-      const result = await sendChatMessage(text, history);
+        const result = await sendChatMessage(text, history);
 
-      if (result.success) {
-        const assistantMessage = {
+        if (result.success) {
+          const assistantMessage = {
+            role: 'assistant',
+            text: result.data.response,
+            language: result.data.language,
+            sources: result.data.sources,
+            cached: result.data.cached,
+            timestamp: Date.now(),
+          };
+          setMessages((prev) => [...prev, assistantMessage]);
+
+          // Log anonymized query to ops feed
+          if (onQueryLog) {
+            onQueryLog({
+              language: result.data.language,
+              intentCategory: result.data.intents?.[0] || 'general',
+              zone: extractZone(text),
+              queryPreview: text.slice(0, 50),
+            });
+          }
+        }
+      } catch (err) {
+        const formatted = formatErrorResponse(err);
+        setError(formatted.error.message);
+        const errorMessage = {
           role: 'assistant',
-          text: result.data.response,
-          language: result.data.language,
-          sources: result.data.sources,
-          cached: result.data.cached,
+          text: `I apologize, but I encountered an issue: ${formatted.error.message}. Please try again.`,
           timestamp: Date.now(),
         };
-        setMessages((prev) => [...prev, assistantMessage]);
-
-        // Log anonymized query to ops feed
-        if (onQueryLog) {
-          onQueryLog({
-            language: result.data.language,
-            intentCategory: result.data.intents?.[0] || 'general',
-            zone: extractZone(text),
-            queryPreview: text.slice(0, 50),
-          });
-        }
+        setMessages((prev) => [...prev, errorMessage]);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (err) {
-      const formatted = formatErrorResponse(err);
-      setError(formatted.error.message);
-      const errorMessage = {
-        role: 'assistant',
-        text: `I apologize, but I encountered an issue: ${formatted.error.message}. Please try again.`,
-        timestamp: Date.now(),
-      };
-      setMessages((prev) => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [input, isLoading, messages, onQueryLog]);
+    },
+    [input, isLoading, messages, onQueryLog],
+  );
 
   /** Handle keyboard submit */
-  const handleKeyDown = useCallback((e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
-    }
-  }, [handleSend]);
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleSend();
+      }
+    },
+    [handleSend],
+  );
 
   return (
     <div className="fan-chat" role="region" aria-label="Fan Chat Assistant">
@@ -147,15 +203,17 @@ function FanChat({ onQueryLog }) {
               <span className="telemetry-dot" />
               <span className="telemetry-text">MetLife Stadium 5G Telemetry Online</span>
               <span style={{ color: 'rgba(255,255,255,0.4)', margin: '0 4px' }}>•</span>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>100+ Languages Auto-Detected</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                100+ Languages Auto-Detected
+              </span>
             </div>
 
             <h2 className="chat-welcome-title">
               Welcome to <span className="gradient-text">Aficionado AI</span>
             </h2>
             <p className="chat-welcome-text">
-              Your multilingual 5G AR concierge for FIFA World Cup 2026 at MetLife Stadium.
-              Grounded in live venue topology, transit schedules, security policies, and ADA accessibility!
+              Your multilingual 5G AR concierge for FIFA World Cup 2026 at MetLife Stadium. Grounded
+              in live venue topology, transit schedules, security policies, and ADA accessibility!
             </p>
 
             {/* 5G AR Wayfinding Quick Cards */}
@@ -180,9 +238,7 @@ function FanChat({ onQueryLog }) {
                       </div>
                       <span className="ar-card-badge">{card.badge}</span>
                     </div>
-                    <div className="ar-card-desc">
-                      {card.desc}
-                    </div>
+                    <div className="ar-card-desc">{card.desc}</div>
                   </button>
                 ))}
               </div>
@@ -210,7 +266,9 @@ function FanChat({ onQueryLog }) {
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                           <span style={{ fontSize: '0.88rem', fontWeight: 600 }}>{sq.text}</span>
-                          <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{sq.category}</span>
+                          <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                            {sq.category}
+                          </span>
                         </div>
                       </button>
                     </div>
@@ -220,7 +278,7 @@ function FanChat({ onQueryLog }) {
             </div>
           </div>
         ) : (
-          <div className="chat-message-row">
+          <div className="chat-message-row" aria-live="polite" aria-relevant="additions">
             {messages.map((msg, i) => (
               <ChatMessage key={i} message={msg} index={i} />
             ))}
@@ -270,9 +328,15 @@ function FanChat({ onQueryLog }) {
               ⚠️ {error}
             </div>
           )}
-          <div className="chat-disclaimer flex-align" style={{ gap: '0.4rem', justifyContent: 'center' }}>
+          <div
+            className="chat-disclaimer flex-align"
+            style={{ gap: '0.4rem', justifyContent: 'center' }}
+          >
             <ShieldCheck size={14} className="text-emerald" />
-            <span>Powered by Google Gemini 2.5 Flash — Responses grounded in verified MetLife venue knowledge base</span>
+            <span>
+              Powered by Google Gemini 2.5 Flash — Responses grounded in verified MetLife venue
+              knowledge base
+            </span>
           </div>
         </div>
       </footer>
@@ -287,10 +351,14 @@ function FanChat({ onQueryLog }) {
  */
 function extractZone(query) {
   const lower = query.toLowerCase();
-  if (lower.includes('gate a') || lower.includes('metlife gate') || lower.includes('puerta a')) return 'gate-a';
-  if (lower.includes('gate b') || lower.includes('verizon') || lower.includes('puerta b')) return 'gate-b';
-  if (lower.includes('gate c') || lower.includes('hcltech') || lower.includes('puerta c')) return 'gate-c';
-  if (lower.includes('gate d') || lower.includes('moody') || lower.includes('puerta d')) return 'gate-d';
+  if (lower.includes('gate a') || lower.includes('metlife gate') || lower.includes('puerta a'))
+    return 'gate-a';
+  if (lower.includes('gate b') || lower.includes('verizon') || lower.includes('puerta b'))
+    return 'gate-b';
+  if (lower.includes('gate c') || lower.includes('hcltech') || lower.includes('puerta c'))
+    return 'gate-c';
+  if (lower.includes('gate d') || lower.includes('moody') || lower.includes('puerta d'))
+    return 'gate-d';
   if (lower.includes('100 level') || lower.includes('lower')) return 'concourse-100';
   if (lower.includes('200 level') || lower.includes('mezzanine')) return 'concourse-200';
   if (lower.includes('300 level') || lower.includes('upper')) return 'concourse-300';
@@ -298,4 +366,3 @@ function extractZone(query) {
 }
 
 export default FanChat;
-

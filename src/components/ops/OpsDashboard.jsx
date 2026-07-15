@@ -5,7 +5,17 @@ import BriefingPanel from './BriefingPanel';
 import SimulateIncidentButton from './SimulateIncidentButton';
 import { createCrowdDataManager } from '../../data/mockCrowdData';
 import { getCurrentWeather, nextWeatherSnapshot } from '../../data/mockWeatherData';
-import { Activity, Cloud, MessageSquare, ShieldAlert, Radio, Wifi, Cpu, Zap, ShieldCheck } from 'lucide-react';
+import {
+  Activity,
+  Cloud,
+  MessageSquare,
+  ShieldAlert,
+  Radio,
+  Wifi,
+  Cpu,
+  Zap,
+  ShieldCheck,
+} from 'lucide-react';
 import '../../styles/ops.css';
 
 /** Create crowd data manager (singleton for the ops view) */
@@ -64,10 +74,15 @@ function OpsDashboard({ fanQueries }) {
               type="button"
               className={`telemetry-pill flex-align ${counterDroneAlert ? 'text-orange pulse-icon' : 'text-emerald'}`}
               onClick={() => setCounterDroneAlert(!counterDroneAlert)}
-              style={{ cursor: 'pointer', border: counterDroneAlert ? '1px solid #F97316' : undefined, background: 'transparent' }}
+              style={{
+                cursor: 'pointer',
+                border: counterDroneAlert ? '1px solid #F97316' : undefined,
+                background: 'transparent',
+              }}
               title="Click to toggle Sentrycs Counter-Drone test alert"
             >
-              <ShieldCheck size={13} /> SENTRYCS RF CYBER-SHIELD: {counterDroneAlert ? 'RF ANOMALY DETECTED' : 'SECURE'}
+              <ShieldCheck size={13} /> SENTRYCS RF CYBER-SHIELD:{' '}
+              {counterDroneAlert ? 'RF ANOMALY DETECTED' : 'SECURE'}
             </button>
           </div>
           <h2 className="ops-header-title">
@@ -75,7 +90,7 @@ function OpsDashboard({ fanQueries }) {
           </h2>
           <p className="ops-header-subtitle flex-align" style={{ gap: '0.5rem' }}>
             <Activity size={14} className="text-cyan" />
-            Real-time stadium intelligence — {crowdSnapshot.label} • 
+            Real-time stadium intelligence — {crowdSnapshot.label} •
             <Cloud size={14} className="text-emerald" style={{ marginLeft: '4px' }} />
             {weatherSnapshot.condition} ({weatherSnapshot.tempF}°F/{weatherSnapshot.tempC}°C) •
             <Zap size={14} className="text-gold" style={{ marginLeft: '4px' }} />
@@ -121,7 +136,9 @@ function OpsDashboard({ fanQueries }) {
         </div>
         <div className="status-item flex-align" style={{ gap: '0.4rem' }}>
           <Cloud size={14} className="text-emerald" />
-          <span>Weather: {weatherSnapshot.condition} ({weatherSnapshot.tempF}°F)</span>
+          <span>
+            Weather: {weatherSnapshot.condition} ({weatherSnapshot.tempF}°F)
+          </span>
         </div>
         <div className="status-item flex-align" style={{ gap: '0.4rem' }}>
           <MessageSquare size={14} className="text-gold" />

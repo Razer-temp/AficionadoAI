@@ -20,7 +20,11 @@
       "direction": "East",
       "sections": ["101-112"],
       "accessible": true,
-      "accessibleFeatures": ["wheelchair ramp", "accessible turnstiles", "mobility assistance tent"],
+      "accessibleFeatures": [
+        "wheelchair ramp",
+        "accessible turnstiles",
+        "mobility assistance tent"
+      ],
       "nearbyAmenities": ["West Hall food court", "Guest Services"],
       "elevatorAccess": true,
       "notes": "Main entrance. West Hall food court immediately inside. Halal food (Shah's) available in West Hall."
@@ -31,7 +35,12 @@
       "direction": "Southwest",
       "sections": ["124-137"],
       "accessible": true,
-      "accessibleFeatures": ["wheelchair ramp", "accessible turnstiles", "elevator to all levels", "disability drop-off zone in Lot C"],
+      "accessibleFeatures": [
+        "wheelchair ramp",
+        "accessible turnstiles",
+        "elevator to all levels",
+        "disability drop-off zone in Lot C"
+      ],
       "nearbyAmenities": ["Guest Services at Section 124", "elevator lobby"],
       "elevatorAccess": true,
       "notes": "Adjacent to accessible parking Lot C drop-off zone. Elevator access to all levels. Recommended for wheelchair users arriving by vehicle."
@@ -206,8 +215,21 @@
       "name": "Shah's Halal Food",
       "type": "halal",
       "cuisine": "Middle Eastern / South Asian",
-      "items": ["Chicken Over Rice", "Lamb Over Rice", "Falafel Over Rice", "Chicken Gyro", "Lamb Gyro", "Falafel Gyro", "Pakora Chips"],
-      "locations": ["West Hall (inside MetLife Gate)", "Section 126", "Section 314", "MetLife Central"],
+      "items": [
+        "Chicken Over Rice",
+        "Lamb Over Rice",
+        "Falafel Over Rice",
+        "Chicken Gyro",
+        "Lamb Gyro",
+        "Falafel Gyro",
+        "Pakora Chips"
+      ],
+      "locations": [
+        "West Hall (inside MetLife Gate)",
+        "Section 126",
+        "Section 314",
+        "MetLife Central"
+      ],
       "dietaryTags": ["halal", "contains-gluten"]
     },
     {
@@ -225,8 +247,20 @@
       "name": "Vegetarian Options",
       "type": "vegetarian",
       "cuisine": "Various",
-      "items": ["Veggie Burritos", "Veggie Tacos", "Rice & Bean Bowls", "Fresh Fruit Cups", "Mr. Tot", "Dippin' Dots"],
-      "locations": ["Portable stands and main concessions across 100, 200, and 300 concourses", "Sections 116-117", "Sections 201, 211, 216, 226, 237", "Sections 306, 315, 330"],
+      "items": [
+        "Veggie Burritos",
+        "Veggie Tacos",
+        "Rice & Bean Bowls",
+        "Fresh Fruit Cups",
+        "Mr. Tot",
+        "Dippin' Dots"
+      ],
+      "locations": [
+        "Portable stands and main concessions across 100, 200, and 300 concourses",
+        "Sections 116-117",
+        "Sections 201, 211, 216, 226, 237",
+        "Sections 306, 315, 330"
+      ],
       "dietaryTags": ["vegetarian"]
     },
     {
@@ -234,7 +268,18 @@
       "name": "General Concessions",
       "type": "general",
       "cuisine": "American stadium classics",
-      "items": ["Hot Dogs", "Burgers", "Pizza", "Chicken Tenders", "Nachos", "Pretzels", "Popcorn", "Soft Drinks", "Beer", "Water"],
+      "items": [
+        "Hot Dogs",
+        "Burgers",
+        "Pizza",
+        "Chicken Tenders",
+        "Nachos",
+        "Pretzels",
+        "Popcorn",
+        "Soft Drinks",
+        "Beer",
+        "Water"
+      ],
       "locations": ["All concourse levels — concession stands located near every 4-5 sections"],
       "dietaryTags": ["general"],
       "notes": "Mobile ordering available at 30+ locations for express pickup."
@@ -288,7 +333,12 @@
       "id": "first-aid-128",
       "name": "First Aid Station - Section 128",
       "location": "100 Level, near Section 128",
-      "services": ["basic first aid", "over-the-counter medication", "EMT response", "adult changing table"],
+      "services": [
+        "basic first aid",
+        "over-the-counter medication",
+        "EMT response",
+        "adult changing table"
+      ],
       "staffing": "Doctors, nurses, and EMTs"
     },
     {
@@ -302,7 +352,12 @@
       "id": "first-aid-326",
       "name": "First Aid Station - Section 326",
       "location": "300 Level, near Section 326",
-      "services": ["basic first aid", "over-the-counter medication", "EMT response", "adult changing table"],
+      "services": [
+        "basic first aid",
+        "over-the-counter medication",
+        "EMT response",
+        "adult changing table"
+      ],
       "staffing": "Doctors, nurses, and EMTs"
     }
   ],

@@ -7,9 +7,9 @@ import OpsDashboard from './OpsDashboard';
  */
 function OpsLayout({ fanQueries }) {
   return (
-    <main className="ops-layout" role="main" aria-label="Operations Dashboard">
+    <div className="ops-layout" aria-label="Operations Dashboard">
       <OpsDashboard fanQueries={fanQueries} />
-    </main>
+    </div>
   );
 }
 

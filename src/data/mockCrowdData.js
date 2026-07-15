@@ -2,7 +2,7 @@
  * Mock crowd density data system.
  * Generates simulated crowd sensor readings per gate/zone that rotate on a timer.
  * Data is clearly labeled as SIMULATED in the UI.
- * 
+ *
  * Uses JSON snapshot states rotating on a timer — lightweight, no busy-polling.
  * @module mockCrowdData
  */
@@ -19,48 +19,78 @@ const CROWD_SNAPSHOTS = [
   {
     label: 'Pre-Game (Gates Opening)',
     zones: {
-      'gate-a': 55, 'gate-b': 42, 'gate-c': 38, 'gate-d': 45,
-      'concourse-100': 20, 'concourse-200': 15, 'concourse-300': 10,
+      'gate-a': 55,
+      'gate-b': 42,
+      'gate-c': 38,
+      'gate-d': 45,
+      'concourse-100': 20,
+      'concourse-200': 15,
+      'concourse-300': 10,
     },
   },
   // State 1: Rush hour — high at popular gates
   {
     label: 'Entry Rush (1hr Before Kickoff)',
     zones: {
-      'gate-a': 82, 'gate-b': 68, 'gate-c': 75, 'gate-d': 58,
-      'concourse-100': 55, 'concourse-200': 40, 'concourse-300': 35,
+      'gate-a': 82,
+      'gate-b': 68,
+      'gate-c': 75,
+      'gate-d': 58,
+      'concourse-100': 55,
+      'concourse-200': 40,
+      'concourse-300': 35,
     },
   },
   // State 2: Near kickoff — critical at some gates
   {
     label: 'Near Kickoff',
     zones: {
-      'gate-a': 92, 'gate-b': 78, 'gate-c': 88, 'gate-d': 65,
-      'concourse-100': 72, 'concourse-200': 60, 'concourse-300': 55,
+      'gate-a': 92,
+      'gate-b': 78,
+      'gate-c': 88,
+      'gate-d': 65,
+      'concourse-100': 72,
+      'concourse-200': 60,
+      'concourse-300': 55,
     },
   },
   // State 3: Match in progress — low at gates, moderate inside
   {
     label: 'Match In Progress',
     zones: {
-      'gate-a': 15, 'gate-b': 12, 'gate-c': 10, 'gate-d': 18,
-      'concourse-100': 35, 'concourse-200': 30, 'concourse-300': 25,
+      'gate-a': 15,
+      'gate-b': 12,
+      'gate-c': 10,
+      'gate-d': 18,
+      'concourse-100': 35,
+      'concourse-200': 30,
+      'concourse-300': 25,
     },
   },
   // State 4: Halftime — surge at concessions
   {
     label: 'Halftime',
     zones: {
-      'gate-a': 20, 'gate-b': 15, 'gate-c': 12, 'gate-d': 22,
-      'concourse-100': 85, 'concourse-200': 78, 'concourse-300': 72,
+      'gate-a': 20,
+      'gate-b': 15,
+      'gate-c': 12,
+      'gate-d': 22,
+      'concourse-100': 85,
+      'concourse-200': 78,
+      'concourse-300': 72,
     },
   },
   // State 5: Post-match exit rush
   {
     label: 'Post-Match Exit',
     zones: {
-      'gate-a': 95, 'gate-b': 88, 'gate-c': 90, 'gate-d': 85,
-      'concourse-100': 60, 'concourse-200': 55, 'concourse-300': 50,
+      'gate-a': 95,
+      'gate-b': 88,
+      'gate-c': 90,
+      'gate-d': 85,
+      'concourse-100': 60,
+      'concourse-200': 55,
+      'concourse-300': 50,
     },
   },
 ];
@@ -168,11 +198,11 @@ export function formatCrowdDataForBriefing(snapshot) {
   const lines = [
     `CROWD DENSITY & TELEMETRY DATA (${snapshot.label}) — SIMULATED LENOVO AI HUB`,
     `Timestamp: ${new Date(snapshot.timestamp).toLocaleTimeString()}`,
-    snapshot.incidentActive ? '🚨 INCIDENT / LIDAR SURGE SIMULATION ACTIVE AT GATE C' : 'ALL GATES NORMAL',
+    snapshot.incidentActive
+      ? '🚨 INCIDENT / LIDAR SURGE SIMULATION ACTIVE AT GATE C'
+      : 'ALL GATES NORMAL',
     '',
-    ...snapshot.zones.map((z) =>
-      `${z.name}: ${z.density}% capacity [Status: ${z.level.label}]`,
-    ),
+    ...snapshot.zones.map((z) => `${z.name}: ${z.density}% capacity [Status: ${z.level.label}]`),
   ].filter(Boolean);
 
   return lines.join('\n');

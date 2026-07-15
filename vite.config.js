@@ -10,9 +10,40 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          gemini: ['@google/generative-ai'],
+          supabase: ['@supabase/supabase-js'],
+        },
+      },
+    },
   },
   test: {
     globals: true,
     environment: 'node',
+    include: ['tests/**/*.test.{js,jsx}'],
+    exclude: ['node_modules', 'dist', 'Virtual-Prompt-war-Week-4-main'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'text-summary', 'lcov'],
+      thresholds: {
+        lines: 85,
+        functions: 85,
+        branches: 85,
+        statements: 85,
+      },
+      include: ['src/utils/**', 'src/services/**'],
+      exclude: [
+        'node_modules',
+        'dist',
+        'tests',
+        'src/services/supabase.js',
+        'src/services/eventService.js',
+        'src/services/geminiChat.js',
+        'src/services/geminiBriefing.js',
+      ],
+    },
   },
 });

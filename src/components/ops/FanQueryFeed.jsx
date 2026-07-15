@@ -25,15 +25,28 @@ const FanQueryFeed = memo(function FanQueryFeed({ queries }) {
           <p>No fan queries logged yet. Switch to Fan Concierge and ask a stadium question!</p>
         </div>
       ) : (
-        <div className="query-feed-list" role="log" aria-live="polite" aria-label="Recent fan queries">
+        <div
+          className="query-feed-list"
+          role="log"
+          aria-live="polite"
+          aria-label="Recent fan queries"
+        >
           {queries.slice(0, 20).map((q) => {
             const langInfo = SUPPORTED_LANGUAGES[q.language] || SUPPORTED_LANGUAGES.en;
             const timeAgo = getTimeAgo(q.timestamp);
 
             return (
-              <article key={q.id} className="query-feed-item" aria-label={`Fan query: ${q.queryPreview}`}>
+              <article
+                key={q.id}
+                className="query-feed-item"
+                aria-label={`Fan query: ${q.queryPreview}`}
+              >
                 <div className="query-feed-meta">
-                  <span className="query-lang-badge flex-align" title={langInfo.name} style={{ gap: '0.2rem' }}>
+                  <span
+                    className="query-lang-badge flex-align"
+                    title={langInfo.name}
+                    style={{ gap: '0.2rem' }}
+                  >
                     <Globe size={12} className="text-cyan" />
                     {langInfo.nativeName}
                   </span>

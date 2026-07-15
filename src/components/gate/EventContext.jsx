@@ -25,11 +25,14 @@ export function EventProvider({ children }) {
 
     // Persist to sessionStorage for page refreshes
     if (eventData && token) {
-      sessionStorage.setItem(`afic_event_${eventData.slug}`, JSON.stringify({
-        event: eventData,
-        sessionToken: token,
-        role: userRole,
-      }));
+      sessionStorage.setItem(
+        `afic_event_${eventData.slug}`,
+        JSON.stringify({
+          event: eventData,
+          sessionToken: token,
+          role: userRole,
+        }),
+      );
     }
   }, []);
 
@@ -59,14 +62,16 @@ export function EventProvider({ children }) {
   }, [event]);
 
   return (
-    <EventContext.Provider value={{
-      event,
-      sessionToken,
-      role,
-      setEventData,
-      loadFromStorage,
-      clearEventData,
-    }}>
+    <EventContext.Provider
+      value={{
+        event,
+        sessionToken,
+        role,
+        setEventData,
+        loadFromStorage,
+        clearEventData,
+      }}
+    >
       {children}
     </EventContext.Provider>
   );

@@ -2,7 +2,7 @@
  * Knowledge base retrieval service.
  * Performs structured keyword/intent matching against venue-knowledge.json
  * to ground Gemini responses in factual venue data.
- * 
+ *
  * This is the "RAG" layer — every fan query about the venue is first
  * matched against this knowledge base, and relevant context is injected
  * into the Gemini prompt. If no match is found, the assistant says so
@@ -35,72 +35,244 @@ export const INTENT_CATEGORIES = {
  */
 const INTENT_PATTERNS = {
   [INTENT_CATEGORIES.NAVIGATION]: [
-    'gate', 'entrance', 'section', 'seat', 'level', 'floor', 'find', 'where',
-    'how do i get', 'directions', 'navigate', 'way to', 'located', 'nearest',
-    'restroom', 'bathroom', 'elevator', 'stairs', 'concourse',
-    'puerta', 'entrada', 'sección', 'dónde', 'cómo llego',
-    'porte', 'entrée', 'où', 'comment',
-    'portão', 'entrada', 'seção', 'onde', 'como chego',
+    'gate',
+    'entrance',
+    'section',
+    'seat',
+    'level',
+    'floor',
+    'find',
+    'where',
+    'how do i get',
+    'directions',
+    'navigate',
+    'way to',
+    'located',
+    'nearest',
+    'restroom',
+    'bathroom',
+    'elevator',
+    'stairs',
+    'concourse',
+    'puerta',
+    'entrada',
+    'sección',
+    'dónde',
+    'cómo llego',
+    'porte',
+    'entrée',
+    'où',
+    'comment',
+    'portão',
+    'entrada',
+    'seção',
+    'onde',
+    'como chego',
   ],
   [INTENT_CATEGORIES.TRANSPORTATION]: [
-    'transit', 'train', 'bus', 'subway', 'metro', 'shuttle', 'parking',
-    'rideshare', 'uber', 'lyft', 'taxi', 'drive', 'car', 'transport',
-    'nj transit', 'path', 'penn station', 'how to get here',
-    'transporte', 'tren', 'autobús', 'estacionamiento',
-    'transport', 'gare',
-    'transporte', 'trem', 'ônibus',
+    'transit',
+    'train',
+    'bus',
+    'subway',
+    'metro',
+    'shuttle',
+    'parking',
+    'rideshare',
+    'uber',
+    'lyft',
+    'taxi',
+    'drive',
+    'car',
+    'transport',
+    'nj transit',
+    'path',
+    'penn station',
+    'how to get here',
+    'transporte',
+    'tren',
+    'autobús',
+    'estacionamiento',
+    'transport',
+    'gare',
+    'transporte',
+    'trem',
+    'ônibus',
   ],
   [INTENT_CATEGORIES.ACCESSIBILITY]: [
-    'wheelchair', 'accessible', 'disability', 'ada', 'mobility',
-    'hearing', 'visual', 'impair', 'assist', 'elevator', 'ramp',
-    'companion seat', 'accessible parking', 'drop off', 'escort',
-    'silla de ruedas', 'accesible', 'discapacidad',
-    'fauteuil roulant', 'accessible',
-    'cadeira de rodas', 'acessível',
+    'wheelchair',
+    'accessible',
+    'disability',
+    'ada',
+    'mobility',
+    'hearing',
+    'visual',
+    'impair',
+    'assist',
+    'elevator',
+    'ramp',
+    'companion seat',
+    'accessible parking',
+    'drop off',
+    'escort',
+    'silla de ruedas',
+    'accesible',
+    'discapacidad',
+    'fauteuil roulant',
+    'accessible',
+    'cadeira de rodas',
+    'acessível',
   ],
   [INTENT_CATEGORIES.FOOD]: [
-    'food', 'eat', 'restaurant', 'concession', 'drink', 'beer', 'water',
-    'halal', 'kosher', 'vegetarian', 'vegan', 'snack', 'hungry',
-    'comida', 'comer', 'bebida',
-    'nourriture', 'manger', 'boire',
-    'comida', 'comer', 'bebida',
+    'food',
+    'eat',
+    'restaurant',
+    'concession',
+    'drink',
+    'beer',
+    'water',
+    'halal',
+    'kosher',
+    'vegetarian',
+    'vegan',
+    'snack',
+    'hungry',
+    'comida',
+    'comer',
+    'bebida',
+    'nourriture',
+    'manger',
+    'boire',
+    'comida',
+    'comer',
+    'bebida',
   ],
   [INTENT_CATEGORIES.POLICY]: [
-    'bag', 'bring', 'allowed', 'prohibited', 'ban', 'policy', 'rule',
-    'water bottle', 'camera', 'umbrella', 'reentry', 're-entry',
-    'gate open', 'gates open', 'what time', 'when', 'hours',
-    'clear bag', 'backpack', 'flag', 'banner', 'stroller',
-    'bolsa', 'permitido', 'prohibido', 'regla', 'política',
-    'sac', 'permis', 'interdit', 'règle',
-    'bolsa', 'permitido', 'proibido', 'regra',
+    'bag',
+    'bring',
+    'allowed',
+    'prohibited',
+    'ban',
+    'policy',
+    'rule',
+    'water bottle',
+    'camera',
+    'umbrella',
+    'reentry',
+    're-entry',
+    'gate open',
+    'gates open',
+    'what time',
+    'when',
+    'hours',
+    'clear bag',
+    'backpack',
+    'flag',
+    'banner',
+    'stroller',
+    'bolsa',
+    'permitido',
+    'prohibido',
+    'regla',
+    'política',
+    'sac',
+    'permis',
+    'interdit',
+    'règle',
+    'bolsa',
+    'permitido',
+    'proibido',
+    'regra',
   ],
   [INTENT_CATEGORIES.MEDICAL]: [
-    'medical', 'first aid', 'doctor', 'nurse', 'emt', 'emergency',
-    'hurt', 'injured', 'sick', 'health', 'nursing', 'baby',
-    'médico', 'primeros auxilios', 'emergencia',
-    'médical', 'premiers soins', 'urgence',
-    'médico', 'primeiros socorros', 'emergência',
+    'medical',
+    'first aid',
+    'doctor',
+    'nurse',
+    'emt',
+    'emergency',
+    'hurt',
+    'injured',
+    'sick',
+    'health',
+    'nursing',
+    'baby',
+    'médico',
+    'primeros auxilios',
+    'emergencia',
+    'médical',
+    'premiers soins',
+    'urgence',
+    'médico',
+    'primeiros socorros',
+    'emergência',
   ],
   [INTENT_CATEGORIES.WEATHER]: [
-    'weather', 'rain', 'sun', 'hot', 'cold', 'temperature', 'umbrella',
-    'poncho', 'sunscreen', 'shade', 'roof', 'covered',
-    'clima', 'lluvia', 'sol', 'calor',
-    'météo', 'pluie', 'soleil', 'chaud',
-    'clima', 'chuva', 'sol', 'calor',
+    'weather',
+    'rain',
+    'sun',
+    'hot',
+    'cold',
+    'temperature',
+    'umbrella',
+    'poncho',
+    'sunscreen',
+    'shade',
+    'roof',
+    'covered',
+    'clima',
+    'lluvia',
+    'sol',
+    'calor',
+    'météo',
+    'pluie',
+    'soleil',
+    'chaud',
+    'clima',
+    'chuva',
+    'sol',
+    'calor',
   ],
   [INTENT_CATEGORIES.SUSTAINABILITY]: [
-    'sustainability', 'sustainable', 'green', 'recycle', 'recycling',
-    'carbon', 'environment', 'eco',
-    'sostenible', 'reciclar',
-    'durable', 'recycler',
-    'sustentável', 'reciclar',
+    'sustainability',
+    'sustainable',
+    'green',
+    'recycle',
+    'recycling',
+    'carbon',
+    'environment',
+    'eco',
+    'sostenible',
+    'reciclar',
+    'durable',
+    'recycler',
+    'sustentável',
+    'reciclar',
   ],
   [INTENT_CATEGORIES.CROWD]: [
-    'crowd', 'busy', 'packed', 'crowded', 'avoid', 'wait', 'line',
-    'queue', 'density', 'which gate', 'less busy', 'fastest',
-    'multitud', 'lleno', 'evitar', 'cola',
-    'foule', 'bondé', 'éviter', 'file',
-    'multidão', 'lotado', 'evitar', 'fila',
+    'crowd',
+    'busy',
+    'packed',
+    'crowded',
+    'avoid',
+    'wait',
+    'line',
+    'queue',
+    'density',
+    'which gate',
+    'less busy',
+    'fastest',
+    'multitud',
+    'lleno',
+    'evitar',
+    'cola',
+    'foule',
+    'bondé',
+    'éviter',
+    'file',
+    'multidão',
+    'lotado',
+    'evitar',
+    'fila',
   ],
 };
 
@@ -148,8 +320,11 @@ export function retrieveContext(intents, query) {
         // Find relevant gates
         const gates = venueData.gates.filter((g) => {
           const gateTerms = [g.id, g.name, g.direction, ...g.sections].join(' ').toLowerCase();
-          return lowerQuery.split(/\s+/).some((word) => gateTerms.includes(word)) ||
-            lowerQuery.includes('gate') || lowerQuery.includes('entrance');
+          return (
+            lowerQuery.split(/\s+/).some((word) => gateTerms.includes(word)) ||
+            lowerQuery.includes('gate') ||
+            lowerQuery.includes('entrance')
+          );
         });
         if (gates.length > 0) {
           contextParts.push('GATE INFORMATION:\n' + JSON.stringify(gates, null, 2));
@@ -161,14 +336,27 @@ export function retrieveContext(intents, query) {
         sources.push('venue-levels');
 
         // Restrooms if mentioned
-        if (lowerQuery.includes('restroom') || lowerQuery.includes('bathroom') || lowerQuery.includes('baño') || lowerQuery.includes('toilette')) {
-          contextParts.push('RESTROOM INFORMATION:\n' + JSON.stringify(venueData.restrooms, null, 2));
+        if (
+          lowerQuery.includes('restroom') ||
+          lowerQuery.includes('bathroom') ||
+          lowerQuery.includes('baño') ||
+          lowerQuery.includes('toilette')
+        ) {
+          contextParts.push(
+            'RESTROOM INFORMATION:\n' + JSON.stringify(venueData.restrooms, null, 2),
+          );
           sources.push('venue-restrooms');
         }
 
         // Guest services
-        if (lowerQuery.includes('service') || lowerQuery.includes('help') || lowerQuery.includes('info')) {
-          contextParts.push('GUEST SERVICES LOCATIONS:\n' + JSON.stringify(venueData.guestServices, null, 2));
+        if (
+          lowerQuery.includes('service') ||
+          lowerQuery.includes('help') ||
+          lowerQuery.includes('info')
+        ) {
+          contextParts.push(
+            'GUEST SERVICES LOCATIONS:\n' + JSON.stringify(venueData.guestServices, null, 2),
+          );
           sources.push('venue-guest-services');
         }
         break;
@@ -181,8 +369,12 @@ export function retrieveContext(intents, query) {
       }
 
       case INTENT_CATEGORIES.ACCESSIBILITY: {
-        contextParts.push('ACCESSIBLE ROUTES:\n' + JSON.stringify(venueData.accessibleRoutes, null, 2));
-        contextParts.push('ACCESSIBILITY SERVICES:\n' + JSON.stringify(venueData.accessibility, null, 2));
+        contextParts.push(
+          'ACCESSIBLE ROUTES:\n' + JSON.stringify(venueData.accessibleRoutes, null, 2),
+        );
+        contextParts.push(
+          'ACCESSIBILITY SERVICES:\n' + JSON.stringify(venueData.accessibility, null, 2),
+        );
         sources.push('venue-accessible-routes', 'venue-accessibility');
 
         // Include relevant gates with accessible features
@@ -209,8 +401,15 @@ export function retrieveContext(intents, query) {
         sources.push('venue-medical');
 
         // Include nursing rooms if relevant
-        if (lowerQuery.includes('nursing') || lowerQuery.includes('baby') || lowerQuery.includes('bebé') || lowerQuery.includes('bébé')) {
-          contextParts.push('NURSING FACILITIES:\n' + JSON.stringify(venueData.restrooms.nursing, null, 2));
+        if (
+          lowerQuery.includes('nursing') ||
+          lowerQuery.includes('baby') ||
+          lowerQuery.includes('bebé') ||
+          lowerQuery.includes('bébé')
+        ) {
+          contextParts.push(
+            'NURSING FACILITIES:\n' + JSON.stringify(venueData.restrooms.nursing, null, 2),
+          );
           sources.push('venue-nursing');
         }
         break;
@@ -223,17 +422,28 @@ export function retrieveContext(intents, query) {
       }
 
       case INTENT_CATEGORIES.SUSTAINABILITY: {
-        contextParts.push('SUSTAINABILITY INFO:\n' + JSON.stringify(venueData.sustainability, null, 2));
+        contextParts.push(
+          'SUSTAINABILITY INFO:\n' + JSON.stringify(venueData.sustainability, null, 2),
+        );
         sources.push('venue-sustainability');
         break;
       }
 
       case INTENT_CATEGORIES.CROWD: {
         // For crowd queries, provide gate info so the AI can reference locations
-        contextParts.push('GATE LOCATIONS (for crowd guidance):\n' + JSON.stringify(
-          venueData.gates.map((g) => ({ id: g.id, name: g.name, direction: g.direction, sections: g.sections })),
-          null, 2,
-        ));
+        contextParts.push(
+          'GATE LOCATIONS (for crowd guidance):\n' +
+            JSON.stringify(
+              venueData.gates.map((g) => ({
+                id: g.id,
+                name: g.name,
+                direction: g.direction,
+                sections: g.sections,
+              })),
+              null,
+              2,
+            ),
+        );
         sources.push('venue-gates-crowd');
         break;
       }

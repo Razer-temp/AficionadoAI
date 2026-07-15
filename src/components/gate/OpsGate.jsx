@@ -8,11 +8,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { useEvent } from './EventContext';
-import {
-  getEventBySlug,
-  verifyOpsKeyBySlug,
-  createSession,
-} from '../../services/eventService';
+import { getEventBySlug, verifyOpsKeyBySlug, createSession } from '../../services/eventService';
 import {
   ShieldCheck,
   Lock,
@@ -195,7 +191,7 @@ function OpsGate({ children }) {
                 boxShadow: '0 4px 12px rgba(6, 182, 212, 0.08)',
                 transition: 'all 0.2s ease',
                 width: '100%',
-                textAlign: 'left'
+                textAlign: 'left',
               }}
               onClick={() => {
                 const keyToUse = event?.ops_access_key || 'FIFA2026OPS';
@@ -206,11 +202,28 @@ function OpsGate({ children }) {
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <span style={{ fontSize: '1.2rem' }}>⚡</span>
                 <div>
-                  <strong style={{ display: 'block', color: '#fff', fontSize: '0.86rem' }}>Hackathon / Demo Ops Key Assistant</strong>
-                  <span style={{ color: 'rgba(255,255,255,0.78)', fontSize: '0.78rem' }}>Click to auto-fill valid Ops key: <code style={{ color: '#67e8f9', fontWeight: 'bold' }}>{event?.ops_access_key || 'FIFA2026OPS'}</code></span>
+                  <strong style={{ display: 'block', color: '#fff', fontSize: '0.86rem' }}>
+                    Hackathon / Demo Ops Key Assistant
+                  </strong>
+                  <span style={{ color: 'rgba(255,255,255,0.78)', fontSize: '0.78rem' }}>
+                    Click to auto-fill valid Ops key:{' '}
+                    <code style={{ color: '#67e8f9', fontWeight: 'bold' }}>
+                      {event?.ops_access_key || 'FIFA2026OPS'}
+                    </code>
+                  </span>
                 </div>
               </div>
-              <span style={{ background: 'rgba(6, 182, 212, 0.22)', padding: '5px 10px', borderRadius: '6px', fontSize: '0.76rem', color: '#67e8f9', border: '1px solid rgba(6, 182, 212, 0.4)', whiteSpace: 'nowrap' }}>
+              <span
+                style={{
+                  background: 'rgba(6, 182, 212, 0.22)',
+                  padding: '5px 10px',
+                  borderRadius: '6px',
+                  fontSize: '0.76rem',
+                  color: '#67e8f9',
+                  border: '1px solid rgba(6, 182, 212, 0.4)',
+                  whiteSpace: 'nowrap',
+                }}
+              >
                 Auto-Fill →
               </span>
             </button>

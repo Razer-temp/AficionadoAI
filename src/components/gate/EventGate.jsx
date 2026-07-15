@@ -243,9 +243,7 @@ function EventGate() {
           {/* Event Info */}
           <div className="gate-event-info">
             <h1 className="gate-event-name">{event.name}</h1>
-            {event.description && (
-              <p className="gate-event-desc">{event.description}</p>
-            )}
+            {event.description && <p className="gate-event-desc">{event.description}</p>}
 
             <div className="gate-event-meta">
               <div className="gate-meta-item">
@@ -278,9 +276,7 @@ function EventGate() {
               <Clock size={20} />
               <div>
                 <p className="gate-upcoming-label">Access opens at</p>
-                <p className="gate-upcoming-time">
-                  {formatEventDate(event.starts_at)}
-                </p>
+                <p className="gate-upcoming-time">{formatEventDate(event.starts_at)}</p>
               </div>
             </div>
           )}
@@ -323,7 +319,7 @@ function EventGate() {
                   boxShadow: '0 4px 12px rgba(16, 185, 129, 0.08)',
                   transition: 'all 0.2s ease',
                   width: '100%',
-                  textAlign: 'left'
+                  textAlign: 'left',
                 }}
                 onClick={() => {
                   setClaimCode('FAN-2026');
@@ -334,11 +330,26 @@ function EventGate() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <span style={{ fontSize: '1.2rem' }}>⚡</span>
                   <div>
-                    <strong style={{ display: 'block', color: '#fff', fontSize: '0.86rem' }}>Hackathon / Demo Pass Assistant</strong>
-                    <span style={{ color: 'rgba(255,255,255,0.78)', fontSize: '0.78rem' }}>Click to auto-fill valid demo code: <code style={{ color: '#6ee7b7', fontWeight: 'bold' }}>FAN-2026</code></span>
+                    <strong style={{ display: 'block', color: '#fff', fontSize: '0.86rem' }}>
+                      Hackathon / Demo Pass Assistant
+                    </strong>
+                    <span style={{ color: 'rgba(255,255,255,0.78)', fontSize: '0.78rem' }}>
+                      Click to auto-fill valid demo code:{' '}
+                      <code style={{ color: '#6ee7b7', fontWeight: 'bold' }}>FAN-2026</code>
+                    </span>
                   </div>
                 </div>
-                <span style={{ background: 'rgba(16, 185, 129, 0.22)', padding: '5px 10px', borderRadius: '6px', fontSize: '0.76rem', color: '#6ee7b7', border: '1px solid rgba(16, 185, 129, 0.4)', whiteSpace: 'nowrap' }}>
+                <span
+                  style={{
+                    background: 'rgba(16, 185, 129, 0.22)',
+                    padding: '5px 10px',
+                    borderRadius: '6px',
+                    fontSize: '0.76rem',
+                    color: '#6ee7b7',
+                    border: '1px solid rgba(16, 185, 129, 0.4)',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
                   Auto-Fill →
                 </span>
               </button>

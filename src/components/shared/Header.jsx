@@ -26,9 +26,10 @@ function Header({ persona }) {
   const isOrganizer = location.pathname.startsWith('/organizer');
 
   // Subtitle text
-  const subtitleText = isEventScoped && event
-    ? `${event.venue} \u2022 ${event.name}`
-    : 'FIFA World Cup 2026 \u2022 MetLife Intelligent Command Center';
+  const subtitleText =
+    isEventScoped && event
+      ? `${event.venue} \u2022 ${event.name}`
+      : 'FIFA World Cup 2026 \u2022 MetLife Intelligent Command Center';
 
   return (
     <header className="app-header glass-strong" role="banner">
@@ -37,7 +38,13 @@ function Header({ persona }) {
           type="button"
           className="header-brand"
           onClick={() => navigate(isEventScoped ? fanPath : '/')}
-          style={{ cursor: 'pointer', border: 'none', background: 'transparent', padding: 0, textAlign: 'left' }}
+          style={{
+            cursor: 'pointer',
+            border: 'none',
+            background: 'transparent',
+            padding: 0,
+            textAlign: 'left',
+          }}
         >
           <div className="header-logo-wrapper">
             <img src="/logo.svg" alt="Aficionado AI Logo" className="header-logo-img" />
@@ -46,7 +53,10 @@ function Header({ persona }) {
             <h1 className="header-title">
               <span className="gradient-text">Aficionado</span> AI
             </h1>
-            <span className="header-subtitle flex-align" style={{ gap: '0.35rem', marginTop: '2px' }}>
+            <span
+              className="header-subtitle flex-align"
+              style={{ gap: '0.35rem', marginTop: '2px' }}
+            >
               <Radio className="pulse-icon text-emerald" size={12} />
               <span>{subtitleText}</span>
             </span>
@@ -93,9 +103,15 @@ function Header({ persona }) {
         </nav>
 
         <div className="header-badge">
-          <div className={`persona-badge ${
-            persona === 'ops' ? 'persona-badge--ops' : persona === 'organizer' ? 'persona-badge--organizer' : 'persona-badge--fan'
-          }`}>
+          <div
+            className={`persona-badge ${
+              persona === 'ops'
+                ? 'persona-badge--ops'
+                : persona === 'organizer'
+                  ? 'persona-badge--organizer'
+                  : 'persona-badge--fan'
+            }`}
+          >
             {persona === 'ops' ? (
               <>
                 <div className="badge-icon-wrap badge-icon-wrap--ops">

@@ -168,7 +168,9 @@
   transform: translateY(-4px) scale(1.015);
   border-color: rgba(0, 242, 254, 0.65);
   background: rgba(31, 42, 61, 0.88);
-  box-shadow: 0 14px 36px rgba(0, 242, 254, 0.2), 0 0 20px rgba(16, 185, 129, 0.15);
+  box-shadow:
+    0 14px 36px rgba(0, 242, 254, 0.2),
+    0 0 20px rgba(16, 185, 129, 0.15);
 }
 
 .ar-card-header {
@@ -195,7 +197,7 @@
   padding: 3px 9px;
   border-radius: var(--radius-full);
   background: rgba(0, 242, 254, 0.14);
-  color: #00F2FE;
+  color: #00f2fe;
   border: 1px solid rgba(0, 242, 254, 0.35);
   white-space: nowrap;
 }
@@ -429,7 +431,9 @@
 }
 
 @keyframes typingBounce {
-  0%, 60%, 100% {
+  0%,
+  60%,
+  100% {
     transform: translateY(0);
     opacity: 0.4;
   }
@@ -457,13 +461,17 @@
   border: 1px solid rgba(56, 189, 248, 0.28);
   border-radius: 20px;
   padding: 0.65rem 0.85rem;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55), 0 0 25px rgba(16, 185, 129, 0.1);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.55),
+    0 0 25px rgba(16, 185, 129, 0.1);
   transition: all var(--transition-normal);
 }
 
 .chat-input-dock:focus-within {
   border-color: var(--accent-blue);
-  box-shadow: 0 14px 48px rgba(0, 0, 0, 0.7), 0 0 32px rgba(56, 189, 248, 0.24);
+  box-shadow:
+    0 14px 48px rgba(0, 0, 0, 0.7),
+    0 0 32px rgba(56, 189, 248, 0.24);
 }
 
 .chat-input-row {

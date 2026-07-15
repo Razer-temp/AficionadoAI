@@ -18,32 +18,46 @@ const ChatMessage = memo(function ChatMessage({ message, index }) {
       style={{ animationDelay: `${Math.min(index * 0.05, 0.3)}s` }}
     >
       <div className="chat-message-avatar flex-center" aria-hidden="true">
-        {isUser ? <User size={18} className="text-cyan" /> : <Bot size={18} className="text-emerald" />}
+        {isUser ? (
+          <User size={18} className="text-cyan" />
+        ) : (
+          <Bot size={18} className="text-emerald" />
+        )}
       </div>
       <div className="chat-message-content">
         <div className="chat-message-header">
-          <span className="chat-message-sender">
-            {isUser ? 'You' : 'Aficionado AI'}
-          </span>
+          <span className="chat-message-sender">{isUser ? 'You' : 'Aficionado AI'}</span>
           {message.cached && (
-            <span className="chat-message-cached flex-align" title="Served from cache" style={{ gap: '0.2rem' }}>
+            <span
+              className="chat-message-cached flex-align"
+              title="Served from cache"
+              style={{ gap: '0.2rem' }}
+            >
               <Zap size={12} className="text-gold" /> Cached
             </span>
           )}
         </div>
         <div
           className="chat-message-text"
+          lang={isAssistant && message.language ? message.language : undefined}
+          dir={isAssistant ? 'auto' : undefined}
           dangerouslySetInnerHTML={{
             __html: isAssistant ? formatMarkdown(message.text) : escapeHtml(message.text),
           }}
         />
         {isAssistant && message.sources && message.sources.length > 0 && (
-          <div className="chat-message-sources flex-align" aria-label="Information sources" style={{ flexWrap: 'wrap', gap: '0.4rem' }}>
+          <div
+            className="chat-message-sources flex-align"
+            aria-label="Information sources"
+            style={{ flexWrap: 'wrap', gap: '0.4rem' }}
+          >
             <span className="sources-label flex-align" style={{ gap: '0.2rem' }}>
               <FileText size={13} className="text-cyan" /> Sources:
             </span>
             {message.sources.map((s, i) => (
-              <span key={i} className="source-tag">{s.replace('venue-', '')}</span>
+              <span key={i} className="source-tag">
+                {s.replace('venue-', '')}
+              </span>
             ))}
           </div>
         )}
