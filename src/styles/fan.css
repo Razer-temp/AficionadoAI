@@ -264,6 +264,38 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
+.starter-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.3;
+}
+
+.starter-cat {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.starter-text {
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: color var(--transition-fast);
+}
+
+.starter-btn:hover .starter-cat {
+  color: var(--text-secondary);
+}
+
+.starter-btn:hover .starter-text {
+  color: #fff;
+}
+
+
 /* --- Chat Message --- */
 .chat-message {
   display: flex;

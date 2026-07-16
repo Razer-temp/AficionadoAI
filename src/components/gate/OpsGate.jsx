@@ -116,9 +116,9 @@ function OpsGate({ children }) {
       <div className="gate-container gate-container--ops">
         <div className="gate-bg gate-bg--ops" />
         <div className="gate-content">
-          <div className="gate-loading">
-            <Loader2 size={40} className="gate-spinner" />
-            <p>Verifying operations access...</p>
+          <div className="gate-loading" role="status">
+            <Loader2 size={32} className="gate-spinner" aria-hidden="true" />
+            <p>Initializing operations dashboard...</p>
           </div>
         </div>
       </div>

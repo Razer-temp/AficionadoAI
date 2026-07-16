@@ -14,8 +14,8 @@ export default function OrganizerAuthGate({ children }) {
 
   if (loading) {
     return (
-      <div className="organizer-loading-gate">
-        <Loader2 className="w-10 h-10 text-gold-400 animate-spin" />
+      <div className="organizer-loading-gate" role="status">
+        <Loader2 className="w-10 h-10 text-gold-400 animate-spin" aria-hidden="true" />
         <span>Verifying Organizer Credentials & RLS Permissions...</span>
       </div>
     );

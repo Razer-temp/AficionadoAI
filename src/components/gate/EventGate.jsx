@@ -152,8 +152,8 @@ function EventGate() {
       <div className="gate-container">
         <div className="gate-bg" />
         <div className="gate-content">
-          <div className="gate-loading">
-            <Loader2 size={40} className="gate-spinner" />
+          <div className="gate-loading" role="status">
+            <Loader2 size={40} className="gate-spinner" aria-hidden="true" />
             <p>Loading event...</p>
           </div>
         </div>

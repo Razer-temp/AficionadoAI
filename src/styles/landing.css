@@ -2278,3 +2278,209 @@
     font-size: 1.65rem;
   }
 }
+
+/* ============================================================
+   JoinEventSection — CSS classes replacing inline styles
+   ============================================================ */
+
+/* Evaluator tip banner */
+.landing-evaluator-tip {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.1);
+}
+
+.landing-evaluator-tip-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.landing-evaluator-tip-text {
+  font-size: 0.88rem;
+  color: #e2e8f0;
+  line-height: 1.45;
+}
+
+.landing-evaluator-tip-title {
+  color: #6ee7b7;
+  display: block;
+  margin-bottom: 3px;
+  font-size: 0.94rem;
+}
+
+.landing-evaluator-tip-text b {
+  color: #fff;
+}
+
+.landing-evaluator-tip-code {
+  color: #6ee7b7;
+}
+
+/* Quick demo section */
+.landing-quick-demos {
+  margin-bottom: 24px;
+}
+
+.landing-quick-demos-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 0.94rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.landing-quick-demos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 16px;
+}
+
+/* Quick demo buttons */
+.landing-quick-demo-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  text-align: left;
+}
+
+.landing-quick-demo-btn--blue {
+  border: 1px solid rgba(56, 189, 248, 0.38);
+}
+
+.landing-quick-demo-btn--gold {
+  border: 1px solid rgba(250, 204, 21, 0.38);
+}
+
+.landing-quick-demo-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+}
+
+.landing-quick-demo-btn:hover .landing-quick-demo-arrow {
+  transform: translateX(4px);
+}
+
+.landing-quick-demo-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.landing-quick-demo-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.45rem;
+  flex-shrink: 0;
+}
+
+.landing-quick-demo-icon--blue {
+  background: rgba(56, 189, 248, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.landing-quick-demo-icon--gold {
+  background: rgba(250, 204, 21, 0.16);
+  border: 1px solid rgba(250, 204, 21, 0.35);
+}
+
+.landing-quick-demo-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.landing-quick-demo-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.landing-quick-demo-title-row strong {
+  color: #f8fafc;
+  font-size: 1.03rem;
+  font-weight: 700;
+}
+
+.landing-quick-demo-live-badge {
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.landing-quick-demo-live-badge--green {
+  background: rgba(16, 185, 129, 0.22);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.45);
+}
+
+.landing-quick-demo-live-badge--gold {
+  background: rgba(250, 204, 21, 0.22);
+  color: #fde047;
+  border: 1px solid rgba(250, 204, 21, 0.45);
+}
+
+.landing-quick-demo-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  display: inline-block;
+}
+
+.landing-quick-demo-desc {
+  color: #94a3b8;
+  font-size: 0.83rem;
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.landing-quick-demo-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.landing-quick-demo-tag {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 0.73rem;
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.landing-quick-demo-arrow {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  margin-left: 10px;
+}
+
+/* Landing nav brand button reset (for extracted nav component) */
+.landing-nav-brand {
+  border: none;
+  background: transparent;
+  padding: 0;
+}

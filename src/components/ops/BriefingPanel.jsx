@@ -100,7 +100,7 @@ function BriefingPanel({ crowdSnapshot, fanQueries, weatherSnapshot = null }) {
         )}
 
         {isLoading && !briefing && (
-          <div className="briefing-loading">
+          <div className="briefing-loading" role="status">
             <LoadingSpinner size="lg" label="Generating operational briefing" />
             <p>Gemini is synthesizing real-time Lidar & concierge data streams...</p>
           </div>

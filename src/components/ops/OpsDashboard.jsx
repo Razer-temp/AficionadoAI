@@ -1,10 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
 import CrowdDensityMap from './CrowdDensityMap';
 import FanQueryFeed from './FanQueryFeed';
 import BriefingPanel from './BriefingPanel';
 import SimulateIncidentButton from './SimulateIncidentButton';
-import { createCrowdDataManager } from '../../data/mockCrowdData';
-import { getCurrentWeather, nextWeatherSnapshot } from '../../data/mockWeatherData';
+import { useCrowdData } from '../../hooks/useCrowdData';
 import {
   Activity,
   Cloud,
@@ -18,9 +16,6 @@ import {
 } from 'lucide-react';
 import '../../styles/ops.css';
 
-/** Create crowd data manager (singleton for the ops view) */
-const crowdManager = createCrowdDataManager();
-
 /**
  * Main operations dashboard.
  * Displays crowd density, fan query feed, AI briefings, live weather, and incident simulation.
@@ -28,35 +23,15 @@ const crowdManager = createCrowdDataManager();
  * @returns {JSX.Element}
  */
 function OpsDashboard({ fanQueries }) {
-  const [crowdSnapshot, setCrowdSnapshot] = useState(crowdManager.getCurrentSnapshot());
-  const [weatherSnapshot, setWeatherSnapshot] = useState(getCurrentWeather());
-  const [isIncident, setIsIncident] = useState(false);
-  const [counterDroneAlert, setCounterDroneAlert] = useState(false);
-
-  // Rotate crowd and weather data every 30 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      crowdManager.nextSnapshot();
-      setCrowdSnapshot(crowdManager.getCurrentSnapshot());
-      setWeatherSnapshot(nextWeatherSnapshot());
-    }, 30000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  /** Simulate an incident (crowd surge at Gate C) */
-  const handleSimulate = useCallback(() => {
-    crowdManager.simulateIncident();
-    setIsIncident(true);
-    setCrowdSnapshot(crowdManager.getCurrentSnapshot());
-  }, []);
-
-  /** Clear the simulated incident */
-  const handleClear = useCallback(() => {
-    crowdManager.clearIncident();
-    setIsIncident(false);
-    setCrowdSnapshot(crowdManager.getCurrentSnapshot());
-  }, []);
+  const {
+    crowdSnapshot,
+    weatherSnapshot,
+    isIncident,
+    counterDroneAlert,
+    setCounterDroneAlert,
+    handleSimulate,
+    handleClear,
+  } = useCrowdData();
 
   return (
     <div className="ops-dashboard">

@@ -454,13 +454,30 @@
       "This digital assistant replaces paper maps, guides, and signage queries",
       "Use mobile ordering to reduce concession queue waste and energy",
       "Recycling bins are located next to all trash receptacles throughout the stadium",
-      "Bring a reusable clear bag — reduce single-use plastic"
+      "Bring a reusable clear bag — reduce single-use plastic",
+      "Opt for paperless ticketing via the FIFA app or QR code — zero paper waste"
     ],
+    "waterRefillStations": [
+      "Main Concourse: between Sections 108 and 109",
+      "Upper Concourse: near Sections 215 and 230",
+      "West Hall Food Court: adjacent to family restrooms",
+      "MetLife Gate (Gate A) entrance: outside turnstiles"
+    ],
+    "recyclingStations": [
+      "Main Concourse: at every food concession area",
+      "Gate A and Gate B entrances: dual-stream (recycling + composting)",
+      "Upper Concourse: every stairwell landing",
+      "Parking Lots: every lot entrance/exit"
+    ],
+    "composting": "All food courts participate in composting. Look for green-lid bins marked 'Compostable' near food service areas.",
     "venueFeatures": [
       "LED lighting throughout stadium (90% energy reduction vs. traditional)",
       "Solar panel installations on surrounding infrastructure",
-      "Comprehensive recycling and composting program",
-      "Water-efficient fixtures in all restrooms"
+      "Comprehensive recycling and composting program at every concourse level",
+      "Water-efficient fixtures in all restrooms",
+      "Electric vehicle charging stations in Lot B and Lot D",
+      "LEED-certified operational practices for all World Cup matches"
     ]
   }
 }
+

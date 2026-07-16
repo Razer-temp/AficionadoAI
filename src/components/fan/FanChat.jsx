@@ -1,9 +1,8 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import ChatMessage from './ChatMessage';
 import TypingIndicator from './TypingIndicator';
 import LanguageBadge from './LanguageBadge';
-import { sendChatMessage, detectLanguage } from '../../services/geminiChat';
-import { formatErrorResponse } from '../../utils/errors';
+import { useFanChat } from '../../hooks/useFanChat';
 import {
   Send,
   Navigation,
@@ -97,11 +96,16 @@ const AR_WAYFINDING_CARDS = [
  * @returns {JSX.Element}
  */
 function FanChat({ onQueryLog }) {
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [language, setLanguage] = useState('en');
-  const [error, setError] = useState(null);
+  const {
+    messages,
+    input,
+    setInput,
+    isLoading,
+    language,
+    error,
+    handleSend,
+  } = useFanChat({ onQueryLog });
+
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -114,73 +118,6 @@ function FanChat({ onQueryLog }) {
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
-
-  /**
-   * Sends a message through the chat pipeline.
-   * @param {string} messageText - The message to send
-   */
-  const handleSend = useCallback(
-    async (messageText) => {
-      const text = messageText || input.trim();
-      if (!text || isLoading) return;
-
-      setInput('');
-      setError(null);
-
-      // Detect language for badge
-      const detectedLang = detectLanguage(text);
-      setLanguage(detectedLang);
-
-      // Add user message
-      const userMessage = { role: 'user', text, timestamp: Date.now() };
-      setMessages((prev) => [...prev, userMessage]);
-      setIsLoading(true);
-
-      try {
-        // Build history for context (last 10 messages)
-        const history = messages.slice(-10).map((m) => ({
-          role: m.role === 'user' ? 'user' : 'model',
-          text: m.text,
-        }));
-
-        const result = await sendChatMessage(text, history);
-
-        if (result.success) {
-          const assistantMessage = {
-            role: 'assistant',
-            text: result.data.response,
-            language: result.data.language,
-            sources: result.data.sources,
-            cached: result.data.cached,
-            timestamp: Date.now(),
-          };
-          setMessages((prev) => [...prev, assistantMessage]);
-
-          // Log anonymized query to ops feed
-          if (onQueryLog) {
-            onQueryLog({
-              language: result.data.language,
-              intentCategory: result.data.intents?.[0] || 'general',
-              zone: extractZone(text),
-              queryPreview: text.slice(0, 50),
-            });
-          }
-        }
-      } catch (err) {
-        const formatted = formatErrorResponse(err);
-        setError(formatted.error.message);
-        const errorMessage = {
-          role: 'assistant',
-          text: `I apologize, but I encountered an issue: ${formatted.error.message}. Please try again.`,
-          timestamp: Date.now(),
-        };
-        setMessages((prev) => [...prev, errorMessage]);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [input, isLoading, messages, onQueryLog],
-  );
 
   /** Handle keyboard submit */
   const handleKeyDown = useCallback(
@@ -248,55 +185,54 @@ function FanChat({ onQueryLog }) {
             <div className="faq-section">
               <div className="section-heading-pill" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                 <HelpCircle size={15} className="text-gold" />
-                <span>Frequently Asked Questions</span>
+                <span>Quick Prompts</span>
               </div>
-              <div className="chat-starters" role="list" aria-label="Suggested questions">
-                {STARTER_QUESTIONS.map((sq, i) => {
-                  const IconComp = sq.icon;
+              <div className="chat-starters">
+                {STARTER_QUESTIONS.map((q, idx) => {
+                  const Icon = q.icon;
                   return (
-                    <div key={i} role="listitem">
-                      <button
-                        type="button"
-                        className="starter-btn"
-                        onClick={() => handleSend(sq.query)}
-                        aria-label={`Ask: ${sq.query}`}
+                    <button
+                      key={idx}
+                      type="button"
+                      className="starter-btn"
+                      onClick={() => handleSend(q.query)}
+                      aria-label={`Ask: ${q.text}`}
+                    >
+                      <div
+                        className="starter-icon-box"
+                        style={{ backgroundColor: `${q.color}15`, color: q.color }}
                       >
-                        <div className="starter-icon-box" style={{ background: `${sq.color}18` }}>
-                          <IconComp size={16} style={{ color: sq.color, flexShrink: 0 }} />
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                          <span style={{ fontSize: '0.88rem', fontWeight: 600 }}>{sq.text}</span>
-                          <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                            {sq.category}
-                          </span>
-                        </div>
-                      </button>
-                    </div>
+                        <Icon size={16} />
+                      </div>
+                      <div className="starter-content">
+                        <span className="starter-cat">{q.category}</span>
+                        <span className="starter-text">{q.text}</span>
+                      </div>
+                    </button>
                   );
                 })}
               </div>
             </div>
           </div>
         ) : (
-          <div className="chat-message-row" aria-live="polite" aria-relevant="additions">
-            {messages.map((msg, i) => (
-              <ChatMessage key={i} message={msg} index={i} />
+          <div className="chat-history">
+            {messages.map((msg, index) => (
+              <ChatMessage key={index} message={msg} />
             ))}
             {isLoading && <TypingIndicator />}
+            <div ref={messagesEndRef} />
           </div>
         )}
-
-        <div ref={messagesEndRef} />
       </div>
 
-      {/* Floating Dock Input Area */}
-      <footer className="chat-input-area">
-        <div className="chat-input-dock">
+      {/* Floating Chat Input Dock */}
+      <footer className="chat-input-dock">
+        <div className="chat-input-container glass-card">
           <div className="chat-input-row">
-            <LanguageBadge language={language} />
+            {language && language !== 'en' && <LanguageBadge language={language} />}
             <div className="chat-input-wrapper">
               <label htmlFor="chat-input" className="sr-only">
-                Type your question
+                Ask a question
               </label>
               <input
                 id="chat-input"
@@ -342,27 +278,6 @@ function FanChat({ onQueryLog }) {
       </footer>
     </div>
   );
-}
-
-/**
- * Extracts a generalized zone from a query for anonymized logging.
- * @param {string} query - User query text
- * @returns {string|null} Zone identifier or null
- */
-function extractZone(query) {
-  const lower = query.toLowerCase();
-  if (lower.includes('gate a') || lower.includes('metlife gate') || lower.includes('puerta a'))
-    return 'gate-a';
-  if (lower.includes('gate b') || lower.includes('verizon') || lower.includes('puerta b'))
-    return 'gate-b';
-  if (lower.includes('gate c') || lower.includes('hcltech') || lower.includes('puerta c'))
-    return 'gate-c';
-  if (lower.includes('gate d') || lower.includes('moody') || lower.includes('puerta d'))
-    return 'gate-d';
-  if (lower.includes('100 level') || lower.includes('lower')) return 'concourse-100';
-  if (lower.includes('200 level') || lower.includes('mezzanine')) return 'concourse-200';
-  if (lower.includes('300 level') || lower.includes('upper')) return 'concourse-300';
-  return null;
 }
 
 export default FanChat;
