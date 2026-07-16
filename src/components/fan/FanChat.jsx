@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback, useState } from 'react';
 import ChatMessage from './ChatMessage';
 import TypingIndicator from './TypingIndicator';
 import LanguageBadge from './LanguageBadge';
@@ -97,6 +97,15 @@ const AR_WAYFINDING_CARDS = [
  * @returns {JSX.Element}
  */
 function FanChat({ onQueryLog }) {
+  const [userContext, setUserContext] = useState({
+    currentLocation: 'gate-a',
+    destinationIntent: '',
+    accessibilityMode: 'standard',
+    minutesToKickoff: 45,
+    ticketSection: '112',
+  });
+  const [showContextHub, setShowContextHub] = useState(false);
+
   const {
     messages,
     input,
@@ -105,7 +114,7 @@ function FanChat({ onQueryLog }) {
     language,
     error,
     handleSend,
-  } = useFanChat({ onQueryLog });
+  } = useFanChat({ onQueryLog, userContext });
 
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -227,6 +236,92 @@ function FanChat({ onQueryLog }) {
 
       {/* Floating Chat Input Dock */}
       <footer className="chat-input-dock">
+        {/* Matchday Context & Accessibility Hub Panel */}
+        <div className="matchday-context-dock">
+          <div className="context-hub-header">
+            <div className="context-hub-title">
+              <Compass size={15} className="text-cyan pulse-icon" />
+              <span>Matchday Context & Accessibility Hub (5G Live Telemetry)</span>
+            </div>
+            <button
+              type="button"
+              className="context-hub-toggle-btn"
+              onClick={() => setShowContextHub(!showContextHub)}
+              aria-expanded={showContextHub}
+            >
+              {showContextHub ? 'Hide Context Telemetry ▲' : 'Configure Context Telemetry ▼'}
+            </button>
+          </div>
+
+          {showContextHub && (
+            <div className="context-hub-grid">
+              <div className="context-field">
+                <label className="context-field-label" htmlFor="ctx-location">Current Location</label>
+                <select
+                  id="ctx-location"
+                  className="context-select"
+                  value={userContext.currentLocation}
+                  onChange={(e) => setUserContext({ ...userContext, currentLocation: e.target.value })}
+                >
+                  <option value="gate-a">Gate A (MetLife Gate)</option>
+                  <option value="gate-b">Gate B (Verizon Gate)</option>
+                  <option value="gate-c">Gate C (HCLTech Gate)</option>
+                  <option value="gate-d">Gate D (Moody&apos;s Gate)</option>
+                  <option value="concourse-100">100 Level Concourse</option>
+                  <option value="concourse-200">200 Level Mezzanine</option>
+                  <option value="concourse-300">300 Level Upper</option>
+                </select>
+              </div>
+
+              <div className="context-field">
+                <label className="context-field-label" htmlFor="ctx-destination">Target Destination</label>
+                <select
+                  id="ctx-destination"
+                  className="context-select"
+                  value={userContext.destinationIntent}
+                  onChange={(e) => setUserContext({ ...userContext, destinationIntent: e.target.value })}
+                >
+                  <option value="">Auto-Detect / General</option>
+                  <option value="main-concourse">Main Concourse & Retail</option>
+                  <option value="section-112">Section 112 (Lower Bowl VIP)</option>
+                  <option value="section-314">Section 314 (Upper Deck Express)</option>
+                  <option value="ada-elevators">Priority ADA Elevator Banks</option>
+                  <option value="first-aid">First Aid Station (Gate C)</option>
+                </select>
+              </div>
+
+              <div className="context-field">
+                <label className="context-field-label" htmlFor="ctx-ada">Accessibility Mode</label>
+                <select
+                  id="ctx-ada"
+                  className="context-select"
+                  value={userContext.accessibilityMode}
+                  onChange={(e) => setUserContext({ ...userContext, accessibilityMode: e.target.value })}
+                >
+                  <option value="standard">Standard Walkway</option>
+                  <option value="step-free">Step-Free / Wheelchair Required</option>
+                  <option value="low-sensory">Low-Sensory Quiet Corridor</option>
+                </select>
+              </div>
+
+              <div className="context-field">
+                <label className="context-field-label" htmlFor="ctx-kickoff">Kickoff Countdown</label>
+                <select
+                  id="ctx-kickoff"
+                  className="context-select"
+                  value={userContext.minutesToKickoff}
+                  onChange={(e) => setUserContext({ ...userContext, minutesToKickoff: Number(e.target.value) })}
+                >
+                  <option value={90}>90 mins (Relaxed Flow)</option>
+                  <option value={45}>45 mins (Moderate Flow)</option>
+                  <option value={10}>10 mins (Urgent / Express Routing Required!)</option>
+                  <option value={-15}>Match in Progress / Halftime</option>
+                </select>
+              </div>
+            </div>
+          )}
+        </div>
+
         <div className="chat-input-container glass-card">
           <div className="chat-input-row">
             {language && language !== 'en' && <LanguageBadge language={language} />}

@@ -72,6 +72,28 @@ export const GEMINI_CONFIG = {
   topP: 0.95,
 };
 
+/** Crowd density threshold for automatic gate rerouting (percentage) */
+export const CROWD_REROUTE_THRESHOLD = 75;
+
+/** Crowd density threshold for moderate flow classification (percentage) */
+export const CROWD_MODERATE_THRESHOLD = 50;
+
+/** Minutes before kickoff that triggers urgency guidance */
+export const KICKOFF_URGENCY_MINUTES = 15;
+
+/** Maximum allowed length for sanitized model output text */
+export const MAX_OUTPUT_LENGTH = 5000;
+
+/** API key values that indicate offline/mock evaluation mode */
+export const OFFLINE_API_KEY_PATTERNS = ['offline-test', 'mock-key-offline'];
+
+/** Gemini briefing-specific generation config overrides */
+export const GEMINI_BRIEFING_CONFIG = {
+  maxOutputTokens: 1500,
+  temperature: 0.6,
+  topP: 0.9,
+};
+
 /** API response codes */
 export const ERROR_CODES = {
   VALIDATION: 'VALIDATION_ERROR',

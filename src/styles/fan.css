@@ -655,6 +655,102 @@
   color: var(--text-muted);
 }
 
+/* --- Matchday Context & Accessibility Hub Dock --- */
+.matchday-context-dock {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 242, 254, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.6rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all var(--transition-normal);
+}
+
+.context-hub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.context-hub-title {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #00F2FE;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.context-hub-toggle-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.context-hub-toggle-btn:hover {
+  border-color: #00F2FE;
+  color: #00F2FE;
+  background: rgba(0, 242, 254, 0.08);
+}
+
+.context-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.context-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.context-field-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.context-select,
+.context-input {
+  background: rgba(26, 34, 53, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  outline: none;
+  transition: all var(--transition-fast);
+  width: 100%;
+}
+
+.context-select:focus,
+.context-input:focus {
+  border-color: #00F2FE;
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.25);
+  background: rgba(30, 41, 59, 0.95);
+}
+
+.context-select:hover,
+.context-input:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
 /* --- Responsive --- */
 @media (max-width: 768px) {
   .chat-messages {
@@ -698,5 +794,10 @@
   .chat-input-dock {
     padding: 0.5rem;
     border-radius: 16px;
+  }
+
+  .context-hub-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
   }
 }

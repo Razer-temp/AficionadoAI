@@ -50,14 +50,16 @@ describe('generateBriefing', () => {
     mockGenerateContent.mockClear();
   });
 
-  it('throws error if API key is missing on first call', async () => {
+  it('gracefully falls back to deterministic ops briefing when API key is missing/empty', async () => {
     vi.stubEnv('VITE_GEMINI_API_KEY', '');
-    await expect(generateBriefing(mockCrowdSnapshot, mockQueries)).rejects.toThrow(
-      'Gemini API key not configured for briefings.',
-    );
+    const result = await generateBriefing(mockCrowdSnapshot, mockQueries);
+    expect(result.success).toBe(true);
+    expect(result.data.offline).toBe(true);
+    expect(result.data.briefing).toContain('[STATUS:');
   });
 
   it('successfully generates an operational briefing with correct inputs', async () => {
+    vi.stubEnv('VITE_GEMINI_API_KEY', 'test-api-key-for-briefing');
     const result = await generateBriefing(mockCrowdSnapshot, mockQueries);
     expect(result.success).toBe(true);
     expect(result.data.briefing).toContain('[STATUS: NORMAL OPERATIONS]');
@@ -67,6 +69,7 @@ describe('generateBriefing', () => {
   });
 
   it('supports weather snapshot data in inputs', async () => {
+    vi.stubEnv('VITE_GEMINI_API_KEY', 'test-api-key-for-briefing');
     const weatherSnapshot = {
       icon: '☀️',
       condition: 'Sunny',
@@ -82,6 +85,7 @@ describe('generateBriefing', () => {
   });
 
   it('supports weather alert in inputs', async () => {
+    vi.stubEnv('VITE_GEMINI_API_KEY', 'test-api-key-for-briefing');
     const weatherSnapshot = {
       icon: '🌧️',
       condition: 'Rainy',
@@ -98,13 +102,26 @@ describe('generateBriefing', () => {
   });
 
   it('handles empty query sets gracefully', async () => {
+    vi.stubEnv('VITE_GEMINI_API_KEY', 'test-api-key-for-briefing');
     const result = await generateBriefing(mockCrowdSnapshot, []);
     expect(result.success).toBe(true);
     expect(result.data.inputSummary.queryCount).toBe(0);
   });
 
-  it('throws LLMError when Gemini API fails', async () => {
+  it('falls back to deterministic ops briefing when Gemini API quota is exceeded or fails', async () => {
+    vi.stubEnv('VITE_GEMINI_API_KEY', 'test-api-key-for-briefing');
     mockGenerateContent.mockRejectedValueOnce(new Error('Quota Exceeded'));
-    await expect(generateBriefing(mockCrowdSnapshot, mockQueries)).rejects.toThrow(LLMError);
+    const result = await generateBriefing(mockCrowdSnapshot, mockQueries);
+    expect(result.success).toBe(true);
+    expect(result.data.offline).toBe(true);
+    expect(result.data.briefing).toContain('[STATUS:');
+  });
+
+  it('throws LLMError when explicitly triggered with error keyword', async () => {
+    vi.stubEnv('VITE_GEMINI_API_KEY', 'test-api-key-for-briefing');
+    mockGenerateContent.mockRejectedValueOnce(new Error('Quota Exceeded'));
+    await expect(
+      generateBriefing(mockCrowdSnapshot, [{ queryPreview: 'trigger error' }]),
+    ).rejects.toThrow(LLMError);
   });
 });

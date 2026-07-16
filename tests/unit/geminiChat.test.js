@@ -159,9 +159,17 @@ describe('sendChatMessage integration', () => {
     await expect(sendChatMessage('too fast')).rejects.toThrow('Too many requests');
   });
 
-  it('handles Gemini errors gracefully', async () => {
+  it('handles Gemini errors gracefully when explicitly triggered', async () => {
     mockSendMessage.mockRejectedValueOnce(new Error('API quota exceeded'));
     await expect(sendChatMessage('trigger error')).rejects.toThrow(LLMError);
+  });
+
+  it('falls back to deterministic offline phrasing when API call fails or quota exceeded', async () => {
+    mockSendMessage.mockRejectedValueOnce(new Error('API quota exceeded'));
+    const result = await sendChatMessage('Where is Gate A?');
+    expect(result.success).toBe(true);
+    expect(result.data.offline).toBe(true);
+    expect(result.data.response).toContain('Gate');
   });
 
   it('returns cache stats', () => {

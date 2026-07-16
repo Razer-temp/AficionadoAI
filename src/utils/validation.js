@@ -4,7 +4,7 @@
  * @module validation
  */
 
-import { MAX_INPUT_LENGTH, MIN_INPUT_LENGTH } from './constants.js';
+import { MAX_INPUT_LENGTH, MIN_INPUT_LENGTH, MAX_OUTPUT_LENGTH } from './constants.js';
 import { ValidationError } from './errors.js';
 
 /**
@@ -69,7 +69,7 @@ export function normalizeForCache(input, language) {
  * @param {number} [maxLength=5000] - Maximum allowed output length
  * @returns {string} Sanitized model text safe for rendering
  */
-export function sanitizeModelText(text, maxLength = 5000) {
+export function sanitizeModelText(text, maxLength = MAX_OUTPUT_LENGTH) {
   if (typeof text !== 'string') return '';
 
   return (

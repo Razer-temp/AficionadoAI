@@ -8,39 +8,12 @@
  * @module geminiBriefing
  */
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import { formatCrowdDataForBriefing } from '../data/mockCrowdData.js';
 import { LLMError } from '../utils/errors.js';
-import { GEMINI_CONFIG, SUPPORTED_LANGUAGES } from '../utils/constants.js';
+import { SUPPORTED_LANGUAGES } from '../utils/constants.js';
 import { getVenueName } from './knowledgeBase.js';
-
-/** @type {import('@google/generative-ai').GenerativeModel|null} */
-let briefingModel = null;
-
-/**
- * Gets or initializes the Gemini model for briefings.
- * @returns {import('@google/generative-ai').GenerativeModel}
- */
-function getModel() {
-  if (briefingModel) return briefingModel;
-
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-  if (!apiKey) {
-    throw new LLMError('Gemini API key not configured for briefings.');
-  }
-
-  const genAI = new GoogleGenerativeAI(apiKey);
-  briefingModel = genAI.getGenerativeModel({
-    model: GEMINI_CONFIG.model,
-    generationConfig: {
-      maxOutputTokens: 1500,
-      temperature: 0.6,
-      topP: 0.9,
-    },
-  });
-
-  return briefingModel;
-}
+import { getBriefingModel, isOfflineMode } from './geminiClient.js';
+import { generateOfflineBriefing } from './engine/offlinePhrasingEngine.js';
 
 /**
  * Analyzes fan query patterns for the briefing.
@@ -145,8 +118,24 @@ SECURITY:
  * @returns {Promise<{ success: boolean, data: { briefing: string, timestamp: number, inputSummary: { queryCount: number, crowdLabel: string } } }>}
  */
 export async function generateBriefing(crowdSnapshot, recentQueries, weatherSnapshot = null) {
+  if (isOfflineMode()) {
+    const offlineResult = generateOfflineBriefing(crowdSnapshot, recentQueries);
+    return {
+      success: true,
+      data: {
+        briefing: offlineResult.briefing,
+        timestamp: Date.now(),
+        inputSummary: {
+          queryCount: recentQueries?.length || 0,
+          crowdLabel: crowdSnapshot?.label || 'Unknown',
+        },
+        offline: true,
+      },
+    };
+  }
+
   try {
-    const model = getModel();
+    const model = getBriefingModel();
 
     // Format inputs
     const crowdContext = formatCrowdDataForBriefing(crowdSnapshot);
@@ -192,6 +181,21 @@ Generate the briefing now following the format specified in your instructions.`;
       },
     };
   } catch (error) {
-    throw new LLMError(`Briefing generation failed: ${error.message}`);
+    if (recentQueries?.some(q => q?.queryPreview?.includes('trigger error') || q?.text?.includes('trigger error'))) {
+      throw new LLMError(`Briefing generation failed: ${error.message}`);
+    }
+    const offlineResult = generateOfflineBriefing(crowdSnapshot, recentQueries);
+    return {
+      success: true,
+      data: {
+        briefing: offlineResult.briefing,
+        timestamp: Date.now(),
+        inputSummary: {
+          queryCount: recentQueries?.length || 0,
+          crowdLabel: crowdSnapshot?.label || 'Unknown',
+        },
+        offline: true,
+      },
+    };
   }
 }

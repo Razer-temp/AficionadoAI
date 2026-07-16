@@ -24,7 +24,7 @@ function extractZone(query) {
   return null;
 }
 
-export function useFanChat({ onQueryLog }) {
+export function useFanChat({ onQueryLog, crowdData = null, userContext = {} }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +55,7 @@ export function useFanChat({ onQueryLog }) {
           text: m.text,
         }));
 
-        const result = await sendChatMessage(text, history);
+        const result = await sendChatMessage(text, history, crowdData, userContext);
 
         if (result.success) {
           const assistantMessage = {
@@ -91,7 +91,7 @@ export function useFanChat({ onQueryLog }) {
         setIsLoading(false);
       }
     },
-    [input, isLoading, messages, onQueryLog],
+    [input, isLoading, messages, onQueryLog, crowdData, userContext],
   );
 
   return {
