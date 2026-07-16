@@ -13,6 +13,9 @@
 
 ## 🌐 Live Demo & Repository
 
+**Deployment Link:** [https://aficionado-ai.vercel.app](https://aficionado-ai.vercel.app)
+**Public GitHub Repo Link:** [https://github.com/rehan-ai/aficionado-ai](https://github.com/rehan-ai/aficionado-ai)
+
 | Resource | Link |
 | :--- | :--- |
 | **🚀 Live Deployment** | [https://aficionado-ai.vercel.app](https://aficionado-ai.vercel.app) |
@@ -25,7 +28,7 @@
 
 ---
 
-## Chosen Vertical
+## Your chosen vertical
 
 **Fan Experience + Operational Intelligence + Event Management + Sustainability** — connected
 via a shared GenAI layer for FIFA World Cup 2026, serving **four personas**
@@ -44,7 +47,7 @@ into the ops layer — this connection IS the product.
 
 ---
 
-## Approach and Logic
+## Approach and logic
 
 1. **Ground the model, don't trust it.** Every Gemini call carries the
    authoritative venue dataset (gates, sections, facilities, transport,
@@ -76,7 +79,7 @@ into the ops layer — this connection IS the product.
 
 ---
 
-## How the Solution Works
+## How the solution works
 
 A fan opens the React client and asks a question. Input is validated, sanitized,
 rate-limited (token bucket), and language-detected. The intent is classified via
@@ -185,7 +188,7 @@ Aficionado AI is built entirely on **Google's Gemini 2.5 Flash** model via the `
 
 ---
 
-## Assumptions Made
+## Any assumptions made
 
 - **Venue dataset is static for the event.** Gates, facilities and transport
   for MetLife Stadium are curated in code (`venue-knowledge.json`); a real

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /**
  * EventCard — Represents a single event in the organizer dashboard.
  * @module EventCard
@@ -131,7 +132,7 @@ function EventCard({
             <div className="org-links-grid">
               <div className="org-link-card org-link-card--fan">
                 <div className="org-link-label">
-                  <span className="flex-align" style={{ gap: '6px' }}>
+                  <span className="flex-align event-card-actions-flex">
                     <Users size={14} className="text-emerald" />
                     Fan Access Portal
                   </span>
@@ -177,7 +178,7 @@ function EventCard({
 
               <div className="org-link-card org-link-card--ops">
                 <div className="org-link-label">
-                  <span className="flex-align" style={{ gap: '6px' }}>
+                  <span className="flex-align event-card-actions-flex">
                     <Shield size={14} className="text-cyan" />
                     Ops Staff Portal
                   </span>
@@ -338,5 +339,32 @@ function EventCard({
     </div>
   );
 }
+
+
+EventCard.propTypes = {
+  event: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    venue: PropTypes.string,
+    event_date: PropTypes.string.isRequired,
+    starts_at: PropTypes.string.isRequired,
+    ends_at: PropTypes.string.isRequired,
+    is_active: PropTypes.bool.isRequired,
+    require_claim_code: PropTypes.bool.isRequired,
+    ops_access_key: PropTypes.string,
+  }).isRequired,
+  isExpanded: PropTypes.bool.isRequired,
+  onExpand: PropTypes.func.isRequired,
+  codes: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    code: PropTypes.string.isRequired,
+    is_claimed: PropTypes.bool.isRequired,
+  })).isRequired,
+  sessions: PropTypes.number.isRequired,
+  onToggleActive: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onGenerateCodes: PropTypes.func.isRequired,
+};
 
 export default EventCard;

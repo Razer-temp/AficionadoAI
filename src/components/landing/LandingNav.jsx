@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /**
  * LandingNav — Desktop and mobile navigation bar for the landing page.
  * Includes scroll-aware background, mobile hamburger drawer, and persona demos.
@@ -117,7 +118,7 @@ function LandingNav({ refs, onNavigate, scrollToSection }) {
 
       {/* Mobile Glass Drawer */}
       {mobileMenuOpen && (
-        <div className="landing-mobile-drawer">
+        <div className="landing-mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
           <div className="landing-mobile-drawer-header">
             <button
               type="button"
@@ -243,5 +244,12 @@ function LandingNav({ refs, onNavigate, scrollToSection }) {
     </>
   );
 }
+
+
+LandingNav.propTypes = {
+  refs: PropTypes.object.isRequired,
+  onNavigate: PropTypes.func.isRequired,
+  scrollToSection: PropTypes.func.isRequired,
+};
 
 export default LandingNav;

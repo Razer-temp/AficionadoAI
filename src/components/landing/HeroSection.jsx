@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /**
  * HeroSection — Landing page hero with headline, CTAs, and trust indicators.
  * @module HeroSection
@@ -86,5 +87,12 @@ function HeroSection({ scrollToJoin, scrollToSimulator, onNavigate }) {
     </section>
   );
 }
+
+
+HeroSection.propTypes = {
+  scrollToJoin: PropTypes.func.isRequired,
+  scrollToSimulator: PropTypes.func.isRequired,
+  onNavigate: PropTypes.func.isRequired,
+};
 
 export default HeroSection;

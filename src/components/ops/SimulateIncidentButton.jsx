@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { ShieldAlert, CheckCircle2, Activity } from 'lucide-react';
 
 /**
@@ -10,7 +11,7 @@ import { ShieldAlert, CheckCircle2, Activity } from 'lucide-react';
 function SimulateIncidentButton({ isActive, onSimulate, onClear }) {
   return (
     <div className="simulate-incident" role="group" aria-label="Incident simulation controls">
-      <div className="simulation-buttons flex-align" style={{ gap: '0.6rem' }}>
+      <div className="simulation-buttons flex-align ops-incident-btn-flex">
         {isActive ? (
           <button
             className="incident-btn incident-btn--clear flex-align"
@@ -33,7 +34,7 @@ function SimulateIncidentButton({ isActive, onSimulate, onClear }) {
           </button>
         )}
       </div>
-      <p className="incident-description flex-align" style={{ gap: '0.4rem' }}>
+      <p className="incident-description flex-align ops-incident-desc-flex">
         <Activity size={14} className={isActive ? 'text-orange pulse-icon' : 'text-cyan'} />
         {isActive
           ? 'Digital Twin Active: Gate C transit corridor surge detected. Trigger Gemini briefing for tactical orders.'
@@ -42,5 +43,12 @@ function SimulateIncidentButton({ isActive, onSimulate, onClear }) {
     </div>
   );
 }
+
+
+SimulateIncidentButton.propTypes = {
+  isActive: PropTypes.bool.isRequired,
+  onSimulate: PropTypes.func.isRequired,
+  onClear: PropTypes.func.isRequired,
+};
 
 export default SimulateIncidentButton;

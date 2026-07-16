@@ -1,4 +1,44 @@
 /* ============================================================
+   Fan Chat Styles
+   ============================================================ */
+
+/* --- FanChat Inline Style Replacements --- */
+.telemetry-dot-separator {
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0 4px;
+}
+
+.telemetry-lang-count {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.section-heading-pill-light {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.chat-disclaimer-centered {
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.starter-icon-wayfinding { background-color: rgba(0, 242, 254, 0.15); color: #00F2FE; }
+.starter-icon-transit { background-color: rgba(16, 185, 129, 0.15); color: #10B981; }
+.starter-icon-ada { background-color: rgba(245, 158, 11, 0.15); color: #F59E0B; }
+.starter-icon-policy { background-color: rgba(79, 172, 254, 0.15); color: #4FACFE; }
+.starter-icon-dining { background-color: rgba(168, 85, 247, 0.15); color: #A855F7; }
+.starter-icon-lang { background-color: rgba(236, 72, 153, 0.15); color: #EC4899; }
+
+.lang-badge-flex { gap: 0.4rem; }
+.chat-msg-time-flex { gap: 0.2rem; }
+.chat-sources-container { flex-wrap: wrap; gap: 0.4rem; }
+.chat-sources-label { gap: 0.2rem; }
+
+.chat-message {
+  animation-delay: var(--anim-delay, 0s);
+}
+
+/* ============================================================
    Fan Chat View & 5G AR Command Hub Styles
    Mobile-first, dark mode, rich glassmorphism interface.
    ============================================================ */

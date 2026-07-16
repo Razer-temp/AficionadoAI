@@ -14,6 +14,7 @@ import {
   Settings,
   QrCode,
   Sparkles,
+  Leaf,
 } from 'lucide-react';
 
 /** Interactive simulator presets with categorized short labels & scenarios */
@@ -161,9 +162,17 @@ export const FEATURES = [
     desc: 'Unique time-gated invite links with optional claim codes and QR verification. Organizers control rules, access windows, and capacity.',
     icon: Shield,
     iconStyle: 'blue',
-    wide: true,
     tags: ['Invite-Only Links', 'Claim Codes', 'QR Scan Ready'],
     interactiveType: 'security-preview',
+  },
+  {
+    title: 'Sustainability & Volunteer Ops',
+    desc: 'Live tracking of zero-waste initiatives, recycling rates, and dynamic deployment of volunteer staff to high-need zones across the venue.',
+    icon: Leaf,
+    iconStyle: 'emerald',
+    wide: true,
+    tags: ['Zero-Waste', 'Volunteer Hub', 'Green Venue'],
+    interactiveType: 'sustainability-preview',
   },
 ];
 

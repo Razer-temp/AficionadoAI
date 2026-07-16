@@ -8,6 +8,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { SIMULATOR_PROMPTS, INITIAL_OPS_FEED } from '../components/landing/landingData';
 import { Sparkles } from 'lucide-react';
+import { TIMINGS } from '../utils/constants';
 
 /**
  * Initial welcome message shown in the simulator chat.
@@ -151,8 +152,8 @@ export function useLandingSimulator() {
             ...prev.slice(0, 4),
           ]);
         }
-      }, 42);
-    }, 600);
+      }, TIMINGS.SIM_TYPEWRITER_SPEED);
+    }, TIMINGS.SIM_GROUNDING_DELAY);
   }, []);
 
   /**
@@ -204,7 +205,7 @@ export function useLandingSimulator() {
       setPlayingAudioId(null);
     } else {
       setPlayingAudioId(msgId);
-      setTimeout(() => setPlayingAudioId(null), 3500);
+      setTimeout(() => setPlayingAudioId(null), TIMINGS.AUDIO_PLAYBACK_MOCK);
     }
   }
 

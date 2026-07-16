@@ -26,6 +26,16 @@ export const RATE_LIMIT = {
   windowMs: 60000,
 };
 
+/** Application timing configurations in milliseconds */
+export const TIMINGS = {
+  CROWD_ROTATION: 30000,
+  GATE_REDIRECT_FAST: 500,
+  GATE_REDIRECT_NORMAL: 1200,
+  SIM_GROUNDING_DELAY: 600,
+  SIM_TYPEWRITER_SPEED: 42,
+  AUDIO_PLAYBACK_MOCK: 3500,
+};
+
 /** LRU Cache configuration */
 export const CACHE_CONFIG = {
   maxSize: 50,

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /**
  * Accessible loading spinner component.
  * Announces loading state to screen readers via aria-live.
@@ -16,5 +17,11 @@ function LoadingSpinner({ size = 'md', label = 'Loading...' }) {
     </div>
   );
 }
+
+
+LoadingSpinner.propTypes = {
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  label: PropTypes.string,
+};
 
 export default LoadingSpinner;

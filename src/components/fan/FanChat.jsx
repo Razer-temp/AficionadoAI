@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useRef, useEffect, useCallback } from 'react';
 import ChatMessage from './ChatMessage';
 import TypingIndicator from './TypingIndicator';
@@ -25,42 +26,42 @@ const STARTER_QUESTIONS = [
     category: 'Wayfinding',
     query: 'How do I get to Gate C?',
     icon: Navigation,
-    color: '#00F2FE',
+    className: 'starter-icon-wayfinding',
   },
   {
     text: 'Transit from Manhattan?',
     category: 'Transit Corridor',
     query: 'How do I get to the stadium using public transit from Manhattan?',
     icon: Train,
-    color: '#10B981',
+    className: 'starter-icon-transit',
   },
   {
     text: 'Wheelchair Entrances?',
     category: 'ADA & Safety',
     query: 'Where are the wheelchair accessible entrances and drop-off zones?',
     icon: Accessibility,
-    color: '#F59E0B',
+    className: 'starter-icon-ada',
   },
   {
     text: 'Bag & Water Policy?',
     category: 'Stadium Policy',
     query: 'What is the bag policy? Can I bring a water bottle into MetLife?',
     icon: Briefcase,
-    color: '#4FACFE',
+    className: 'starter-icon-policy',
   },
   {
     text: 'Halal Food Options?',
     category: 'Dining & Food',
     query: 'Where can I find halal food options in the stadium concourses?',
     icon: Utensils,
-    color: '#A855F7',
+    className: 'starter-icon-dining',
   },
   {
     text: '¿Dónde está la puerta A?',
     category: 'Multilingual',
     query: '¿Dónde está la puerta A?',
     icon: Globe,
-    color: '#EC4899',
+    className: 'starter-icon-lang',
   },
 ];
 
@@ -139,8 +140,8 @@ function FanChat({ onQueryLog }) {
             <div className="welcome-telemetry-banner">
               <span className="telemetry-dot" />
               <span className="telemetry-text">MetLife Stadium 5G Telemetry Online</span>
-              <span style={{ color: 'rgba(255,255,255,0.4)', margin: '0 4px' }}>•</span>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+              <span className="telemetry-dot-separator">•</span>
+              <span className="telemetry-lang-count">
                 100+ Languages Auto-Detected
               </span>
             </div>
@@ -183,7 +184,7 @@ function FanChat({ onQueryLog }) {
 
             {/* Categorized FAQ Grid */}
             <div className="faq-section">
-              <div className="section-heading-pill" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+              <div className="section-heading-pill section-heading-pill-light">
                 <HelpCircle size={15} className="text-gold" />
                 <span>Quick Prompts</span>
               </div>
@@ -199,8 +200,7 @@ function FanChat({ onQueryLog }) {
                       aria-label={`Ask: ${q.text}`}
                     >
                       <div
-                        className="starter-icon-box"
-                        style={{ backgroundColor: `${q.color}15`, color: q.color }}
+                        className={`starter-icon-box ${q.className}`}
                       >
                         <Icon size={16} />
                       </div>
@@ -265,8 +265,7 @@ function FanChat({ onQueryLog }) {
             </div>
           )}
           <div
-            className="chat-disclaimer flex-align"
-            style={{ gap: '0.4rem', justifyContent: 'center' }}
+            className="chat-disclaimer flex-align chat-disclaimer-centered"
           >
             <ShieldCheck size={14} className="text-emerald" />
             <span>
@@ -279,5 +278,10 @@ function FanChat({ onQueryLog }) {
     </div>
   );
 }
+
+
+FanChat.propTypes = {
+  onQueryLog: PropTypes.func,
+};
 
 export default FanChat;

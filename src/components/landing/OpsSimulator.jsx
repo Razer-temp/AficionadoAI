@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /**
  * OpsSimulator — Operations Command Center simulator for the landing page.
  * Shows live query feed, gate crowd density, and AI briefing preview.
@@ -92,14 +93,14 @@ function OpsSimulator({ opsFeed, surgeActive, setSurgeActive, onNavigate }) {
             <div className="landing-sim-gate-item">
               <div className="landing-sim-gate-name">Gate A (Main North)</div>
               <div className="landing-sim-gate-bar-wrap">
-                <div className="landing-sim-gate-bar bg-emerald" style={{ width: '38%' }} />
+                <div className="landing-sim-gate-bar bg-emerald sim-w-38" />
               </div>
               <span className="landing-sim-gate-stat text-emerald">3m wait</span>
             </div>
             <div className="landing-sim-gate-item">
               <div className="landing-sim-gate-name">Gate B (VIP & Accessible)</div>
               <div className="landing-sim-gate-bar-wrap">
-                <div className="landing-sim-gate-bar bg-cyan" style={{ width: '25%' }} />
+                <div className="landing-sim-gate-bar bg-cyan sim-w-25" />
               </div>
               <span className="landing-sim-gate-stat text-cyan">1m wait</span>
             </div>
@@ -107,8 +108,7 @@ function OpsSimulator({ opsFeed, surgeActive, setSurgeActive, onNavigate }) {
               <div className="landing-sim-gate-name">Gate C (Express South)</div>
               <div className="landing-sim-gate-bar-wrap">
                 <div
-                  className={`landing-sim-gate-bar ${surgeActive ? 'bg-red' : 'bg-gold'}`}
-                  style={{ width: surgeActive ? '92%' : '65%' }}
+                  className={`landing-sim-gate-bar ${surgeActive ? 'bg-red sim-w-92' : 'bg-gold sim-w-65'}`}
                 />
               </div>
               <span
@@ -120,7 +120,7 @@ function OpsSimulator({ opsFeed, surgeActive, setSurgeActive, onNavigate }) {
             <div className="landing-sim-gate-item">
               <div className="landing-sim-gate-name">Gate D (Transit Hub)</div>
               <div className="landing-sim-gate-bar-wrap">
-                <div className="landing-sim-gate-bar bg-emerald" style={{ width: '42%' }} />
+                <div className="landing-sim-gate-bar bg-emerald sim-w-42" />
               </div>
               <span className="landing-sim-gate-stat text-emerald">4m wait</span>
             </div>
@@ -155,5 +155,19 @@ function OpsSimulator({ opsFeed, surgeActive, setSurgeActive, onNavigate }) {
     </div>
   );
 }
+
+
+OpsSimulator.propTypes = {
+  opsFeed: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    lang: PropTypes.string.isRequired,
+    query: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    impact: PropTypes.string.isRequired,
+  })).isRequired,
+  surgeActive: PropTypes.bool.isRequired,
+  setSurgeActive: PropTypes.func.isRequired,
+  onNavigate: PropTypes.func.isRequired,
+};
 
 export default OpsSimulator;

@@ -522,3 +522,109 @@
     justify-content: center;
   }
 }
+
+/* --- Demo Pass Button --- */
+.gate-demo-pass-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #10b981;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.gate-demo-pass-btn:hover {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.gate-demo-pass-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gate-demo-pass-icon {
+  font-size: 1.2rem;
+}
+
+.gate-demo-pass-title {
+  display: block;
+  color: #fff;
+  font-size: 0.86rem;
+}
+
+.gate-demo-pass-desc {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.78rem;
+}
+
+.gate-demo-pass-code {
+  color: #6ee7b7;
+  font-weight: bold;
+}
+
+.gate-demo-pass-action {
+  background: rgba(16, 185, 129, 0.22);
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  white-space: nowrap;
+}
+
+/* --- Ops Demo Pass Button --- */
+.gate-ops-pass-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  color: #06b6d4;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.08);
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.gate-ops-pass-btn:hover {
+  background: rgba(6, 182, 212, 0.18);
+  border-color: rgba(6, 182, 212, 0.5);
+}
+
+.gate-ops-pass-content { display: flex; align-items: center; gap: 10px; }
+.gate-ops-pass-icon { font-size: 1.2rem; }
+.gate-ops-pass-title { display: block; color: #fff; font-size: 0.86rem; }
+.gate-ops-pass-desc { color: rgba(255, 255, 255, 0.78); font-size: 0.78rem; }
+.gate-ops-pass-code { color: #67e8f9; font-weight: bold; }
+
+.gate-ops-pass-action {
+  background: rgba(6, 182, 212, 0.22);
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  color: #67e8f9;
+  border: 1px solid rgba(6, 182, 212, 0.4);
+  white-space: nowrap;
+}
+
+.gate-footer-spaced {
+  margin-top: 1.5rem;
+}

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /**
  * OrganizerAuthGate — Guards access to the organizer dashboard.
  * Requires an active Supabase Auth session, otherwise renders OrganizerLogin.
@@ -49,3 +50,7 @@ export default function OrganizerAuthGate({ children }) {
     </div>
   );
 }
+
+OrganizerAuthGate.propTypes = {
+  children: PropTypes.node.isRequired,
+};

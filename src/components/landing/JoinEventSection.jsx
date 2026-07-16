@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /**
  * JoinEventSection — Event join form with quick demo buttons and direct links.
  * @module JoinEventSection
@@ -190,5 +191,11 @@ function JoinEventSection({ sectionRef, onNavigate }) {
     </section>
   );
 }
+
+
+JoinEventSection.propTypes = {
+  sectionRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  onNavigate: PropTypes.func.isRequired,
+};
 
 export default JoinEventSection;

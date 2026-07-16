@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { memo } from 'react';
 import { SUPPORTED_LANGUAGES } from '../../utils/constants';
 import { MessageSquare, Inbox, MapPin, Globe, Clock } from 'lucide-react';
@@ -12,7 +13,7 @@ const FanQueryFeed = memo(function FanQueryFeed({ queries }) {
   return (
     <section className="ops-card query-feed-card glass-card" aria-label="Fan query feed">
       <div className="ops-card-header">
-        <div className="flex-align" style={{ gap: '0.5rem' }}>
+        <div className="flex-align ops-query-feed-header-flex">
           <MessageSquare size={18} className="text-gold" />
           <h3 className="ops-card-title">Live Multilingual Concierge Feed</h3>
         </div>
@@ -21,7 +22,7 @@ const FanQueryFeed = memo(function FanQueryFeed({ queries }) {
 
       {queries.length === 0 ? (
         <div className="query-feed-empty">
-          <Inbox size={36} className="text-cyan opacity-40" style={{ margin: '0 auto 0.8rem' }} />
+          <Inbox size={36} className="text-cyan opacity-40 ops-query-feed-empty-icon" />
           <p>No fan queries logged yet. Switch to Fan Concierge and ask a stadium question!</p>
         </div>
       ) : (
@@ -43,21 +44,20 @@ const FanQueryFeed = memo(function FanQueryFeed({ queries }) {
               >
                 <div className="query-feed-meta">
                   <span
-                    className="query-lang-badge flex-align"
+                    className="query-lang-badge flex-align ops-query-feed-meta-flex"
                     title={langInfo.name}
-                    style={{ gap: '0.2rem' }}
                   >
                     <Globe size={12} className="text-cyan" />
                     {langInfo.nativeName}
                   </span>
                   <span className="query-intent-badge">{q.intentCategory}</span>
                   {q.zone && (
-                    <span className="query-zone-badge flex-align" style={{ gap: '0.2rem' }}>
+                    <span className="query-zone-badge flex-align ops-query-feed-meta-flex">
                       <MapPin size={11} className="text-gold" />
                       {q.zone.replace(/-/g, ' ')}
                     </span>
                   )}
-                  <span className="query-time flex-align" style={{ gap: '0.2rem' }}>
+                  <span className="query-time flex-align ops-query-feed-meta-flex">
                     <Clock size={11} /> {timeAgo}
                   </span>
                 </div>
@@ -84,5 +84,17 @@ function getTimeAgo(timestamp) {
   if (minutes < 60) return `${minutes}m ago`;
   return `${Math.floor(minutes / 60)}h ago`;
 }
+
+
+FanQueryFeed.propTypes = {
+  queries: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    language: PropTypes.string.isRequired,
+    intentCategory: PropTypes.string.isRequired,
+    zone: PropTypes.string,
+    queryPreview: PropTypes.string.isRequired,
+    timestamp: PropTypes.number.isRequired,
+  })).isRequired,
+};
 
 export default FanQueryFeed;

@@ -78,7 +78,7 @@ function OrganizerDashboard() {
         {/* Stats Overview */}
         <div className="org-stats-row">
           <div className="org-stat-card">
-            <div className="org-stat-icon" style={{ color: 'var(--accent-blue)' }}>
+            <div className="org-stat-icon org-stat-icon-blue">
               <CalendarDays size={20} />
             </div>
             <div className="org-stat-data">
@@ -87,7 +87,7 @@ function OrganizerDashboard() {
             </div>
           </div>
           <div className="org-stat-card">
-            <div className="org-stat-icon" style={{ color: 'var(--accent-green)' }}>
+            <div className="org-stat-icon org-stat-icon-green">
               <Radio size={20} />
             </div>
             <div className="org-stat-data">
@@ -98,7 +98,7 @@ function OrganizerDashboard() {
             </div>
           </div>
           <div className="org-stat-card">
-            <div className="org-stat-icon" style={{ color: 'var(--accent-purple)' }}>
+            <div className="org-stat-icon org-stat-icon-purple">
               <Users size={20} />
             </div>
             <div className="org-stat-data">
@@ -109,7 +109,7 @@ function OrganizerDashboard() {
             </div>
           </div>
           <div className="org-stat-card">
-            <div className="org-stat-icon" style={{ color: 'var(--accent-amber)' }}>
+            <div className="org-stat-icon org-stat-icon-amber">
               <Ticket size={20} />
             </div>
             <div className="org-stat-data">

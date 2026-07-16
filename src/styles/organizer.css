@@ -1,4 +1,15 @@
 /* ============================================================
+   Organizer Styles
+   ============================================================ */
+
+/* --- Organizer Inline Style Replacements --- */
+.org-stat-icon-blue { color: var(--accent-blue); }
+.org-stat-icon-green { color: var(--accent-green); }
+.org-stat-icon-purple { color: var(--accent-purple); }
+.org-stat-icon-amber { color: var(--accent-amber); }
+
+.event-card-actions-flex { gap: 6px; }
+/* ============================================================
    Organizer Dashboard Styles
    Production-grade event management with dark glassmorphism.
    Stunning Command Center interface, glowing accents, perfect alignment.

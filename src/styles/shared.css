@@ -1,4 +1,29 @@
 /* ============================================================
+   Shared Styles (Layout, Header, Global Utilities)
+   ============================================================ */
+
+/* --- Inline Style Replacements --- */
+.header-brand-btn {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+}
+
+.header-subtitle-flex {
+  gap: 0.35rem;
+  margin-top: 2px;
+}
+
+.error-boundary-icon {
+  margin: 0 auto 1rem;
+}
+
+.error-boundary-btn-flex {
+  gap: 0.4rem;
+  margin: 1rem auto 0;
+}
    Shared Component Styles
    Header, Loading Spinner, Error Boundary
    ============================================================ */

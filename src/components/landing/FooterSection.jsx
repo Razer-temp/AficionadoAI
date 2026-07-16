@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /**
  * FooterSection — Landing page footer with branding, links, and attribution.
  * @module FooterSection
@@ -49,5 +50,11 @@ function FooterSection({ onNavigate, scrollToSimulator }) {
     </footer>
   );
 }
+
+
+FooterSection.propTypes = {
+  onNavigate: PropTypes.func.isRequired,
+  scrollToSimulator: PropTypes.func.isRequired,
+};
 
 export default FooterSection;

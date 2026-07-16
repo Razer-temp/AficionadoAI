@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { MessageSquare, Activity, ShieldCheck, Sparkles, Radio, Settings } from 'lucide-react';
 import { useEvent } from '../gate/EventContext';
@@ -36,15 +37,8 @@ function Header({ persona }) {
       <div className="header-content">
         <button
           type="button"
-          className="header-brand"
+          className="header-brand header-brand-btn"
           onClick={() => navigate(isEventScoped ? fanPath : '/')}
-          style={{
-            cursor: 'pointer',
-            border: 'none',
-            background: 'transparent',
-            padding: 0,
-            textAlign: 'left',
-          }}
         >
           <div className="header-logo-wrapper">
             <img src="/logo.svg" alt="Aficionado AI Logo" className="header-logo-img" />
@@ -54,8 +48,7 @@ function Header({ persona }) {
               <span className="gradient-text">Aficionado</span> AI
             </h1>
             <span
-              className="header-subtitle flex-align"
-              style={{ gap: '0.35rem', marginTop: '2px' }}
+              className="header-subtitle flex-align header-subtitle-flex"
             >
               <Radio className="pulse-icon text-emerald" size={12} />
               <span>{subtitleText}</span>
@@ -143,5 +136,10 @@ function Header({ persona }) {
     </header>
   );
 }
+
+
+Header.propTypes = {
+  persona: PropTypes.oneOf(['fan', 'ops', 'organizer']).isRequired,
+};
 
 export default Header;

@@ -14,6 +14,7 @@ import {
   createSession,
   checkEventTimeWindow,
 } from '../../services/eventService';
+import { TIMINGS } from '../../utils/constants';
 import {
   Shield,
   Clock,
@@ -59,13 +60,17 @@ function EventGate() {
       setAccessGranted(true);
       setTimeout(() => {
         navigate(`/event/${slug}/fan`, { replace: true });
-      }, 500);
+      }, TIMINGS.GATE_REDIRECT_FAST);
       return;
     }
 
     fetchEvent();
   }, [slug]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  /**
+   * Fetches the event details based on the URL slug.
+   * Handles error states and time window validation.
+   */
   async function fetchEvent() {
     setLoading(true);
     setError(null);
@@ -100,6 +105,11 @@ function EventGate() {
     }
   }
 
+  /**
+   * Directly grants fan access to the event when no claim code is required.
+   * Creates a session and redirects to the Fan UI.
+   * @param {object} eventData - The validated event object
+   */
   async function grantDirectAccess(eventData) {
     const token = crypto.randomUUID();
     await createSession(eventData.id, 'fan', token);
@@ -107,9 +117,14 @@ function EventGate() {
     setAccessGranted(true);
     setTimeout(() => {
       navigate(`/event/${slug}/fan`, { replace: true });
-    }, 1200);
+    }, TIMINGS.GATE_REDIRECT_NORMAL);
   }
 
+  /**
+   * Handles the submission of a claim code.
+   * Validates the code and grants access if successful.
+   * @param {Event} e - Form submit event
+   */
   async function handleCodeSubmit(e) {
     e.preventDefault();
     if (!claimCode.trim() || validating) return;
@@ -132,9 +147,14 @@ function EventGate() {
 
     setTimeout(() => {
       navigate(`/event/${slug}/fan`, { replace: true });
-    }, 1200);
+    }, TIMINGS.GATE_REDIRECT_NORMAL);
   }
 
+  /**
+   * Formats the event ISO date string into a localized human-readable string.
+   * @param {string} dateStr - ISO date string
+   * @returns {string} Formatted date
+   */
   function formatEventDate(dateStr) {
     return new Date(dateStr).toLocaleDateString('en-US', {
       weekday: 'long',
@@ -303,53 +323,26 @@ function EventGate() {
               {/* Hackathon Quick-Try Assistant Pill */}
               <button
                 type="button"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '12px 14px',
-                  borderRadius: '10px',
-                  marginBottom: '16px',
-                  background: 'rgba(16, 185, 129, 0.12)',
-                  border: '1px solid rgba(16, 185, 129, 0.35)',
-                  color: '#10b981',
-                  cursor: 'pointer',
-                  fontSize: '0.85rem',
-                  fontWeight: '500',
-                  boxShadow: '0 4px 12px rgba(16, 185, 129, 0.08)',
-                  transition: 'all 0.2s ease',
-                  width: '100%',
-                  textAlign: 'left',
-                }}
+                className="gate-demo-pass-btn"
                 onClick={() => {
                   setClaimCode('FAN-2026');
                   setCodeError(null);
                   if (codeInputRef.current) codeInputRef.current.focus();
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <span style={{ fontSize: '1.2rem' }}>⚡</span>
+                <div className="gate-demo-pass-content">
+                  <span className="gate-demo-pass-icon">⚡</span>
                   <div>
-                    <strong style={{ display: 'block', color: '#fff', fontSize: '0.86rem' }}>
+                    <strong className="gate-demo-pass-title">
                       Hackathon / Demo Pass Assistant
                     </strong>
-                    <span style={{ color: 'rgba(255,255,255,0.78)', fontSize: '0.78rem' }}>
+                    <span className="gate-demo-pass-desc">
                       Click to auto-fill valid demo code:{' '}
-                      <code style={{ color: '#6ee7b7', fontWeight: 'bold' }}>FAN-2026</code>
+                      <code className="gate-demo-pass-code">FAN-2026</code>
                     </span>
                   </div>
                 </div>
-                <span
-                  style={{
-                    background: 'rgba(16, 185, 129, 0.22)',
-                    padding: '5px 10px',
-                    borderRadius: '6px',
-                    fontSize: '0.76rem',
-                    color: '#6ee7b7',
-                    border: '1px solid rgba(16, 185, 129, 0.4)',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
+                <span className="gate-demo-pass-action">
                   Auto-Fill →
                 </span>
               </button>

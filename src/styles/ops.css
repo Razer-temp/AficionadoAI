@@ -1,4 +1,99 @@
 /* ============================================================
+   Ops Styles — OpsDashboard, CrowdDensityMap, etc.
+   ============================================================ */
+
+/* --- OpsDashboard Inline Style Replacements --- */
+.ops-header-telemetry-row {
+  gap: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.ops-drone-btn {
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid transparent;
+}
+.ops-drone-btn.alert-active {
+  border-color: #F97316;
+}
+
+.ops-header-subtitle-row {
+  gap: 0.5rem;
+}
+
+.ops-header-icon-spaced {
+  margin-left: 4px;
+}
+
+.ops-status-item-flex {
+  gap: 0.4rem;
+}
+
+.ops-query-feed-header-flex {
+  gap: 0.5rem;
+}
+
+.ops-query-feed-empty-icon {
+  margin: 0 auto 0.8rem;
+}
+
+.ops-query-feed-meta-flex {
+  gap: 0.2rem;
+}
+
+.ops-crowd-header-flex-1 {
+  gap: 0.6rem;
+}
+
+.ops-crowd-header-flex-2 {
+  gap: 0.5rem;
+}
+
+.ops-crowd-badge-flex {
+  gap: 0.3rem;
+}
+
+.zone-icon {
+  color: var(--zone-color);
+}
+
+.zone-bar-fill {
+  background-color: var(--zone-color);
+}
+
+.zone-level {
+  color: var(--zone-color);
+}
+
+.ops-briefing-header-flex {
+  gap: 0.5rem;
+}
+
+.ops-briefing-time-flex {
+  gap: 0.3rem;
+}
+
+.ops-briefing-error-flex {
+  gap: 0.5rem;
+}
+
+.ops-briefing-empty-icon {
+  margin: 0 auto 1rem;
+}
+
+.ops-briefing-footer-flex {
+  gap: 0.4rem;
+}
+
+.ops-incident-btn-flex {
+  gap: 0.6rem;
+}
+
+.ops-incident-desc-flex {
+  gap: 0.4rem;
+}
+
+/* ============================================================
    Ops Dashboard Styles
    Command-center aesthetic with dark theme, glowing status cards.
    ============================================================ */
@@ -92,6 +187,16 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+
+.ops-drone-btn:hover { background: rgba(255, 255, 255, 0.15); }
+.ops-drone-btn.alert-active { animation: pulseWarning 1.5s infinite; border: 1px solid rgba(249, 115, 22, 0.4); }
+
+.volunteer-panel-list { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1rem; }
+.volunteer-stat-row { display: flex; align-items: center; justify-content: space-between; padding: 0.8rem; border-radius: 8px; }
+.volunteer-stat-row--green { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); }
+.volunteer-stat-row--blue { background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.2); }
+.volunteer-stat-title { display: flex; align-items: center; gap: 0.6rem; font-weight: 600; }
+.volunteer-stat-text { font-size: 0.85rem; }
 
 .simulated-badge {
   background: rgba(245, 158, 11, 0.15);

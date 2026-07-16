@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import OpsDashboard from './OpsDashboard';
 
 /**
@@ -12,5 +13,10 @@ function OpsLayout({ fanQueries }) {
     </div>
   );
 }
+
+
+OpsLayout.propTypes = {
+  fanQueries: PropTypes.array.isRequired,
+};
 
 export default OpsLayout;

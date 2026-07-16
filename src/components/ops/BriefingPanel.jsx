@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState, useCallback } from 'react';
 import { generateBriefing } from '../../services/geminiBriefing';
 import { formatErrorResponse } from '../../utils/errors';
@@ -41,13 +42,13 @@ function BriefingPanel({ crowdSnapshot, fanQueries, weatherSnapshot = null }) {
   return (
     <section className="ops-card briefing-card glass-card" aria-label="AI operational briefing">
       <div className="ops-card-header">
-        <div className="flex-align" style={{ gap: '0.5rem' }}>
+        <div className="flex-align ops-briefing-header-flex">
           <Bot size={20} className="text-cyan pulse-icon" />
           <h3 className="ops-card-title">Gemini Tactical Dispatch Briefing</h3>
         </div>
         <div className="briefing-actions">
           {lastGenerated && (
-            <span className="briefing-timestamp flex-align" style={{ gap: '0.3rem' }}>
+            <span className="briefing-timestamp flex-align ops-briefing-time-flex">
               <Clock size={12} /> Updated: {lastGenerated}
             </span>
           )}
@@ -75,7 +76,7 @@ function BriefingPanel({ crowdSnapshot, fanQueries, weatherSnapshot = null }) {
 
       <div className="briefing-content">
         {error && (
-          <div className="briefing-error flex-align" role="alert" style={{ gap: '0.5rem' }}>
+          <div className="briefing-error flex-align ops-briefing-error-flex" role="alert">
             <AlertTriangle size={18} className="text-orange" />
             <span>{error}</span>
           </div>
@@ -85,8 +86,7 @@ function BriefingPanel({ crowdSnapshot, fanQueries, weatherSnapshot = null }) {
           <div className="briefing-empty">
             <ClipboardList
               size={40}
-              className="text-cyan opacity-50"
-              style={{ margin: '0 auto 1rem' }}
+              className="text-cyan opacity-50 ops-briefing-empty-icon"
             />
             <p>
               Click <strong>Generate Dispatch Orders</strong> to synthesize 3D Digital Twin & fan
@@ -116,7 +116,7 @@ function BriefingPanel({ crowdSnapshot, fanQueries, weatherSnapshot = null }) {
       </div>
 
       <div className="briefing-footer">
-        <span className="briefing-disclaimer flex-align" style={{ gap: '0.4rem' }}>
+        <span className="briefing-disclaimer flex-align ops-briefing-footer-flex">
           <ShieldCheck size={14} className="text-emerald" /> Powered by Google Gemini 2.5 Flash •
           MetLife NYNJ 2026 Telemetry
         </span>
@@ -142,5 +142,12 @@ function formatBriefing(text) {
     .replace(/^/, '<p>')
     .replace(/$/, '</p>');
 }
+
+
+BriefingPanel.propTypes = {
+  crowdSnapshot: PropTypes.object.isRequired,
+  fanQueries: PropTypes.array.isRequired,
+  weatherSnapshot: PropTypes.object,
+};
 
 export default BriefingPanel;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /**
  * FAQAccordion — Expandable FAQ section for the landing page.
  * @module FAQAccordion
@@ -61,5 +62,10 @@ function FAQAccordion({ sectionRef }) {
     </section>
   );
 }
+
+
+FAQAccordion.propTypes = {
+  sectionRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+};
 
 export default FAQAccordion;

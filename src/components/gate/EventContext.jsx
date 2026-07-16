@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /* eslint-disable react-refresh/only-export-components */
 /**
  * Event Context — Provides event-scoped data to child components.
@@ -96,5 +97,10 @@ export function useEvent() {
   }
   return context;
 }
+
+
+EventProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default EventContext;

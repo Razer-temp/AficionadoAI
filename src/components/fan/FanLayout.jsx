@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import FanChat from './FanChat';
 
 /**
@@ -13,5 +14,10 @@ function FanLayout({ onQueryLog }) {
     </div>
   );
 }
+
+
+FanLayout.propTypes = {
+  onQueryLog: PropTypes.func,
+};
 
 export default FanLayout;

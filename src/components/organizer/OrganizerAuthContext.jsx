@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /* eslint-disable react-refresh/only-export-components */
 /**
  * OrganizerAuthContext — Authentication context for organizer portal.
@@ -101,3 +102,7 @@ export function useOrganizerAuth() {
   }
   return context;
 }
+
+OrganizerAuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /**
  * FeatureGrid — Interactive bento grid showcasing AI capabilities.
  * @module FeatureGrid
@@ -102,8 +103,23 @@ function FeatureGrid({ sectionRef }) {
                     <strong className="text-emerald">+94% efficiency</strong>
                   </div>
                   <div className="landing-sim-gate-bar-wrap">
-                    <div className="landing-sim-gate-bar bg-cyan" style={{ width: '85%' }} />
+                    <div className="landing-sim-gate-bar bg-cyan sim-w-85" />
                   </div>
+                </div>
+              )}
+
+              {feature.interactiveType === 'sustainability-preview' && (
+                <div className="landing-bento-interactive flex-align justify-between landing-sus-preview">
+                  <div className="flex-align event-card-actions-flex">
+                    <div className="landing-sus-icon-wrap">
+                      <MapPin size={16} className="text-emerald" />
+                    </div>
+                    <div>
+                      <strong className="text-emerald landing-sus-title">Deploying 12 Volunteers</strong>
+                      <span className="text-secondary landing-sus-subtitle">Zone B Recycling Stations</span>
+                    </div>
+                  </div>
+                  <ArrowRight size={16} className="text-emerald" />
                 </div>
               )}
             </div>
@@ -113,5 +129,10 @@ function FeatureGrid({ sectionRef }) {
     </section>
   );
 }
+
+
+FeatureGrid.propTypes = {
+  sectionRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+};
 
 export default FeatureGrid;

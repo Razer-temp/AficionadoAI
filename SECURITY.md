@@ -32,7 +32,13 @@ We will acknowledge your report within 48 hours and provide a resolution timelin
 - **`.env.example`**: Template provided with placeholder values (never real keys)
 - **`.gitignore`**: `.env` file is excluded from version control
 
-### Data Privacy
+### Database & Gated Access Security (Supabase)
+- **Row Level Security (RLS)**: All Supabase tables (`events`, `claim_codes`, `event_sessions`) have strict RLS policies enabled. Organizers can only modify their own events and generated codes.
+- **Atomic Claim Code Redemption**: Claim code redemption is handled via a secure PostgreSQL stored procedure (`claim_event_code`) to prevent race conditions and double-spending of tickets.
+- **Encrypted Ops Access Keys**: Operations portal (`/event/:slug/ops`) requires an explicit access key (`ops_access_key`), validated via secure RPC `verify_ops_access_key` with zero-trust session tokens.
+- **Time Window Verification**: Access checks strictly enforce ISO timestamp boundaries (`starts_at`, `ends_at`) on the server/database layer before granting fan or ops sessions.
+
+### Data Privacy & Anonymization
 - **Zero PII collection**: Only language, intent category, and zone are logged — no personal data
 - **Anonymized analytics**: Fan query feed in ops dashboard contains no identifying information
 - **No persistent sessions**: Fan interactions are not tied to user accounts

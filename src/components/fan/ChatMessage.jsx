@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { memo } from 'react';
 import { User, Bot, Zap, FileText } from 'lucide-react';
 
@@ -15,7 +16,7 @@ const ChatMessage = memo(function ChatMessage({ message, index }) {
     <article
       className={`chat-message chat-message--${message.role}`}
       aria-label={`${isUser ? 'Your message' : 'Assistant response'}`}
-      style={{ animationDelay: `${Math.min(index * 0.05, 0.3)}s` }}
+      style={{ '--anim-delay': `${Math.min(index * 0.05, 0.3)}s` }}
     >
       <div className="chat-message-avatar flex-center" aria-hidden="true">
         {isUser ? (
@@ -28,11 +29,7 @@ const ChatMessage = memo(function ChatMessage({ message, index }) {
         <div className="chat-message-header">
           <span className="chat-message-sender">{isUser ? 'You' : 'Aficionado AI'}</span>
           {message.cached && (
-            <span
-              className="chat-message-cached flex-align"
-              title="Served from cache"
-              style={{ gap: '0.2rem' }}
-            >
+            <span className="chat-message-cached flex-align">
               <Zap size={12} className="text-gold" /> Cached
             </span>
           )}
@@ -46,12 +43,8 @@ const ChatMessage = memo(function ChatMessage({ message, index }) {
           }}
         />
         {isAssistant && message.sources && message.sources.length > 0 && (
-          <div
-            className="chat-message-sources flex-align"
-            aria-label="Information sources"
-            style={{ flexWrap: 'wrap', gap: '0.4rem' }}
-          >
-            <span className="sources-label flex-align" style={{ gap: '0.2rem' }}>
+          <div className="chat-message-sources flex-align chat-sources-container">
+            <span className="sources-label flex-align chat-sources-label">
               <FileText size={13} className="text-cyan" /> Sources:
             </span>
             {message.sources.map((s, i) => (
@@ -93,5 +86,17 @@ function formatMarkdown(text) {
     .replace(/^/, '<p>')
     .replace(/$/, '</p>');
 }
+
+
+ChatMessage.propTypes = {
+  message: PropTypes.shape({
+    role: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    language: PropTypes.string,
+    sources: PropTypes.arrayOf(PropTypes.string),
+    cached: PropTypes.bool,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+};
 
 export default ChatMessage;

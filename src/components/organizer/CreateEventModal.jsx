@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /**
  * CreateEventModal — Modal for organizers to create a new event.
  * @module CreateEventModal
@@ -251,5 +252,11 @@ function CreateEventModal({ onClose, onCreated }) {
     </div>
   );
 }
+
+
+CreateEventModal.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  onCreated: PropTypes.func.isRequired,
+};
 
 export default CreateEventModal;

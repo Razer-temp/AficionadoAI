@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /**
  * OpsGate — Operations staff access gate.
  * Validates the ops access key from URL query parameters
@@ -175,55 +176,28 @@ function OpsGate({ children }) {
             {/* Hackathon Quick-Try Ops Key Pill */}
             <button
               type="button"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '12px 14px',
-                borderRadius: '10px',
-                marginBottom: '16px',
-                background: 'rgba(6, 182, 212, 0.12)',
-                border: '1px solid rgba(6, 182, 212, 0.35)',
-                color: '#06b6d4',
-                cursor: 'pointer',
-                fontSize: '0.85rem',
-                fontWeight: '500',
-                boxShadow: '0 4px 12px rgba(6, 182, 212, 0.08)',
-                transition: 'all 0.2s ease',
-                width: '100%',
-                textAlign: 'left',
-              }}
+              className="gate-ops-pass-btn"
               onClick={() => {
                 const keyToUse = event?.ops_access_key || 'FIFA2026OPS';
                 setManualKey(keyToUse);
                 setKeyError(null);
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <span style={{ fontSize: '1.2rem' }}>⚡</span>
+              <div className="gate-ops-pass-content">
+                <span className="gate-ops-pass-icon">⚡</span>
                 <div>
-                  <strong style={{ display: 'block', color: '#fff', fontSize: '0.86rem' }}>
+                  <strong className="gate-ops-pass-title">
                     Hackathon / Demo Ops Key Assistant
                   </strong>
-                  <span style={{ color: 'rgba(255,255,255,0.78)', fontSize: '0.78rem' }}>
+                  <span className="gate-ops-pass-desc">
                     Click to auto-fill valid Ops key:{' '}
-                    <code style={{ color: '#67e8f9', fontWeight: 'bold' }}>
+                    <code className="gate-ops-pass-code">
                       {event?.ops_access_key || 'FIFA2026OPS'}
                     </code>
                   </span>
                 </div>
               </div>
-              <span
-                style={{
-                  background: 'rgba(6, 182, 212, 0.22)',
-                  padding: '5px 10px',
-                  borderRadius: '6px',
-                  fontSize: '0.76rem',
-                  color: '#67e8f9',
-                  border: '1px solid rgba(6, 182, 212, 0.4)',
-                  whiteSpace: 'nowrap',
-                }}
-              >
+              <span className="gate-ops-pass-action">
                 Auto-Fill →
               </span>
             </button>
@@ -268,7 +242,7 @@ function OpsGate({ children }) {
             )}
           </form>
 
-          <div className="gate-footer" style={{ marginTop: '1.5rem' }}>
+          <div className="gate-footer gate-footer-spaced">
             <ShieldCheck size={14} />
             <span>Restricted to authorized operations personnel</span>
           </div>
@@ -277,5 +251,10 @@ function OpsGate({ children }) {
     </div>
   );
 }
+
+
+OpsGate.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default OpsGate;

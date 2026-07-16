@@ -6,6 +6,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { createCrowdDataManager } from '../data/mockCrowdData';
 import { getCurrentWeather, nextWeatherSnapshot } from '../data/mockWeatherData';
+import { TIMINGS } from '../utils/constants';
 
 // Create crowd data manager (singleton for the ops view)
 const crowdManager = createCrowdDataManager();
@@ -22,7 +23,7 @@ export function useCrowdData() {
       crowdManager.nextSnapshot();
       setCrowdSnapshot(crowdManager.getCurrentSnapshot());
       setWeatherSnapshot(nextWeatherSnapshot());
-    }, 30000);
+    }, TIMINGS.CROWD_ROTATION);
 
     return () => clearInterval(interval);
   }, []);

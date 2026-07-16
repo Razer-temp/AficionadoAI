@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /**
  * HowItWorks — Interactive 3-step workflow walkthrough with live previews.
  * @module HowItWorks
@@ -107,5 +108,12 @@ function HowItWorks({ sectionRef, onNavigate, scrollToJoin }) {
     </section>
   );
 }
+
+
+HowItWorks.propTypes = {
+  sectionRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  onNavigate: PropTypes.func.isRequired,
+  scrollToJoin: PropTypes.func.isRequired,
+};
 
 export default HowItWorks;

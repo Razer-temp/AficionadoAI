@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { memo } from 'react';
 import {
   CheckCircle2,
@@ -38,12 +39,12 @@ const CrowdDensityMap = memo(function CrowdDensityMap({ zones }) {
   return (
     <section className="ops-card crowd-density-card glass-card" aria-label="Crowd density map">
       <div className="ops-card-header">
-        <div className="flex-align" style={{ gap: '0.6rem' }}>
+        <div className="flex-align ops-crowd-header-flex-1">
           <Radio size={20} className="pulse-icon text-cyan" />
           <h3 className="ops-card-title">Lenovo AI Lidar Crowd Grid</h3>
         </div>
-        <div className="flex-align" style={{ gap: '0.5rem' }}>
-          <span className="ops-card-badge simulated-badge flex-align" style={{ gap: '0.3rem' }}>
+        <div className="flex-align ops-crowd-header-flex-2">
+          <span className="ops-card-badge simulated-badge flex-align ops-crowd-badge-flex">
             <Activity size={12} /> 3D DIGITAL TWIN
           </span>
         </div>
@@ -66,7 +67,6 @@ const CrowdDensityMap = memo(function CrowdDensityMap({ zones }) {
                 <IconComponent
                   className="zone-icon"
                   size={18}
-                  style={{ color: zone.level.color }}
                 />
                 <span className="zone-name">{zone.name}</span>
               </div>
@@ -74,7 +74,7 @@ const CrowdDensityMap = memo(function CrowdDensityMap({ zones }) {
                 <div className="zone-bar-track">
                   <div
                     className="zone-bar-fill"
-                    style={{ width: `${zone.density}%`, backgroundColor: zone.level.color }}
+                    style={{ width: `${zone.density}%` }}
                     role="progressbar"
                     aria-valuenow={zone.density}
                     aria-valuemin={0}
@@ -84,7 +84,7 @@ const CrowdDensityMap = memo(function CrowdDensityMap({ zones }) {
                 </div>
                 <div className="zone-stats">
                   <span className="zone-percent">{zone.density}%</span>
-                  <span className="zone-level" style={{ color: zone.level.color }}>
+                  <span className="zone-level">
                     {zone.level.label}
                   </span>
                 </div>
@@ -96,5 +96,20 @@ const CrowdDensityMap = memo(function CrowdDensityMap({ zones }) {
     </section>
   );
 });
+
+
+CrowdDensityMap.propTypes = {
+  zones: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    direction: PropTypes.string.isRequired,
+    density: PropTypes.number.isRequired,
+    level: PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      iconName: PropTypes.string,
+      color: PropTypes.string.isRequired,
+    }).isRequired,
+  })),
+};
 
 export default CrowdDensityMap;

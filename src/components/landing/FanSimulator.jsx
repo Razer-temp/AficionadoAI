@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /**
  * FanSimulator — Interactive iPhone mockup with 4-stage LLM streaming simulation.
  * Shows the fan-facing AI concierge experience with chat history and prompt deck.
@@ -309,5 +310,25 @@ function FanSimulator({ simulator, onNavigate }) {
     </div>
   );
 }
+
+
+FanSimulator.propTypes = {
+  simulator: PropTypes.shape({
+    activeScenarioIndex: PropTypes.number.isRequired,
+    customInput: PropTypes.string.isRequired,
+    setCustomInput: PropTypes.func.isRequired,
+    aiState: PropTypes.string.isRequired,
+    activeGroundingStep: PropTypes.string.isRequired,
+    playingAudioId: PropTypes.string,
+    likedMessageIds: PropTypes.object.isRequired,
+    chatHistory: PropTypes.array.isRequired,
+    chatScrollRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+    handleSelectPrompt: PropTypes.func.isRequired,
+    handleCustomSubmit: PropTypes.func.isRequired,
+    handlePlayAudio: PropTypes.func.isRequired,
+    handleLikeMessage: PropTypes.func.isRequired,
+  }).isRequired,
+  onNavigate: PropTypes.func.isRequired,
+};
 
 export default FanSimulator;
